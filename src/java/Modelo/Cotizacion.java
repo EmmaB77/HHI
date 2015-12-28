@@ -22,7 +22,7 @@ public class Cotizacion {
         int status = 0;
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "	insert into COTIZACION(FECHA_SOL, SOL_COT, REFERENCIA, TITULO, DESCRIPCION, NUM_COT, FECHA_COT, MONTO, ORDEN_COMPRA, "
+        String query = "insert into COTIZACION(FECHA_SOL, SOL_COT, REFERENCIA, TITULO, DESCRIPCION, NUM_COT, FECHA_COT, MONTO, ORDEN_COMPRA, "
                 + "RECIBIDO, ID_USUARIO, FECHA_ENTREGA, ID_EMPLEADO, AVANCE, STATUS, ACT, DIAS_CREDIT, TOTAL, CANTIDAD_LETRA) \n"
                 + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
         try {
