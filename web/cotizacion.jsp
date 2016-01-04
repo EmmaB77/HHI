@@ -154,6 +154,13 @@
                                 <li><a href="#">Actualizar</a></li>
                             </ul>
                         </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" href="#" data-toggle="dropdown">Nómina</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Calcular Nómina</a></li>
+                                <li><a href="#">Imprimir Recibos</a></li>
+                            </ul>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
