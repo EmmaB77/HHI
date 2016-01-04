@@ -77,12 +77,15 @@
                             <ul class="dropdown-menu">
                                 <li><a href="ControladorCerrarSesion"><i class="glyphicon glyphicon-log-out"></i> Cerrar sesión</a></li>
                                 <li role="separator" class="divider"></li>
-                                <!--<li><a href="#"><i class="glyphicon glyphicon-edit"></i> Cambiar contraseña</a></li>-->
                             </ul>
                         </li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
+        <div class="container">
+            <h2>Nómina:</h2>
+            <div><a data-toggle="modal" href="#Calcular" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>Calcular</a></div>
+        </div>
     </body>
 </html>
