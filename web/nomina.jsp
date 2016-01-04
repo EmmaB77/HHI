@@ -14,6 +14,13 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <script src="js/jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <link href="css/jquery.dataTables.css" rel="stylesheet">
+        <script src="js/jquery.dataTables.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $('#tabla_cot').dataTable();
+            });
+        </script>
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-static-top">
@@ -85,7 +92,75 @@
         </nav>
         <div class="container">
             <h2>Nómina:</h2>
-            <div><a data-toggle="modal" href="#Calcular" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>Calcular</a></div>
+            <div><a data-toggle="modal" href="#calcularnom" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Calcular</a></div>
+            <br>
+            <br>
+            <div class="table-responsive container">
+                <table class="table" id="tabla_cot" name="nomina">
+                    <thead>
+                        <tr>
+                            <th>Empleado</th>
+                            <th>Semana</th>
+                            <th>Vie</th>
+                            <th>Sáb</th>
+                            <th>Dom</th>
+                            <th>Lun</th>
+                            <th>Mar</th>
+                            <th>Mier</th>
+                            <th>Jue</th>
+                            <th>Total</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="hora" items="${horas}" varStatus="iter">
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <a href="#=" class="btn btn-sm btn-danger" role="button" title="Descontar"><i class="glyphicon glyphicon-minus"></i><i class="glyphicon glyphicon-usd"></i></a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+            <form class="form" role="form" method="post" action="calcular_nom">
+                <div class="modal fade" id="calcularnom">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">Ingrese las horas por día</h3>
+                            </div>
+                            <div class="table container modal-body">
+                                <div class="row form-group">
+                                    <div class="col-lg-5">Empleado:<input type="text" class="form-control"></div>
+                                    <div class="col-lg-1">V: <input type="text" class="form-control"></div>
+                                    <div class="col-lg-1">S: <input type="text" class="form-control"></div>
+                                    <div class="col-lg-1">D: <input type="text" class="form-control"></div>
+                                    <div class="col-lg-1">L: <input type="text" class="form-control"></div>
+                                    <div class="col-lg-1">M: <input type="text" class="form-control"></div>
+                                    <div class="col-lg-1">Mie: <input type="text" class="form-control"></div>
+                                    <div class="col-lg-1">J: <input type="text" class="form-control"></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="summit" class="btn btn-success">Agregar</button>
+                                    <button type="RESET" class="btn btn-info">Limpiar</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </body>
 </html>
