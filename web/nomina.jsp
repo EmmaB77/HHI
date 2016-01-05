@@ -100,6 +100,7 @@
                     <thead>
                         <tr>
                             <th>Empleado</th>
+                            <th>Sueldo/Día</th>
                             <th>Semana</th>
                             <th>Vie</th>
                             <th>Sáb</th>
@@ -108,13 +109,17 @@
                             <th>Mar</th>
                             <th>Mier</th>
                             <th>Jue</th>
+                            <th>Total Hrs</th>
                             <th>Total</th>
-                            <th>Acciones</th>
+                            <th>---</th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach var="hora" items="${horas}" varStatus="iter">
                             <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
