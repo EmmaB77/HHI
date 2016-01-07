@@ -103,6 +103,14 @@ public class NominaBean {
     public void setSalarioT(float salarioT) {
         this.salarioT = salarioT;
     }
+
+    public String getSemanaNom() {
+        return semanaNom;
+    }
+
+    public void setSemanaNom(String semanaNom) {
+        this.semanaNom = semanaNom;
+    }
     
     
     

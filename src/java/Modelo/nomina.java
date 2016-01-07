@@ -11,7 +11,7 @@ import java.util.List;
 
 public class nomina {
     
-    public static int agregarGasto(NominaBean nomina) {
+    public static int calcularNom(NominaBean nomina) {
         int status = 0;
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
@@ -19,14 +19,16 @@ public class nomina {
                 + " values(?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = con.prepareStatement(query);
-            ps.setObject(1, gasto.getFechaIndirect());
-            ps.setObject(2, gasto.getMesIndirect());
-            ps.setObject(3, gasto.getProveeIndirect());
-            ps.setObject(4, gasto.getNumFactIndirect());
-            ps.setObject(5, gasto.getDescIndirect());
-            ps.setObject(6, gasto.getSubToIndirect());
-            ps.setObject(7, gasto.getIvaIndirect());
-            ps.setObject(8, gasto.getTotalIndirect());
+            ps.setObject(1, nomina.getEmpleadoNom().getIdEmpleado());
+            ps.setObject(2, nomina.getSemanaNom());
+            ps.setObject(3, nomina.getHrsViernes());
+            ps.setObject(4, nomina.getHrsSabado());
+            ps.setObject(5, nomina.getHrsDomingo());
+            ps.setObject(6, nomina.getHrsLunes());
+            ps.setObject(7, nomina.getHrsMartes());
+            ps.setObject(8, nomina.getHrsJueves());
+            ps.setObject(9, nomina.getHrsTotales());
+            ps.setObject(10, nomina.getSalarioT());
             status = ps.executeUpdate();
             System.out.println("Exito en el registro");
             con.close();
