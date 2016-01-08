@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class nomina {
-    
+
     public static int calcularNom(NominaBean nomina) {
         int status = 0;
         Connection con = Conexion.getConnetion();
@@ -37,5 +37,92 @@ public class nomina {
         }
         return status;
     }
-    
+
+    public static int descontarNom(int idNom, String dia, float horas, float nuevoS) {
+        int status = 0;
+        Connection con = Conexion.getConnetion();
+        PreparedStatement ps;
+        switch (dia) {
+            case "Lunes": {
+                String query = "update nomina set lunes = " + horas + ", salarioT = "+ nuevoS +" where idNomina = " + idNom;
+                try {
+                    ps = con.prepareStatement(query);
+                    status = ps.executeUpdate();
+                    con.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+                break;
+            }
+            case "Martes": {
+                String query = "update nomina set martes = " + horas + ", salarioT = "+ nuevoS +" where idNomina = " + idNom;
+                try {
+                    ps = con.prepareStatement(query);
+                    status = ps.executeUpdate();
+                    con.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+                break;
+            }
+            case "Miercoles": {
+                String query = "update nomina set miercoles = " + horas + ", salarioT = "+ nuevoS +" where idNomina = " + idNom;
+                try {
+                    ps = con.prepareStatement(query);
+                    status = ps.executeUpdate();
+                    con.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+                break;
+            }
+            case "Jueves": {
+                String query = "update nomina set jueves = " + horas + ", salarioT = "+ nuevoS +" where idNomina = " + idNom;
+                try {
+                    ps = con.prepareStatement(query);
+                    status = ps.executeUpdate();
+                    con.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+                break;
+            }
+            case "Viernes": {
+                String query = "update nomina set viernes = " + horas + ", salarioT = "+ nuevoS +" where idNomina = " + idNom;
+                try {
+                    ps = con.prepareStatement(query);
+                    status = ps.executeUpdate();
+                    con.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+                break;
+            }
+            case "Sabado": {
+                String query = "update nomina set sabado = " + horas + ", salarioT = "+ nuevoS +" where idNomina = " + idNom;
+                try {
+                    ps = con.prepareStatement(query);
+                    status = ps.executeUpdate();
+                    con.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+                break;
+            }
+            default: {
+                String query = "update nomina set domingo = " + horas + ", salarioT = "+ nuevoS +" where idNomina = " + idNom;
+                try {
+                    ps = con.prepareStatement(query);
+                    status = ps.executeUpdate();
+                    con.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+                break;
+            }
+        }
+
+        return status;
+    }
+
 }
