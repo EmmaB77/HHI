@@ -3,6 +3,8 @@ package Beans;
 
 public class NominaBean {
     
+    private int idNom;
+    private int id_empleado;
     private PersonaBean personaNom;
     private EmpleadoBean empleadoNom;
     private String semanaNom;
@@ -110,6 +112,22 @@ public class NominaBean {
 
     public void setSemanaNom(String semanaNom) {
         this.semanaNom = semanaNom;
+    }
+
+    public int getIdNom() {
+        return idNom;
+    }
+
+    public void setIdNom(int idNom) {
+        this.idNom = idNom;
+    }
+
+    public int getId_empleado() {
+        return id_empleado;
+    }
+
+    public void setId_empleado(int id_empleado) {
+        this.id_empleado = id_empleado;
     }
     
     
