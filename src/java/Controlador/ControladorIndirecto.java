@@ -104,7 +104,6 @@ public class ControladorIndirecto extends HttpServlet {
             } else {
                 total = subtI;
             }
-
             GastoIndirectoBean gasto = new GastoIndirectoBean();
             gasto.setIdIndirect(idI);
             gasto.setFechaIndirect(fechaI);

@@ -100,7 +100,6 @@
                     <thead>
                         <tr>
                             <th>Empleado</th>
-                            <th>Sueldo/Día</th>
                             <th>Semana</th>
                             <th>Vie</th>
                             <th>Sáb</th>
@@ -137,7 +136,7 @@
                     </tbody>
                 </table>
             </div>
-            <form class="form" role="form" method="post" action="calcular_nom">
+            <form class="form" role="form" method="post" action="calcularnom">
                 <div class="modal fade" id="calcularnom">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
@@ -147,14 +146,62 @@
                             </div>
                             <div class="table container modal-body">
                                 <div class="row form-group">
-                                    <div class="col-lg-5">Empleado:<input type="text" class="form-control"></div>
-                                    <div class="col-lg-1">V: <input type="text" class="form-control"></div>
-                                    <div class="col-lg-1">S: <input type="text" class="form-control"></div>
-                                    <div class="col-lg-1">D: <input type="text" class="form-control"></div>
-                                    <div class="col-lg-1">L: <input type="text" class="form-control"></div>
-                                    <div class="col-lg-1">M: <input type="text" class="form-control"></div>
-                                    <div class="col-lg-1">Mie: <input type="text" class="form-control"></div>
-                                    <div class="col-lg-1">J: <input type="text" class="form-control"></div>
+                                    <div class="col-lg-5">Empleado:<input type="text" class="form-control" name="empleado" id="empleado"></div>
+                                    <div class="col-lg-1">Semana: <input type="text" class="form-control" name="semana" id="semana"></div>
+                                    <div class="col-lg-1">V: <input type="text" class="form-control" name="viernes" id="viernes"></div>
+                                    <div class="col-lg-1">S: <input type="text" class="form-control" name="sabado" id="sabado"></div>
+                                    <div class="col-lg-1">D: <input type="text" class="form-control" name="domingo" id="domingo"></div>
+                                    <div class="col-lg-1">L: <input type="text" class="form-control" name="lunes" id="lunes"></div>
+                                    <div class="col-lg-1">M: <input type="text" class="form-control" name="martes" id="martes"></div>
+                                    <div class="col-lg-1">Mie: <input type="text" class="form-control" name="miercoles" id="miercoles"></div>
+                                    <div class="col-lg-1">J: <input type="text" class="form-control" name="jueves" id="jueves"></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="summit" class="btn btn-success">Agregar</button>
+                                    <button type="RESET" class="btn btn-info">Limpiar</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form class="form" role="form" method="post" action="descontar">
+                <div class="modal fade" id="descontarNom">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">Seleccione día y horas</h3>
+                            </div>
+                            <div class="table container modal-body">
+                                <div class="row form-group">
+                                    <div class="col-lg-5">Dia:
+                                        <select class="form-control" name="dia" id="dia">
+                                            <option value="Lunes">Lunes</option>
+                                            <option value="Martes">Martes</option>
+                                            <option value="Miercoles">Miercoles</option>
+                                            <option value="Jueves">Jueves</option>
+                                            <option value="Viernes">Viernes</option>
+                                            <option value="Sabado">Sábado</option>
+                                            <option value="Domingo">Domingo</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-1">Horas:
+                                        <select class="form-control" name="dia" id="dia">
+                                            <option value="0.5">Media Hora</option>
+                                            <option value="1">1 Hora</option>
+                                            <option value="2">2 Horas</option>
+                                            <option value="3">3 Horas</option>
+                                            <option value="4">4 Horas</option>
+                                            <option value="5">5 Horas</option>
+                                            <option value="6">6 Horas</option>
+                                            <option value="7">7 Horas</option>
+                                            <option value="8">8 Horas</option>
+                                            <option value="9">9 Horas</option>
+                                            <option value="10">1 dia</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="summit" class="btn btn-success">Agregar</button>
