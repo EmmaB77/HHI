@@ -100,7 +100,6 @@
                     <thead>
                         <tr>
                             <th>Empleado</th>
-                            <th>Sueldo/Día</th>
                             <th>Semana</th>
                             <th>Vie</th>
                             <th>Sáb</th>
@@ -137,7 +136,7 @@
                     </tbody>
                 </table>
             </div>
-            <form class="form" role="form" method="post" action="calcular_nom">
+            <form class="form" role="form" method="post" action="calcularnom">
                 <div class="modal fade" id="calcularnom">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
@@ -148,6 +147,7 @@
                             <div class="table container modal-body">
                                 <div class="row form-group">
                                     <div class="col-lg-5">Empleado:<input type="text" class="form-control" name="empleado" id="empleado"></div>
+                                    <div class="col-lg-1">Semana: <input type="text" class="form-control" name="semana" id="semana"></div>
                                     <div class="col-lg-1">V: <input type="text" class="form-control" name="viernes" id="viernes"></div>
                                     <div class="col-lg-1">S: <input type="text" class="form-control" name="sabado" id="sabado"></div>
                                     <div class="col-lg-1">D: <input type="text" class="form-control" name="domingo" id="domingo"></div>
