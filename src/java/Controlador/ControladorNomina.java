@@ -53,9 +53,6 @@ public class ControladorNomina extends HttpServlet {
             float hrsTotales = viernes+lunes+martes+miercoles+jueves+hrsExtra;
             float sueldo=0;
 
-            
-
-            
 
             NominaBean nominac = new NominaBean();
             nominac.setId_empleado(idEmp);
@@ -68,7 +65,6 @@ public class ControladorNomina extends HttpServlet {
             nominac.setHrsExtra(hrsExtra);
             nominac.setHrsTotales(hrsTotales);
             nominac.setSalarioT(sueldo);
-            
             nomina.calcularNom(nominac);
             response.sendRedirect("nomina");
         }
