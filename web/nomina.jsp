@@ -99,15 +99,15 @@
                 <table class="table" id="tabla_cot" name="nomina">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Empleado</th>
                             <th>Semana</th>
                             <th>Vie</th>
-                            <th>Sáb</th>
-                            <th>Dom</th>
                             <th>Lun</th>
                             <th>Mar</th>
                             <th>Mier</th>
                             <th>Jue</th>
+                            <th>T. EX</th>
                             <th>Total Hrs</th>
                             <th>Total</th>
                             <th>---</th>
@@ -142,25 +142,27 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h3 class="modal-title">Ingrese las horas por día</h3>
+                                <h3 class="modal-title">Calcular Nomina</h3>
                             </div>
                             <div class="table container modal-body">
                                 <div class="row form-group">
-                                    <div class="col-lg-5">Empleado:<input type="text" class="form-control" name="empleado" id="empleado"></div>
-                                    <div class="col-lg-1">Semana: <input type="text" class="form-control" name="semana" id="semana"></div>
-                                    <div class="col-lg-1">V: <input type="text" class="form-control" name="viernes" id="viernes"></div>
-                                    <div class="col-lg-1">S: <input type="text" class="form-control" name="sabado" id="sabado"></div>
-                                    <div class="col-lg-1">D: <input type="text" class="form-control" name="domingo" id="domingo"></div>
-                                    <div class="col-lg-1">L: <input type="text" class="form-control" name="lunes" id="lunes"></div>
-                                    <div class="col-lg-1">M: <input type="text" class="form-control" name="martes" id="martes"></div>
-                                    <div class="col-lg-1">Mie: <input type="text" class="form-control" name="miercoles" id="miercoles"></div>
-                                    <div class="col-lg-1">J: <input type="text" class="form-control" name="jueves" id="jueves"></div>
+                                    <div class="col-lg-6">Empleado:<input type="text" class="form-control" name="empleado" id="empleado" required></div>
+                                    <div class="col-lg-3">Semana del: <input type="date" class="form-control" name="semana2" id="semana2" required></div>
+                                    <div class="col-lg-3">Al: <input type="date" class="form-control" name="semana2" id="semana2" required></div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="summit" class="btn btn-success">Agregar</button>
-                                    <button type="RESET" class="btn btn-info">Limpiar</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+                                <div class="row form-group">
+                                    <div class="col-lg-2">Hrs V: <input type="number" class="form-control" name="viernes" id="viernes" required></div>
+                                    <div class="col-lg-2">Hrs L: <input type="number" class="form-control" name="lunes" id="lunes" required></div>
+                                    <div class="col-lg-2">Hrs M: <input type="number" class="form-control" name="martes" id="martes" required></div>
+                                    <div class="col-lg-2">Hrs Mie: <input type="number" class="form-control" name="miercoles" id="miercoles" required></div>
+                                    <div class="col-lg-2">Hrs J: <input type="number" class="form-control" name="jueves" id="jueves" required></div>
+                                    <div class="col-lg-2">Hrs T.Ex:<input type="number" class="form-control" name="tiempo_extra" id="tiempo_extra" required></div>
                                 </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="summit" class="btn btn-success">Agregar</button>
+                                <button type="RESET" class="btn btn-info">Limpiar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
                             </div>
                         </div>
                     </div>

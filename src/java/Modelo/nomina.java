@@ -15,20 +15,19 @@ public class nomina {
         int status = 0;
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "insert into nomina (id_empleado, semana, viernes, sabado, domingo, lunes, martes, miercoles, jueves, hrs_total, total)"
+        String query = "insert into nomina (id_empleado, semana, viernes, lunes, martes, miercoles, jueves, horas_extra, hrs_total, total)"
                 + " values(?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = con.prepareStatement(query);
             ps.setObject(1, nomina.getEmpleadoNom().getIdEmpleado());
             ps.setObject(2, nomina.getSemanaNom());
             ps.setObject(3, nomina.getHrsViernes());
-            ps.setObject(4, nomina.getHrsSabado());
-            ps.setObject(5, nomina.getHrsDomingo());
-            ps.setObject(6, nomina.getHrsLunes());
-            ps.setObject(7, nomina.getHrsMartes());
-            ps.setObject(8, nomina.getHrsJueves());
-            ps.setObject(9, nomina.getHrsTotales());
-            ps.setObject(10, nomina.getSalarioT());
+            ps.setObject(4, nomina.getHrsLunes());
+            ps.setObject(5, nomina.getHrsMartes());
+            ps.setObject(6, nomina.getHrsJueves());
+            ps.setObject(7, nomina.getHrsExtra());
+            ps.setObject(8, nomina.getHrsTotales());
+            ps.setObject(9, nomina.getSalarioT());
             status = ps.executeUpdate();
             System.out.println("Exito en el registro");
             con.close();
@@ -94,19 +93,9 @@ public class nomina {
                     System.out.println(e);
                 }
                 break;
-            case "Sabado":
-                try {
-                    String query = "update nomina set sabado= " + horas + " salario=" + nvSal + " where idEmp=" + idNom;
-                    ps = con.prepareStatement(query);
-                    ps.executeUpdate();
-                    con.close();
-                } catch (SQLException e) {
-                    System.out.println(e);
-                }
-                break;
             default:
                 try {
-                    String query = "update nomina set domingo= " + horas + " salario=" + nvSal + " where idEmp=" + idNom;
+                    String query = "update nomina set horas_extra= " + horas + " salario=" + nvSal + " where idEmp=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -122,7 +111,7 @@ public class nomina {
         List<NominaBean> lista = new ArrayList<>();
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "select nomina.idNom, persona.nombre, nomina.semana, nomina.viernes, nomina.sabado, nomina.domingo, nomina.lunes, nomina.martes, nomina.miercoles, nomina.jueves, \n"
+        String query = "select nomina.idNom, persona.nombre, nomina.semana, nomina.viernes, nomina.lunes, nomina.martes, nomina.miercoles, nomina.jueves, nomina.horas_extra \n"
                 + "nomina.hrstotales, nomina.salarioT from nomina inner join empleado on nomina.id_empleado = empleado.id_empleado inner join persona on empleado.id_persona=persona.id_persona;";
         try {
             ps = con.prepareStatement(query);
@@ -133,12 +122,11 @@ public class nomina {
                 nomina.setIdNom(rs.getInt("idNom"));
                 nomina.setId_empleado(rs.getInt("id_empleado"));
                 nomina.setHrsViernes(rs.getFloat("viernes"));
-                nomina.setHrsSabado(rs.getFloat("sabado"));
-                nomina.setHrsDomingo(rs.getFloat("domingo"));
                 nomina.setHrsLunes(rs.getFloat("lunes"));
                 nomina.setHrsMartes(rs.getFloat("martes"));
                 nomina.setHrsMiercoles(rs.getFloat("miercoles"));
                 nomina.setHrsJueves(rs.getFloat("jueves"));
+                nomina.setHrsExtra(rs.getFloat("horas_extra"));
                 nomina.setHrsTotales(rs.getFloat("hrstotales"));
                 nomina.setSalarioT(rs.getFloat("salarioT"));
                 lista.add(nomina);

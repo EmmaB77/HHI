@@ -13,8 +13,7 @@ public class NominaBean {
     private float hrsMiercoles;
     private float hrsJueves;
     private float hrsViernes;
-    private float hrsSabado;
-    private float hrsDomingo;
+    private float hrsExtra;
     private float hrsTotales;
     private float salarioT;
 
@@ -74,21 +73,15 @@ public class NominaBean {
         this.hrsViernes = hrsViernes;
     }
 
-    public float getHrsSabado() {
-        return hrsSabado;
+    public float getHrsExtra() {
+        return hrsExtra;
     }
 
-    public void setHrsSabado(float hrsSabado) {
-        this.hrsSabado = hrsSabado;
+    public void setHrsExtra(float horasExtra) {
+        this.hrsExtra = horasExtra;
     }
 
-    public float getHrsDomingo() {
-        return hrsDomingo;
-    }
 
-    public void setHrsDomingo(float hrsDomingo) {
-        this.hrsDomingo = hrsDomingo;
-    }
 
     public float getHrsTotales() {
         return hrsTotales;
