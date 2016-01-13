@@ -45,14 +45,21 @@ public class ControladorNomina extends HttpServlet {
             int idEmp = Integer.parseInt(request.getParameter("idEmp"));
             String semana = request.getParameter("semana");
             float viernes = Float.parseFloat(request.getParameter("viernes"));
-            float hrsExtra = Float.parseFloat(request.getParameter("tiempo_extra"));
             float lunes = Float.parseFloat(request.getParameter("lunes"));
             float martes = Float.parseFloat(request.getParameter("martes"));
             float miercoles = Float.parseFloat(request.getParameter("miercoles"));
             float jueves = Float.parseFloat(request.getParameter("jueves"));
+            float hrsExtra = Float.parseFloat(request.getParameter("tiempo_extra"));
+            float hrsSemana = viernes+lunes+martes+miercoles+jueves;
             float hrsTotales = viernes+lunes+martes+miercoles+jueves+hrsExtra;
+            float salario1;
+            float salario2;
             float sueldo=0;
+            
+            salario1 = hrsSemana * nomina.obtenerSalario(idEmp);
+            salario2 = hrsExtra * nomina.obtenerSalario(idEmp) * 2;
 
+            sueldo = salario1 + salario2;
 
             NominaBean nominac = new NominaBean();
             nominac.setId_empleado(idEmp);

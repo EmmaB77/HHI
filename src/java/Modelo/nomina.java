@@ -11,7 +11,7 @@ import java.util.List;
 
 public class nomina {
 
-    public static int calcularNom(NominaBean nomina) {
+    public static void calcularNom(NominaBean nomina) {
         int status = 0;
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
@@ -34,18 +34,49 @@ public class nomina {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        return status;
     }
 
-    public static int descontarNom(int idNom, String dia, float horas, float nvSal) {
+    public static int descontarNom(int idNom, String dia, float horas) {
         int status = 0;
+        float nvSal = 0;
+        float viernes = 0;
+        float lunes = 0;
+        float martes = 0;
+        float miercoles = 0;
+        float jueves = 0;
+        float horasEx = 0;
+        float totales;
+        float salarioT;
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
+        String query1 = "select lunes, martes, miercoles, jueves, horas_extra, hrstotales, salarioT from nomina where idNom= " + idNom + ";";
+        
+        try {
+            ps = con.prepareStatement(query1);
+            ResultSet rs;
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                viernes = rs.getFloat("viernes");
+                lunes = rs.getFloat("lunes");
+                martes = rs.getFloat("martes");
+                miercoles = rs.getFloat("miercoles");
+                jueves = rs.getFloat("jueves");
+                horasEx = rs.getFloat("horas_extra");
+                totales = rs.getFloat("hrstotales");
+                salarioT = rs.getFloat("salarioT");
+            }
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
 
         switch (dia) {
             case "Lunes":
                 try {
-                    String query = "update nomina set lunes= " + horas + " salario=" + nvSal + " where idEmp=" + idNom;
+                    lunes = lunes - horas;
+                    totales = lunes+martes+miercoles+jueves+viernes+horasEx;
+                    
+                    String query = "update nomina set lunes= " + lunes + ", salario=" + nvSal + ", hrstotales= "+totales+"where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -55,7 +86,7 @@ public class nomina {
                 break;
             case "Martes":
                 try {
-                    String query = "update nomina set martes= " + horas + " salario=" + nvSal + " where idEmp=" + idNom;
+                    String query = "update nomina set martes= " + horas + " salario=" + nvSal + " where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -65,7 +96,7 @@ public class nomina {
                 break;
             case "Miercoles":
                 try {
-                    String query = "update nomina set miercoles= " + horas + " salario=" + nvSal + " where idEmp=" + idNom;
+                    String query = "update nomina set miercoles= " + horas + " salario=" + nvSal + " where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -75,7 +106,7 @@ public class nomina {
                 break;
             case "Jueves":
                 try {
-                    String query = "update nomina set jueves= " + horas + " salario=" + nvSal + " where idEmp=" + idNom;
+                    String query = "update nomina set jueves= " + horas + " salario=" + nvSal + " where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -85,7 +116,7 @@ public class nomina {
                 break;
             case "Viernes":
                 try {
-                    String query = "update nomina set viernes= " + horas + " salario=" + nvSal + " where idEmp=" + idNom;
+                    String query = "update nomina set viernes= " + horas + " salario=" + nvSal + " where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -95,7 +126,7 @@ public class nomina {
                 break;
             default:
                 try {
-                    String query = "update nomina set horas_extra= " + horas + " salario=" + nvSal + " where idEmp=" + idNom;
+                    String query = "update nomina set horas_extra= " + horas + " salario=" + nvSal + " where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -139,7 +170,7 @@ public class nomina {
     }
 
     public static float obtenerSalario(int idEmp) {
-        float salario=0;
+        float salario = 0;
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
         String query = "select salarioxdia from empleado where id_empleado=" + idEmp + ";";
@@ -147,7 +178,7 @@ public class nomina {
             ps = con.prepareStatement(query);
             ResultSet rs;
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 salario = rs.getFloat("salarioxdia");
             }
         } catch (SQLException e) {
@@ -155,9 +186,9 @@ public class nomina {
         }
         return salario;
     }
-    
-    public static float obtenerSalarioT(int idNom){
-         float salario=0;
+
+    public static float obtenerSalarioT(int idNom) {
+        float salario = 0;
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
         String query = "select salariot from nomina where idNom=" + idNom + ";";
@@ -165,13 +196,19 @@ public class nomina {
             ps = con.prepareStatement(query);
             ResultSet rs;
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 salario = rs.getFloat("salariot");
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
         return salario;
+    }
+
+    public static int descontar() {
+        int status = 0;
+
+        return status;
     }
 
 }
