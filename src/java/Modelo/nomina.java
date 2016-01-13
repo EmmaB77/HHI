@@ -15,7 +15,7 @@ public class nomina {
         int status = 0;
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "insert into nomina (id_empleado, semana, viernes, lunes, martes, miercoles, jueves, horas_extra, hrs_total, total)"
+        String query = "insert into nomina (id_empleado, semana, viernes, lunes, martes, miercoles, jueves, horas_extra, hrstotales, salarioT)"
                 + " values(?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = con.prepareStatement(query);
@@ -36,7 +36,7 @@ public class nomina {
         }
     }
 
-    public static int descontarNom(int idNom, String dia, float horas) {
+    public static int descontarNom(int idNom, String dia, float horas, int idEmp) {
         int status = 0;
         float nvSal = 0;
         float viernes = 0;
@@ -46,6 +46,9 @@ public class nomina {
         float jueves = 0;
         float horasEx = 0;
         float totales;
+        float totalSemana;
+        float salarioSemana;
+        float salarioExtra;
         float salarioT;
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
@@ -75,8 +78,11 @@ public class nomina {
                 try {
                     lunes = lunes - horas;
                     totales = lunes+martes+miercoles+jueves+viernes+horasEx;
-                    
-                    String query = "update nomina set lunes= " + lunes + ", salario=" + nvSal + ", hrstotales= "+totales+"where idNom=" + idNom;
+                    totalSemana = totales-horasEx;
+                    salarioSemana = totalSemana*obtenerSalario(idEmp);
+                    salarioExtra = horasEx*obtenerSalario(idEmp)*2;
+                    nvSal = salarioSemana + salarioExtra;
+                    String query = "update nomina set lunes= " + lunes + ", salario=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -86,7 +92,13 @@ public class nomina {
                 break;
             case "Martes":
                 try {
-                    String query = "update nomina set martes= " + horas + " salario=" + nvSal + " where idNom=" + idNom;
+                    martes = martes - horas;
+                    totales = lunes+martes+miercoles+jueves+viernes+horasEx;
+                    totalSemana = totales-horasEx;
+                    salarioSemana = totalSemana*obtenerSalario(idEmp);
+                    salarioExtra = horasEx*obtenerSalario(idEmp)*2;
+                    nvSal = salarioSemana + salarioExtra;
+                    String query = "update nomina set martes= " + martes + ", salario=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -96,7 +108,13 @@ public class nomina {
                 break;
             case "Miercoles":
                 try {
-                    String query = "update nomina set miercoles= " + horas + " salario=" + nvSal + " where idNom=" + idNom;
+                    miercoles = miercoles - horas;
+                    totales = lunes+martes+miercoles+jueves+viernes+horasEx;
+                    totalSemana = totales-horasEx;
+                    salarioSemana = totalSemana*obtenerSalario(idEmp);
+                    salarioExtra = horasEx*obtenerSalario(idEmp)*2;
+                    nvSal = salarioSemana + salarioExtra;
+                    String query = "update nomina set miercoles= " + miercoles + ", salario=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -106,7 +124,13 @@ public class nomina {
                 break;
             case "Jueves":
                 try {
-                    String query = "update nomina set jueves= " + horas + " salario=" + nvSal + " where idNom=" + idNom;
+                    jueves = jueves - horas;
+                    totales = lunes+martes+miercoles+jueves+viernes+horasEx;
+                    totalSemana = totales-horasEx;
+                    salarioSemana = totalSemana*obtenerSalario(idEmp);
+                    salarioExtra = horasEx*obtenerSalario(idEmp)*2;
+                    nvSal = salarioSemana + salarioExtra;
+                    String query = "update nomina set jueves= " + jueves + ", salario=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -116,7 +140,13 @@ public class nomina {
                 break;
             case "Viernes":
                 try {
-                    String query = "update nomina set viernes= " + horas + " salario=" + nvSal + " where idNom=" + idNom;
+                    viernes = viernes - horas;
+                    totales = lunes+martes+miercoles+jueves+viernes+horasEx;
+                    totalSemana = totales-horasEx;
+                    salarioSemana = totalSemana*obtenerSalario(idEmp);
+                    salarioExtra = horasEx*obtenerSalario(idEmp)*2;
+                    nvSal = salarioSemana + salarioExtra;
+                    String query = "update nomina set viernes= " + viernes + ", salario=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -126,7 +156,13 @@ public class nomina {
                 break;
             default:
                 try {
-                    String query = "update nomina set horas_extra= " + horas + " salario=" + nvSal + " where idNom=" + idNom;
+                    horasEx = horasEx - horas;
+                    totales = lunes+martes+miercoles+jueves+viernes+horasEx;
+                    totalSemana = totales-horasEx;
+                    salarioSemana = totalSemana*obtenerSalario(idEmp);
+                    salarioExtra = horasEx*obtenerSalario(idEmp)*2;
+                    nvSal = salarioSemana + salarioExtra;
+                    String query = "update nomina set horas_extra= " + horasEx + ", salario=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -205,10 +241,10 @@ public class nomina {
         return salario;
     }
 
-    public static int descontar() {
-        int status = 0;
-
-        return status;
+    public static int obtenerIdEmp(int idNom) {
+        int id = 0;
+        
+        return id;
     }
 
 }

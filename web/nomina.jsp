@@ -147,7 +147,7 @@
                             <div class="table container modal-body">
                                 <div class="row form-group">
                                     <div class="col-lg-6">Empleado:<input type="text" class="form-control" name="empleado" id="empleado" required></div>
-                                    <div class="col-lg-3">Semana del: <input type="date" class="form-control" name="semana2" id="semana2" required></div>
+                                    <div class="col-lg-3">Semana del: <input type="date" class="form-control" name="semana1" id="semana1" required></div>
                                     <div class="col-lg-3">Al: <input type="date" class="form-control" name="semana2" id="semana2" required></div>
                                 </div>
                                 <div class="row form-group">

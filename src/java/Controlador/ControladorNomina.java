@@ -27,7 +27,7 @@ public class ControladorNomina extends HttpServlet {
         } else if (userPath.equals("/nomina")) {
             List<NominaBean> listaNomina;
             listaNomina = nomina.listaNom();
-            varSesion.setAttribute("nomina", listaNomina);
+            varSesion.setAttribute("horas", listaNomina);
             response.sendRedirect("nomina.jsp");
         } else {
             System.out.println("El Servidor esta de nena y algo hizo mal |:|");
@@ -43,7 +43,9 @@ public class ControladorNomina extends HttpServlet {
         HttpSession varSesion = request.getSession();
         if (userPath.equals("/calcularnom")) {
             int idEmp = Integer.parseInt(request.getParameter("idEmp"));
-            String semana = request.getParameter("semana");
+            String semana1 = request.getParameter("semana1");
+            String semana2 = request.getParameter("semana2");
+            String semana = "Semana del "+semana1+" al "+semana2;
             float viernes = Float.parseFloat(request.getParameter("viernes"));
             float lunes = Float.parseFloat(request.getParameter("lunes"));
             float martes = Float.parseFloat(request.getParameter("martes"));
@@ -54,13 +56,12 @@ public class ControladorNomina extends HttpServlet {
             float hrsTotales = viernes+lunes+martes+miercoles+jueves+hrsExtra;
             float salario1;
             float salario2;
-            float sueldo=0;
+            float sueldo;
             
             salario1 = hrsSemana * nomina.obtenerSalario(idEmp);
             salario2 = hrsExtra * nomina.obtenerSalario(idEmp) * 2;
 
             sueldo = salario1 + salario2;
-
             NominaBean nominac = new NominaBean();
             nominac.setId_empleado(idEmp);
             nominac.setSemanaNom(semana);
@@ -74,6 +75,19 @@ public class ControladorNomina extends HttpServlet {
             nominac.setSalarioT(sueldo);
             nomina.calcularNom(nominac);
             response.sendRedirect("nomina");
+        }
+        
+        if(userPath.equals("/descontarnom")){
+            
+            String dia = request.getParameter("dia");
+            int idNom = Integer.parseInt(request.getParameter("idNom"));
+            int idEmp = nomina.obtenerIdEmp(idNom);
+            float horas = Float.parseFloat(request.getParameter("horas"));
+            NominaBean nom = new NominaBean();
+            nom.setIdNom(idNom);
+            nom.setId_empleado(idEmp);
+            nomina.descontarNom(idNom, dia, horas, idEmp);
+            response.sendRedirect("nomina");  
         }
     }
 }
