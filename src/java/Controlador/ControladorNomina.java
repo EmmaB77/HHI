@@ -1,8 +1,10 @@
 package Controlador;
 
+import Beans.EmpleadoBean;
 import Beans.NominaBean;
 import Beans.UserSystBean;
 import Modelo.nomina;
+import Modelo.Empleado;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -27,7 +29,10 @@ public class ControladorNomina extends HttpServlet {
         } else if (userPath.equals("/nomina")) {
             List<NominaBean> listaNomina;
             listaNomina = nomina.listaNom();
-            varSesion.setAttribute("horas", listaNomina);
+            List<EmpleadoBean> listaEmpleados;
+            listaEmpleados = Empleado.listarEmpleados();
+            varSesion.setAttribute("nominas", listaNomina);
+            varSesion.setAttribute("empleados", listaEmpleados);
             response.sendRedirect("nomina.jsp");
         } else {
             System.out.println("El Servidor esta de nena y algo hizo mal |:|");
@@ -62,6 +67,7 @@ public class ControladorNomina extends HttpServlet {
             salario2 = hrsExtra * nomina.obtenerSalario(idEmp) * 2;
 
             sueldo = salario1 + salario2;
+            
             NominaBean nominac = new NominaBean();
             nominac.setId_empleado(idEmp);
             nominac.setSemanaNom(semana);
@@ -72,7 +78,7 @@ public class ControladorNomina extends HttpServlet {
             nominac.setHrsJueves(jueves);
             nominac.setHrsExtra(hrsExtra);
             nominac.setHrsTotales(hrsTotales);
-            nominac.setSalarioT(sueldo);
+            nominac.setSueldoT(sueldo);
             nomina.calcularNom(nominac);
             response.sendRedirect("nomina");
         }
@@ -80,8 +86,8 @@ public class ControladorNomina extends HttpServlet {
         if(userPath.equals("/descontarnom")){
             
             String dia = request.getParameter("dia");
-            int idNom = Integer.parseInt(request.getParameter("idNom"));
-            int idEmp = nomina.obtenerIdEmp(idNom);
+            int idNom = Integer.parseInt(request.getParameter("idNomi"));
+            int idEmp = Integer.parseInt(request.getParameter("idEmpe"));
             float horas = Float.parseFloat(request.getParameter("horas"));
             NominaBean nom = new NominaBean();
             nom.setIdNom(idNom);

@@ -15,19 +15,20 @@ public class nomina {
         int status = 0;
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "insert into nomina (id_empleado, semana, viernes, lunes, martes, miercoles, jueves, horas_extra, hrstotales, salarioT)"
-                + " values(?,?,?,?,?,?,?,?,?,?,?)";
+        String query = "insert into nomina (id_empleado, semana, viernes, lunes, martes, miercoles, jueves, horas_extra, hrstotales, sueldoT)"
+                + " values(?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = con.prepareStatement(query);
-            ps.setObject(1, nomina.getEmpleadoNom().getIdEmpleado());
+            ps.setObject(1, nomina.getId_empleado());
             ps.setObject(2, nomina.getSemanaNom());
             ps.setObject(3, nomina.getHrsViernes());
             ps.setObject(4, nomina.getHrsLunes());
             ps.setObject(5, nomina.getHrsMartes());
-            ps.setObject(6, nomina.getHrsJueves());
-            ps.setObject(7, nomina.getHrsExtra());
-            ps.setObject(8, nomina.getHrsTotales());
-            ps.setObject(9, nomina.getSalarioT());
+            ps.setObject(6, nomina.getHrsMiercoles());
+            ps.setObject(7, nomina.getHrsJueves());
+            ps.setObject(8, nomina.getHrsExtra());
+            ps.setObject(9, nomina.getHrsTotales());
+            ps.setObject(10, nomina.getSueldoT());
             status = ps.executeUpdate();
             System.out.println("Exito en el registro");
             con.close();
@@ -178,8 +179,7 @@ public class nomina {
         List<NominaBean> lista = new ArrayList<>();
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "select nomina.idNom, persona.nombre, nomina.semana, nomina.viernes, nomina.lunes, nomina.martes, nomina.miercoles, nomina.jueves, nomina.horas_extra \n"
-                + "nomina.hrstotales, nomina.salarioT from nomina inner join empleado on nomina.id_empleado = empleado.id_empleado inner join persona on empleado.id_persona=persona.id_persona;";
+        String query = "Select idNom, ID_EMPLEADO, semana, viernes, lunes, martes, miercoles, jueves, horas_extra, hrstotales, sueldoT from nomina";
         try {
             ps = con.prepareStatement(query);
             ResultSet rs;
@@ -188,6 +188,7 @@ public class nomina {
                 NominaBean nomina = new NominaBean();
                 nomina.setIdNom(rs.getInt("idNom"));
                 nomina.setId_empleado(rs.getInt("id_empleado"));
+                nomina.setSemanaNom(rs.getString("semana"));
                 nomina.setHrsViernes(rs.getFloat("viernes"));
                 nomina.setHrsLunes(rs.getFloat("lunes"));
                 nomina.setHrsMartes(rs.getFloat("martes"));
@@ -195,7 +196,8 @@ public class nomina {
                 nomina.setHrsJueves(rs.getFloat("jueves"));
                 nomina.setHrsExtra(rs.getFloat("horas_extra"));
                 nomina.setHrsTotales(rs.getFloat("hrstotales"));
-                nomina.setSalarioT(rs.getFloat("salarioT"));
+                nomina.setSueldoT(rs.getFloat("sueldoT"));
+                nomina.setEmpleado(Empleado.obtenerEmpleado(nomina.getId_empleado()));
                 lista.add(nomina);
             }
             con.close();
@@ -227,13 +229,13 @@ public class nomina {
         float salario = 0;
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "select salariot from nomina where idNom=" + idNom + ";";
+        String query = "select sueldot from nomina where idNom=" + idNom + ";";
         try {
             ps = con.prepareStatement(query);
             ResultSet rs;
             rs = ps.executeQuery();
             while (rs.next()) {
-                salario = rs.getFloat("salariot");
+                salario = rs.getFloat("sueldot");
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -242,9 +244,8 @@ public class nomina {
     }
 
     public static int obtenerIdEmp(int idNom) {
-        int id = 0;
-        
+        int id = 0;  
         return id;
     }
-
+    
 }

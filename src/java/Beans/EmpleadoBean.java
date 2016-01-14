@@ -3,6 +3,7 @@ package Beans;
 public class EmpleadoBean {
     
     private int idEmpleado;
+    private int idPersona;
     private PersonaBean persona;
     private PuestoBean puesto;
     private DepartamentoBean depto;
@@ -46,6 +47,14 @@ public class EmpleadoBean {
 
     public void setEmpresa(EmpresaBean empresa) {
         this.empresa = empresa;
+    }
+
+    public int getIdPersona() {
+        return idPersona;
+    }
+
+    public void setIdPersona(int idPersona) {
+        this.idPersona = idPersona;
     }
     
     

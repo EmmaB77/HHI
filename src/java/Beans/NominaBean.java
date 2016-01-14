@@ -5,8 +5,8 @@ public class NominaBean {
     
     private int idNom;
     private int id_empleado;
-    private PersonaBean personaNom;
-    private EmpleadoBean empleadoNom;
+    private PersonaBean persona;
+    private EmpleadoBean empleado;
     private String semanaNom;
     private float hrsLunes;
     private float hrsMartes;
@@ -15,22 +15,22 @@ public class NominaBean {
     private float hrsViernes;
     private float hrsExtra;
     private float hrsTotales;
-    private float salarioT;
+    private float sueldoT;
 
-    public PersonaBean getPersonaNom() {
-        return personaNom;
+    public PersonaBean getPersona() {
+        return persona;
     }
 
-    public void setPersonaNom(PersonaBean personaNom) {
-        this.personaNom = personaNom;
+    public void setPersona(PersonaBean persona) {
+        this.persona = persona;
     }
 
-    public EmpleadoBean getEmpleadoNom() {
-        return empleadoNom;
+    public EmpleadoBean getEmpleado() {
+        return empleado;
     }
 
-    public void setEmpleadoNom(EmpleadoBean empleadoNom) {
-        this.empleadoNom = empleadoNom;
+    public void setEmpleado(EmpleadoBean empleadoNom) {
+        this.empleado = empleadoNom;
     }
 
     public float getHrsLunes() {
@@ -81,8 +81,6 @@ public class NominaBean {
         this.hrsExtra = horasExtra;
     }
 
-
-
     public float getHrsTotales() {
         return hrsTotales;
     }
@@ -91,12 +89,12 @@ public class NominaBean {
         this.hrsTotales = hrsTotales;
     }
 
-    public float getSalarioT() {
-        return salarioT;
+    public float getSueldoT() {
+        return sueldoT;
     }
 
-    public void setSalarioT(float salarioT) {
-        this.salarioT = salarioT;
+    public void setSueldoT(float sueldoT) {
+        this.sueldoT = sueldoT;
     }
 
     public String getSemanaNom() {
@@ -122,7 +120,5 @@ public class NominaBean {
     public void setId_empleado(int id_empleado) {
         this.id_empleado = id_empleado;
     }
-    
-    
     
 }

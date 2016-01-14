@@ -1,5 +1,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.sql.*" %>
+<%@page import="Conexion.Conexion" %><!DOCTYPE html>
+<%@page import="Modelo.nomina"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,6 +22,16 @@
         <script type="text/javascript">
             $(function () {
                 $('#tabla_cot').dataTable();
+            });
+        </script>
+        <script>
+            $(document).ready(function (e) {
+                $('#descontar').on('show.bs.modal', function (e) {
+                    var idN = $(e.relatedTarget).data().idN;
+                    var idE = $(e.relatedTarget).data().idE;
+                    $(e.currentTarget).find('#idNomi').val(idN);
+                    $(e.currentTarget).find('#idEmpe').val(idE);
+                });
             });
         </script>
     </head>
@@ -73,7 +86,7 @@
                         <li class="dropdown">
                             <a class="dropdown-toggle" href="#" data-toggle="dropdown">Nómina</a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Calcular Nómina</a></li>
+                                <li><a href="nomina">Calcular Nómina</a></li>
                                 <li><a href="#">Imprimir Recibos</a></li>
                             </ul>
                         </li>
@@ -114,22 +127,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="hora" items="${horas}" varStatus="iter">
+                        <c:forEach var="nomina" items="${nominas}" varStatus="iter">
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>${nomina.idNom}</td>
+                                <td>${nomina.empleado.persona.nombrePersona}&nbsp;${nomina.empleado.persona.apellidoPpersona}&nbsp;${nomina.empleado.persona.apellidoMpersona}</td>
+                                <td>${nomina.semanaNom}</td>
+                                <td>${nomina.hrsViernes}</td>
+                                <td>${nomina.hrsLunes}</td>
+                                <td>${nomina.hrsMartes}</td>
+                                <td>${nomina.hrsMiercoles}</td>
+                                <td>${nomina.hrsJueves}</td>
+                                <td>${nomina.hrsExtra}</td>
+                                <td>${nomina.hrsTotales}</td>
+                                <td>${nomina.sueldoT}</td>
                                 <td>
-                                    <a href="#=" class="btn btn-sm btn-danger" role="button" title="Descontar"><i class="glyphicon glyphicon-minus"></i><i class="glyphicon glyphicon-usd"></i></a>
+                                    <a data-toggle="modal" href="#" class="btn btn-sm btn-danger" role="button" data-target="#descontar" data-idE="${nomina.id_empleado}" data-idN="${nomina.idNom}"><i class="glyphicon glyphicon-minus"></i><i class="glyphicon glyphicon-usd"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -146,7 +158,14 @@
                             </div>
                             <div class="table container modal-body">
                                 <div class="row form-group">
-                                    <div class="col-lg-6">Empleado:<input type="text" class="form-control" name="empleado" id="empleado" required></div>
+                                    <div class="col-lg-5">
+                                        Empleado:
+                                        <select class="form-control" name="idEmp" id="idEmp">
+                                            <option value="">--Selecciona un empleado--</option>
+                                            <c:forEach var="empleado" items="${empleados}" varStatus="iter">
+                                                <option value="${empleado.idEmpleado}">${empleado.persona.nombrePersona}&nbsp;${empleado.persona.apellidoPpersona}&nbsp;${paciente.persona.apellidoMpersona}</option>
+                                            </c:forEach>
+                                        </select></div>
                                     <div class="col-lg-3">Semana del: <input type="date" class="form-control" name="semana1" id="semana1" required></div>
                                     <div class="col-lg-3">Al: <input type="date" class="form-control" name="semana2" id="semana2" required></div>
                                 </div>
@@ -168,9 +187,9 @@
                     </div>
                 </div>
             </form>
-            <form class="form" role="form" method="post" action="descontar">
-                <div class="modal fade" id="descontarNom">
-                    <div class="modal-dialog modal-sm">
+            <form class="form" role="form" method="post" action="descontarnom">
+                <div class="modal fade" id="descontar">
+                    <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -188,8 +207,10 @@
                                             <option value="Sabado">Sábado</option>
                                             <option value="Domingo">Domingo</option>
                                         </select>
+                                        <input type="text" id="idEmpe" name="idEmpe"/>
+                                        <input type="text" id="idNomi" name="idNomi"/>
                                     </div>
-                                    <div class="col-lg-1">Horas:
+                                    <div class="col-lg-5">Horas:
                                         <select class="form-control" name="dia" id="dia">
                                             <option value="0.5">Media Hora</option>
                                             <option value="1">1 Hora</option>
@@ -205,11 +226,11 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="summit" class="btn btn-success">Agregar</button>
-                                    <button type="RESET" class="btn btn-info">Limpiar</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
-                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="summit" class="btn btn-danger">Descontar</button>
+                                <button type="RESET" class="btn btn-info">Limpiar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
                             </div>
                         </div>
                     </div>
