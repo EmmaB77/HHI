@@ -19,19 +19,19 @@
         <script src="js/bootstrap.min.js"></script>
         <link href="css/jquery.dataTables.css" rel="stylesheet">
         <script src="js/jquery.dataTables.js"></script>
-        <script type="text/javascript">
-            $(function () {
-                $('#tabla_cot').dataTable();
-            });
-        </script>
         <script>
             $(document).ready(function (e) {
                 $('#descontar').on('show.bs.modal', function (e) {
-                    var idN = $(e.relatedTarget).data().idN;
-                    var idE = $(e.relatedTarget).data().idE;
-                    $(e.currentTarget).find('#idNomi').val(idN);
-                    $(e.currentTarget).find('#idEmpe').val(idE);
+                    var idNo = $(e.relatedTarget).data().idN;
+                    var idEm = $(e.relatedTarget).data().idE;
+                    $(e.currentTarget).find('#idN').val(idNo);
+                    $(e.currentTarget).find('#idE').val(idEm);
                 });
+            });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $('#tabla_cot').dataTable();
             });
         </script>
     </head>
@@ -207,8 +207,8 @@
                                             <option value="Sabado">Sábado</option>
                                             <option value="Domingo">Domingo</option>
                                         </select>
-                                        <input type="text" id="idEmpe" name="idEmpe"/>
-                                        <input type="text" id="idNomi" name="idNomi"/>
+                                        <input type="text" id="idE" name="idE"/>
+                                        <input type="text" id="idN" name="idN"/>
                                     </div>
                                     <div class="col-lg-5">Horas:
                                         <select class="form-control" name="dia" id="dia">
