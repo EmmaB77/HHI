@@ -197,34 +197,33 @@
                             </div>
                             <div class="modal-body">
                                 <div class="form-group">
-                                        &nbsp; Dia:
-                                        <select class="form-control" name="dia" id="dia">
-                                            <option value="Lunes">Lunes</option>
-                                            <option value="Martes">Martes</option>
-                                            <option value="Miercoles">Miércoles</option>
-                                            <option value="Jueves">Jueves</option>
-                                            <option value="Viernes">Viernes</option>
-                                            <option value="Sabado">Sábado</option>
-                                            <option value="Domingo">Domingo</option>
-                                        </select>
-                                        &nbsp; Horas:
-                                        <select class="form-control" name="horas" id="horas">
-                                            <option value="0.5">Media Hora</option>
-                                            <option value="1">1 Hora</option>
-                                            <option value="2">2 Horas</option>
-                                            <option value="3">3 Horas</option>
-                                            <option value="4">4 Horas</option>
-                                            <option value="5">5 Horas</option>
-                                            <option value="6">6 Horas</option>
-                                            <option value="7">7 Horas</option>
-                                            <option value="8">8 Horas</option>
-                                            <option value="9">9 Horas</option>
-                                            <option value="10">1 dia</option>
-                                        </select>
+                                    &nbsp; Dia:
+                                    <select class="form-control" name="dia" id="dia">
+                                        <option value="Lunes">Lunes</option>
+                                        <option value="Martes">Martes</option>
+                                        <option value="Miercoles">Miércoles</option>
+                                        <option value="Jueves">Jueves</option>
+                                        <option value="Viernes">Viernes</option>
+                                        <option value="Tiempo">Tiempo Extra</option>
+                                    </select>
+                                    &nbsp; Horas:
+                                    <select class="form-control" name="horas" id="horas">
+                                        <option value="0.5">Media Hora</option>
+                                        <option value="1">1 Hora</option>
+                                        <option value="2">2 Horas</option>
+                                        <option value="3">3 Horas</option>
+                                        <option value="4">4 Horas</option>
+                                        <option value="5">5 Horas</option>
+                                        <option value="6">6 Horas</option>
+                                        <option value="7">7 Horas</option>
+                                        <option value="8">8 Horas</option>
+                                        <option value="9">9 Horas</option>
+                                        <option value="10">1 dia</option>
+                                    </select>
                                 </div>
                                 <div class="row form-group">
-                                    ID Nomina: <input type="text" name="idNomD" id="idNomD" class="form-control">
-                                    ID Empleado: <input type="text" name="idEmD" id="idEmD" class="form-control">
+                                    <input type="hidden" name="idNomD" id="idNomD" class="form-control">
+                                    <input type="hidden" name="idEmD" id="idEmD" class="form-control">
                                 </div>
                             </div>
                             <div class="modal-footer">
