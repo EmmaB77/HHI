@@ -47,7 +47,7 @@
                     $(e.currentTarget).find('#fechaU').val(date);
                     $(e.currentTarget).find('#mesU').val(mes);
                 });
-            });
+            })                                                                                                                                                                                                                                                                                                                                                                                                              ;
         </script>
     </head>
     <body>

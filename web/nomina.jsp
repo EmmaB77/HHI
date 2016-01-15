@@ -19,19 +19,19 @@
         <script src="js/bootstrap.min.js"></script>
         <link href="css/jquery.dataTables.css" rel="stylesheet">
         <script src="js/jquery.dataTables.js"></script>
-        <script>
-            $(document).ready(function (e) {
-                $('#descontar').on('show.bs.modal', function (e) {
-                    var idNo = $(e.relatedTarget).data().idN;
-                    var idEm = $(e.relatedTarget).data().idE;
-                    $(e.currentTarget).find('#idN').val(idNo);
-                    $(e.currentTarget).find('#idE').val(idEm);
-                });
-            });
-        </script>
         <script type="text/javascript">
             $(function () {
                 $('#tabla_cot').dataTable();
+            });
+        </script>
+        <script>
+            $(document).ready(function (e) {
+                $('#Quitar').on('show.bs.modal', function (e) {
+                    var id = $(e.relatedTarget).data().id1;
+                    var prov = $(e.relatedTarget).data().id2;
+                    $(e.currentTarget).find('#idEmD').val(id);
+                    $(e.currentTarget).find('#idNomD').val(prov);
+                });
             });
         </script>
     </head>
@@ -141,7 +141,7 @@
                                 <td>${nomina.hrsTotales}</td>
                                 <td>${nomina.sueldoT}</td>
                                 <td>
-                                    <a data-toggle="modal" href="#" class="btn btn-sm btn-danger" role="button" data-target="#descontar" data-idE="${nomina.id_empleado}" data-idN="${nomina.idNom}"><i class="glyphicon glyphicon-minus"></i><i class="glyphicon glyphicon-usd"></i></a>
+                                    <a data-toggle="modal" href="#" class="btn btn-sm btn-danger" role="button" data-target="#Quitar" data-id1="${nomina.id_empleado}" data-id2="${nomina.idNom}"><i class="glyphicon glyphicon-minus"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -156,7 +156,7 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                 <h3 class="modal-title">Calcular Nomina</h3>
                             </div>
-                            <div class="table container modal-body">
+                            <div class="modal-body">
                                 <div class="row form-group">
                                     <div class="col-lg-5">
                                         Empleado:
@@ -188,30 +188,27 @@
                 </div>
             </form>
             <form class="form" role="form" method="post" action="descontarnom">
-                <div class="modal fade" id="descontar">
-                    <div class="modal-dialog">
+                <div class="modal fade" id="Quitar" name="Quitar">
+                    <div class="modal-dialog modal-sm">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                 <h3 class="modal-title">Seleccione día y horas</h3>
                             </div>
-                            <div class="table container modal-body">
-                                <div class="row form-group">
-                                    <div class="col-lg-5">Dia:
+                            <div class="modal-body">
+                                <div class="form-group">
+                                        &nbsp; Dia:
                                         <select class="form-control" name="dia" id="dia">
                                             <option value="Lunes">Lunes</option>
                                             <option value="Martes">Martes</option>
-                                            <option value="Miercoles">Miercoles</option>
+                                            <option value="Miercoles">Miércoles</option>
                                             <option value="Jueves">Jueves</option>
                                             <option value="Viernes">Viernes</option>
                                             <option value="Sabado">Sábado</option>
                                             <option value="Domingo">Domingo</option>
                                         </select>
-                                        <input type="text" id="idE" name="idE"/>
-                                        <input type="text" id="idN" name="idN"/>
-                                    </div>
-                                    <div class="col-lg-5">Horas:
-                                        <select class="form-control" name="dia" id="dia">
+                                        &nbsp; Horas:
+                                        <select class="form-control" name="horas" id="horas">
                                             <option value="0.5">Media Hora</option>
                                             <option value="1">1 Hora</option>
                                             <option value="2">2 Horas</option>
@@ -224,7 +221,10 @@
                                             <option value="9">9 Horas</option>
                                             <option value="10">1 dia</option>
                                         </select>
-                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    ID Nomina: <input type="text" name="idNomD" id="idNomD" class="form-control">
+                                    ID Empleado: <input type="text" name="idEmD" id="idEmD" class="form-control">
                                 </div>
                             </div>
                             <div class="modal-footer">

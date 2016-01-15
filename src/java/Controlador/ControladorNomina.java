@@ -86,8 +86,8 @@ public class ControladorNomina extends HttpServlet {
         if(userPath.equals("/descontarnom")){
             
             String dia = request.getParameter("dia");
-            int idNom = Integer.parseInt(request.getParameter("idNomi"));
-            int idEmp = Integer.parseInt(request.getParameter("idEmpe"));
+            int idNom = Integer.parseInt(request.getParameter("idNomD"));
+            int idEmp = Integer.parseInt(request.getParameter("idEmD"));
             float horas = Float.parseFloat(request.getParameter("horas"));
             NominaBean nom = new NominaBean();
             nom.setIdNom(idNom);

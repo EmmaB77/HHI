@@ -53,7 +53,7 @@ public class nomina {
         float salarioT;
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query1 = "select lunes, martes, miercoles, jueves, horas_extra, hrstotales, salarioT from nomina where idNom= " + idNom + ";";
+        String query1 = "select viernes, lunes, martes, miercoles, jueves, horas_extra, hrstotales, sueldoT from nomina where idNom= " + idNom + ";";
         
         try {
             ps = con.prepareStatement(query1);
@@ -67,7 +67,7 @@ public class nomina {
                 jueves = rs.getFloat("jueves");
                 horasEx = rs.getFloat("horas_extra");
                 totales = rs.getFloat("hrstotales");
-                salarioT = rs.getFloat("salarioT");
+                salarioT = rs.getFloat("sueldot");
             }
             con.close();
         } catch (SQLException e) {
@@ -83,7 +83,7 @@ public class nomina {
                     salarioSemana = totalSemana*obtenerSalario(idEmp);
                     salarioExtra = horasEx*obtenerSalario(idEmp)*2;
                     nvSal = salarioSemana + salarioExtra;
-                    String query = "update nomina set lunes= " + lunes + ", salario=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
+                    String query = "update nomina set lunes= " + lunes + ", sueldot=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -99,7 +99,7 @@ public class nomina {
                     salarioSemana = totalSemana*obtenerSalario(idEmp);
                     salarioExtra = horasEx*obtenerSalario(idEmp)*2;
                     nvSal = salarioSemana + salarioExtra;
-                    String query = "update nomina set martes= " + martes + ", salario=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
+                    String query = "update nomina set martes= " + martes + ", sueldot=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -115,7 +115,7 @@ public class nomina {
                     salarioSemana = totalSemana*obtenerSalario(idEmp);
                     salarioExtra = horasEx*obtenerSalario(idEmp)*2;
                     nvSal = salarioSemana + salarioExtra;
-                    String query = "update nomina set miercoles= " + miercoles + ", salario=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
+                    String query = "update nomina set miercoles= " + miercoles + ", sueldot=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -131,7 +131,7 @@ public class nomina {
                     salarioSemana = totalSemana*obtenerSalario(idEmp);
                     salarioExtra = horasEx*obtenerSalario(idEmp)*2;
                     nvSal = salarioSemana + salarioExtra;
-                    String query = "update nomina set jueves= " + jueves + ", salario=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
+                    String query = "update nomina set jueves= " + jueves + ", sueldot=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -147,7 +147,7 @@ public class nomina {
                     salarioSemana = totalSemana*obtenerSalario(idEmp);
                     salarioExtra = horasEx*obtenerSalario(idEmp)*2;
                     nvSal = salarioSemana + salarioExtra;
-                    String query = "update nomina set viernes= " + viernes + ", salario=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
+                    String query = "update nomina set viernes= " + viernes + ", sueldot=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -163,7 +163,7 @@ public class nomina {
                     salarioSemana = totalSemana*obtenerSalario(idEmp);
                     salarioExtra = horasEx*obtenerSalario(idEmp)*2;
                     nvSal = salarioSemana + salarioExtra;
-                    String query = "update nomina set horas_extra= " + horasEx + ", salario=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
+                    String query = "update nomina set horas_extra= " + horasEx + ", sueldot=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
