@@ -87,7 +87,7 @@
                             <a class="dropdown-toggle" href="#" data-toggle="dropdown">Nómina</a>
                             <ul class="dropdown-menu">
                                 <li><a href="nomina">Calcular Nómina</a></li>
-                                <li><a href="#">Imprimir Recibos</a></li>
+                                <li><a href="recibo">Imprimir Recibos</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -139,7 +139,7 @@
                                 <td>${nomina.hrsJueves}</td>
                                 <td>${nomina.hrsExtra}</td>
                                 <td>${nomina.hrsTotales}</td>
-                                <td>${nomina.sueldoT}</td>
+                                <td>$ ${nomina.sueldoT} 00/100 M.N.</td>
                                 <td>
                                     <a data-toggle="modal" href="#" class="btn btn-sm btn-danger" role="button" data-target="#Quitar" data-id1="${nomina.id_empleado}" data-id2="${nomina.idNom}"><i class="glyphicon glyphicon-minus"></i></a>
                                 </td>

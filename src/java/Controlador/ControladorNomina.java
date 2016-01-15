@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebServlet(name = "ControladorNomina", urlPatterns = {"/ControladorNomina","/calcularnom","/descontarnom","/nomina"})
+@WebServlet(name = "ControladorNomina", urlPatterns = {"/ControladorNomina","/calcularnom","/descontarnom","/nomina","/recibo"})
 public class ControladorNomina extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -25,7 +25,8 @@ public class ControladorNomina extends HttpServlet {
         String userPath = request.getServletPath();
         HttpSession varSesion = request.getSession();
         UserSystBean user = (UserSystBean) varSesion.getAttribute("usuario");
-        if (user == null) { response.sendRedirect("acceso.jsp");
+        if (user == null) { 
+            response.sendRedirect("acceso.jsp");
         } else if (userPath.equals("/nomina")) {
             List<NominaBean> listaNomina;
             listaNomina = nomina.listaNom();
@@ -34,6 +35,17 @@ public class ControladorNomina extends HttpServlet {
             varSesion.setAttribute("nominas", listaNomina);
             varSesion.setAttribute("empleados", listaEmpleados);
             response.sendRedirect("nomina.jsp");
+        }else if(userPath.equals("/recibo")){
+            List<NominaBean> listaNomina;
+            listaNomina = nomina.listaNom();
+            List<EmpleadoBean> listaEmpleados;
+            listaEmpleados = Empleado.listarEmpleados();
+            List<NominaBean> listaSemanas;
+            listaSemanas = nomina.listaSemanas();
+            varSesion.setAttribute("semanas", listaSemanas);
+            varSesion.setAttribute("nominas", listaNomina);
+            varSesion.setAttribute("empleados", listaEmpleados);
+            response.sendRedirect("recibosN.jsp");
         } else {
             System.out.println("El Servidor esta de nena y algo hizo mal |:|");
         }

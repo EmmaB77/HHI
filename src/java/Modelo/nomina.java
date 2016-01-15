@@ -54,7 +54,7 @@ public class nomina {
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
         String query1 = "select viernes, lunes, martes, miercoles, jueves, horas_extra, hrstotales, sueldoT from nomina where idNom= " + idNom + ";";
-        
+
         try {
             ps = con.prepareStatement(query1);
             ResultSet rs;
@@ -77,12 +77,12 @@ public class nomina {
             case "Lunes":
                 try {
                     lunes = lunes - horas;
-                    totales = lunes+martes+miercoles+jueves+viernes+horasEx;
-                    totalSemana = totales-horasEx;
-                    salarioSemana = totalSemana*obtenerSalario(idEmp);
-                    salarioExtra = horasEx*obtenerSalario(idEmp)*2;
+                    totales = lunes + martes + miercoles + jueves + viernes + horasEx;
+                    totalSemana = totales - horasEx;
+                    salarioSemana = totalSemana * obtenerSalario(idEmp);
+                    salarioExtra = horasEx * obtenerSalario(idEmp) * 2;
                     nvSal = salarioSemana + salarioExtra;
-                    String query = "update nomina set lunes= " + lunes + ", sueldot=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
+                    String query = "update nomina set lunes= " + lunes + ", sueldot=" + nvSal + ", hrstotales= " + totales + " where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -93,12 +93,12 @@ public class nomina {
             case "Martes":
                 try {
                     martes = martes - horas;
-                    totales = lunes+martes+miercoles+jueves+viernes+horasEx;
-                    totalSemana = totales-horasEx;
-                    salarioSemana = totalSemana*obtenerSalario(idEmp);
-                    salarioExtra = horasEx*obtenerSalario(idEmp)*2;
+                    totales = lunes + martes + miercoles + jueves + viernes + horasEx;
+                    totalSemana = totales - horasEx;
+                    salarioSemana = totalSemana * obtenerSalario(idEmp);
+                    salarioExtra = horasEx * obtenerSalario(idEmp) * 2;
                     nvSal = salarioSemana + salarioExtra;
-                    String query = "update nomina set martes= " + martes + ", sueldot=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
+                    String query = "update nomina set martes= " + martes + ", sueldot=" + nvSal + ", hrstotales= " + totales + " where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -109,12 +109,12 @@ public class nomina {
             case "Miercoles":
                 try {
                     miercoles = miercoles - horas;
-                    totales = lunes+martes+miercoles+jueves+viernes+horasEx;
-                    totalSemana = totales-horasEx;
-                    salarioSemana = totalSemana*obtenerSalario(idEmp);
-                    salarioExtra = horasEx*obtenerSalario(idEmp)*2;
+                    totales = lunes + martes + miercoles + jueves + viernes + horasEx;
+                    totalSemana = totales - horasEx;
+                    salarioSemana = totalSemana * obtenerSalario(idEmp);
+                    salarioExtra = horasEx * obtenerSalario(idEmp) * 2;
                     nvSal = salarioSemana + salarioExtra;
-                    String query = "update nomina set miercoles= " + miercoles + ", sueldot=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
+                    String query = "update nomina set miercoles= " + miercoles + ", sueldot=" + nvSal + ", hrstotales= " + totales + " where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -125,12 +125,12 @@ public class nomina {
             case "Jueves":
                 try {
                     jueves = jueves - horas;
-                    totales = lunes+martes+miercoles+jueves+viernes+horasEx;
-                    totalSemana = totales-horasEx;
-                    salarioSemana = totalSemana*obtenerSalario(idEmp);
-                    salarioExtra = horasEx*obtenerSalario(idEmp)*2;
+                    totales = lunes + martes + miercoles + jueves + viernes + horasEx;
+                    totalSemana = totales - horasEx;
+                    salarioSemana = totalSemana * obtenerSalario(idEmp);
+                    salarioExtra = horasEx * obtenerSalario(idEmp) * 2;
                     nvSal = salarioSemana + salarioExtra;
-                    String query = "update nomina set jueves= " + jueves + ", sueldot=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
+                    String query = "update nomina set jueves= " + jueves + ", sueldot=" + nvSal + ", hrstotales= " + totales + " where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -141,12 +141,12 @@ public class nomina {
             case "Viernes":
                 try {
                     viernes = viernes - horas;
-                    totales = lunes+martes+miercoles+jueves+viernes+horasEx;
-                    totalSemana = totales-horasEx;
-                    salarioSemana = totalSemana*obtenerSalario(idEmp);
-                    salarioExtra = horasEx*obtenerSalario(idEmp)*2;
+                    totales = lunes + martes + miercoles + jueves + viernes + horasEx;
+                    totalSemana = totales - horasEx;
+                    salarioSemana = totalSemana * obtenerSalario(idEmp);
+                    salarioExtra = horasEx * obtenerSalario(idEmp) * 2;
                     nvSal = salarioSemana + salarioExtra;
-                    String query = "update nomina set viernes= " + viernes + ", sueldot=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
+                    String query = "update nomina set viernes= " + viernes + ", sueldot=" + nvSal + ", hrstotales= " + totales + " where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -157,12 +157,12 @@ public class nomina {
             default:
                 try {
                     horasEx = horasEx - horas;
-                    totales = lunes+martes+miercoles+jueves+viernes+horasEx;
-                    totalSemana = totales-horasEx;
-                    salarioSemana = totalSemana*obtenerSalario(idEmp);
-                    salarioExtra = horasEx*obtenerSalario(idEmp)*2;
+                    totales = lunes + martes + miercoles + jueves + viernes + horasEx;
+                    totalSemana = totales - horasEx;
+                    salarioSemana = totalSemana * obtenerSalario(idEmp);
+                    salarioExtra = horasEx * obtenerSalario(idEmp) * 2;
                     nvSal = salarioSemana + salarioExtra;
-                    String query = "update nomina set horas_extra= " + horasEx + ", sueldot=" + nvSal + ", hrstotales= "+totales+" where idNom=" + idNom;
+                    String query = "update nomina set horas_extra= " + horasEx + ", sueldot=" + nvSal + ", hrstotales= " + totales + " where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -197,6 +197,27 @@ public class nomina {
                 nomina.setHrsTotales(rs.getFloat("hrstotales"));
                 nomina.setSueldoT(rs.getFloat("sueldoT"));
                 nomina.setEmpleado(Empleado.obtenerEmpleado(nomina.getId_empleado()));
+                lista.add(nomina);
+            }
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return lista;
+    }
+
+    public static List<NominaBean> listaSemanas() {
+        List<NominaBean> lista = new ArrayList<>();
+        Connection con = Conexion.getConnetion();
+        PreparedStatement ps;
+        String query = "Select semana from nomina group by semana";
+        try {
+            ps = con.prepareStatement(query);
+            ResultSet rs;
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                NominaBean nomina = new NominaBean();
+                nomina.setSemanaNom(rs.getString("semana"));
                 lista.add(nomina);
             }
             con.close();
@@ -243,8 +264,8 @@ public class nomina {
     }
 
     public static int obtenerIdEmp(int idNom) {
-        int id = 0;  
+        int id = 0;
         return id;
     }
-    
+
 }

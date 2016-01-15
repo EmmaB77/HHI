@@ -78,7 +78,7 @@
                             <a class="dropdown-toggle" href="#" data-toggle="dropdown">Nómina</a>
                             <ul class="dropdown-menu">
                                 <li><a href="nomina">Calcular Nómina</a></li>
-                                <li><a href="#">Imprimir Recibos</a></li>
+                                <li><a href="recibo">Imprimir Recibos</a></li>
                             </ul>
                         </li>
                     </ul>
