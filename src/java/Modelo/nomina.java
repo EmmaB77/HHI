@@ -69,7 +69,6 @@ public class nomina {
                 totales = rs.getFloat("hrstotales");
                 salarioT = rs.getFloat("sueldot");
             }
-            con.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
