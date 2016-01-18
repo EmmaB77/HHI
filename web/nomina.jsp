@@ -129,17 +129,17 @@
                     <tbody>
                         <c:forEach var="nomina" items="${nominas}" varStatus="iter">
                             <tr>
-                                <td>${nomina.idNom}</td>
-                                <td>${nomina.empleado.persona.nombrePersona}&nbsp;${nomina.empleado.persona.apellidoPpersona}&nbsp;${nomina.empleado.persona.apellidoMpersona}</td>
-                                <td>${nomina.semanaNom}</td>
-                                <td>${nomina.hrsViernes}</td>
-                                <td>${nomina.hrsLunes}</td>
-                                <td>${nomina.hrsMartes}</td>
-                                <td>${nomina.hrsMiercoles}</td>
-                                <td>${nomina.hrsJueves}</td>
-                                <td>${nomina.hrsExtra}</td>
-                                <td>${nomina.hrsTotales}</td>
-                                <td>$ ${nomina.sueldoT} 00/100 M.N.</td>
+                                <td><h6>${nomina.idNom}</h6></td>
+                                <td><h6>${nomina.empleado.persona.nombrePersona}&nbsp;${nomina.empleado.persona.apellidoPpersona}&nbsp;${nomina.empleado.persona.apellidoMpersona}</h6></td>
+                                <td><h6>${nomina.semanaNom}</h6></td>
+                                <td><h6>${nomina.hrsViernes}</h6></td>
+                                <td><h6>${nomina.hrsLunes}</h6></td>
+                                <td><h6>${nomina.hrsMartes}</h6></td>
+                                <td><h6>${nomina.hrsMiercoles}</h6></td>
+                                <td><h6>${nomina.hrsJueves}</h6></td>
+                                <td><h6>${nomina.hrsExtra}</h6></td>
+                                <td><h6>${nomina.hrsTotales}</h6></td>
+                                <td><h6>$ ${nomina.sueldoT} 00/100 M.N.</h6></td>
                                 <td>
                                     <a data-toggle="modal" href="#" class="btn btn-sm btn-danger" role="button" data-target="#Quitar" data-id1="${nomina.id_empleado}" data-id2="${nomina.idNom}"><i class="glyphicon glyphicon-minus"></i></a>
                                 </td>
@@ -176,6 +176,13 @@
                                     <div class="col-lg-2">Hrs Mie: <input type="number" class="form-control" name="miercoles" id="miercoles" required></div>
                                     <div class="col-lg-2">Hrs J: <input type="number" class="form-control" name="jueves" id="jueves" required></div>
                                     <div class="col-lg-2">Hrs T.Ex:<input type="number" class="form-control" name="tiempo_extra" id="tiempo_extra" required></div>
+                                </div>
+                                <div class="row form-group">
+                                    <h5>&nbsp;&nbsp;&nbsp;&nbsp;Ingresos Extra:</h5>
+                                    <div class="col-lg-3">Sobre Sueldo: <input type="number" class="form-control" name="sobre" id="sobre" required></div>
+                                    <div class="col-lg-3">Viaticos: <input type="number" class="form-control" name="viaticos" id="viaticos" required></div>
+                                    <div class="col-lg-3">Otros Ingresos: <input type="number" class="form-control" name="otrosI" id="otrosI" required></div>
+                                    <div class="col-lg-3">Deducciones: <input type="number" class="form-control" name="deducciones" id="deducciones" required></div>
                                 </div>
                             </div>
                             <div class="modal-footer">

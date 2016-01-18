@@ -101,7 +101,7 @@
                     </div><br>
                     <div class="row">
                         <div class="col-lg-3">HHI INSTALACIONES INDUSTRIALES</div>
-                        <div class="col-lg-4" align="right">15/01/2016</div>
+                        <div class="col-lg-4" align="right">Fecha: ${datos.date}</div>
                     </div>
                     <div class="row">
                         <div class="col-lg-7" align="center"><h5><b>RECIBO DE NÓMINA</b></h5></div>
@@ -118,49 +118,55 @@
                         <div class="col-lg-3">Horas Trabajadas: ${datos.hrsTotales}</div>
                     </div><br>
                     <div class="row">
-                        <div class="col-lg-4" align="left">Ingresos</div>
-                        <div class="col-lg-3" align="left">Deducciones:</div>
+                        <div class="col-lg-4" align="left"><b>Ingresos</b></div>
+                        <div class="col-lg-3" align="left"><b>Deducciones:</b></div>
                     </div></font><font size="1">
                     <div class="row">
+                        <div class="col-lg-7">-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</div>
+                    </div>
+                    <div class="row">
                         <div class="col-lg-2">Normal:</div>
-                        <div class="col-lg-2">$ ${datos.sueldoT} M.N.</div>
+                        <div class="col-lg-2">$ ${datos.sueldo_N} M.N.</div>
                         <div class="col-lg-2">Infonavit:</div>
-                        <div class="col-lg-1">$ 0.00 M.N.</div>
+                        <div class="col-lg-1">$ ${datos.infonavit}</div>
                     </div>
                     <div class="row">
                         <div class="col-lg-2">Tiempo Extra:</div>
-                        <div class="col-lg-2">$ 0.00 M.N.</div>
+                        <div class="col-lg-2">$ ${datos.sueldoEx} M.N.</div>
                         <div class="col-lg-2">Otros:</div>
-                        <div class="col-lg-1">$ 0.00 M.N.</div>
+                        <div class="col-lg-1">$ ${datos.otros_deducciones} M.N.</div>
                     </div>
                     <div class="row">
                         <div class="col-lg-2">SobreSueldo:</div>
-                        <div class="col-lg-2">$ 0.00 M.N.</div>
+                        <div class="col-lg-2">$ ${datos.sobresueldo} M.N.</div>
                     </div>
                     <div class="row">
                         <div class="col-lg-2">Viaticos</div>
-                        <div class="col-lg-2">$ 0.00 M.N.</div>
+                        <div class="col-lg-2">$ ${datos.viaticos} M.N.</div>
                     </div>
                     <div class="row">
                         <div class="col-lg-2">Otros:</div>
-                        <div class="col-lg-2">$ 0.00 M.N.</div>
+                        <div class="col-lg-2">$ ${datos.otros_ingresos} M.N.</div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-2">Total Ingresos:</div>
-                        <div class="col-lg-2">$ 0.00 M.N.</div>
-                        <div class="col-lg-2">Total Deducciones:</div>
-                        <div class="col-lg-1">$ 0.00 M.N.</div>
+                        <div class="col-lg-7">-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2"><b>Total Ingresos:</b></div>
+                        <div class="col-lg-2">$ ${datos.total_ingresos} M.N.</div>
+                        <div class="col-lg-2"><b>Total Deducciones:</b></div>
+                        <div class="col-lg-1">$ ${datos.total_deducciones} M.N.</div>
                     </div>
                     <div class="row">
                         <div class="col-lg-2"></div>
                         <div class="col-lg-2"></div>
-                        <div class="col-lg-2">Salario Total:</div>
-                        <div class="col-lg-1">$ 1000.00 M.N.</div>
+                        <div class="col-lg-2"><b>Salario Total:</b></div>
+                        <div class="col-lg-1">$ ${datos.sueldoT} M.N.</div>
                     </div></font>
                     <div class="row">
                         <div class="col-lg-5"><h6>Recibi de conformidad las prestaciones correspondientes al periodo que se indica arriba y que liquida totalmente hasta esta fecha, mi salario ordinario, extraordinario, 7o. Día, salario de compensación y demas prestaciones.</h6></div>
                     </div>
-                    <div class="row"><h5>
+                    <div class="row">
                         <div class="col-lg-5"></div>
                         <div class="col-lg-2" align="center">_________________</div>
                     </div>

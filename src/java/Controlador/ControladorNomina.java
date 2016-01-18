@@ -36,8 +36,9 @@ public class ControladorNomina extends HttpServlet {
             varSesion.setAttribute("empleados", listaEmpleados);
             response.sendRedirect("nomina.jsp");
         }else if(userPath.equals("/recibo")){
+            String semana = "Semana del 2016-01-01 al 2016-01-07";
             List<NominaBean> listaNomina;
-            listaNomina = nomina.listaNom();
+            listaNomina = nomina.listaNomxSem(semana);
             List<EmpleadoBean> listaEmpleados;
             listaEmpleados = Empleado.listarEmpleados();
             List<NominaBean> listaSemanas;
@@ -69,16 +70,26 @@ public class ControladorNomina extends HttpServlet {
             float miercoles = Float.parseFloat(request.getParameter("miercoles"));
             float jueves = Float.parseFloat(request.getParameter("jueves"));
             float hrsExtra = Float.parseFloat(request.getParameter("tiempo_extra"));
+            float sobreS = Float.parseFloat(request.getParameter("sobre"));
+            float viaticos = Float.parseFloat(request.getParameter("viaticos"));
+            float otrosI = Float.parseFloat(request.getParameter("otrosI"));
+            float deducc = Float.parseFloat(request.getParameter("deducciones"));
+            float infonavit = nomina.obtenerDescInfonavit(idEmp);
             float hrsSemana = viernes+lunes+martes+miercoles+jueves;
             float hrsTotales = viernes+lunes+martes+miercoles+jueves+hrsExtra;
-            float salario1;
-            float salario2;
+            float normal;
+            float extra;
+            float ingresos;
+            float deducciones;
             float sueldo;
             
-            salario1 = hrsSemana * nomina.obtenerSalario(idEmp);
-            salario2 = hrsExtra * nomina.obtenerSalario(idEmp) * 2;
-
-            sueldo = salario1 + salario2;
+            normal = hrsSemana * nomina.obtenerSalario(idEmp);
+            extra = hrsExtra * nomina.obtenerSalario(idEmp) * 2;
+            
+            ingresos = normal+extra+sobreS+viaticos+otrosI;
+            deducciones = deducc+infonavit;
+            
+            sueldo = ingresos - deducciones;
             
             NominaBean nominac = new NominaBean();
             nominac.setId_empleado(idEmp);
@@ -90,8 +101,18 @@ public class ControladorNomina extends HttpServlet {
             nominac.setHrsJueves(jueves);
             nominac.setHrsExtra(hrsExtra);
             nominac.setHrsTotales(hrsTotales);
+            nominac.setSobresueldo(sobreS);
+            nominac.setViaticos(viaticos);
+            nominac.setOtros_ingresos(otrosI);
+            nominac.setInfonavit(infonavit);
+            nominac.setOtros_deducciones(deducc);
+            nominac.setSueldoEx(extra);
+            nominac.setSueldo_N(normal);
+            nominac.setTotal_ingresos(ingresos);
+            nominac.setTotal_deducciones(deducciones);
             nominac.setSueldoT(sueldo);
             nomina.calcularNom(nominac);
+            System.out.println("Normal: "+normal+", Extra: "+extra+", Total Ingresos: "+ingresos+", Total Deducciones: "+deducciones+", Sueldo Total: "+sueldo);
             response.sendRedirect("nomina");
         }
         
