@@ -16,6 +16,27 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <script src="js/jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script>
+            function imprSelec(imprime)
+            {
+                var ficha = document.getElementById(imprime);
+                var ventimp = window.open(' ', '_blank');
+                ventimp.document.write(ficha.innerHTML);
+                var css = ventimp.document.createElement("link");
+                css.setAttribute("href", "css/bootstrap.min.css");
+                css.setAttribute("rel", "stylesheet");
+                css.setAttribute("type", "text/css");
+                var src1 = ventimp.document.createElement("script");
+                src1.setAttribute("src", "js/jquery.js");
+                var src2 = ventimp.document.createElement("script");
+                src2.setAttribute("src", "js/bootstrap.min.js");
+                ventimp.document.head.appendChild(css);
+                ventimp.document.head.appendChild(src1);
+                ventimp.document.head.appendChild(src2);
+                ventimp.print( );
+                ventimp.close();
+            }
+        </script> 
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-static-top">
@@ -86,96 +107,97 @@
             </div>
         </nav>
         <div class="container">
-            <form class="form-group">
-                Generar por Semana: <select class="form-control">
-                    <option>--Seleccione Semana--</option>
-                    <c:forEach var="semana" items="${semanas}" varStatus="iter">
-                        <option value="${semana.semanaNom}">${semana.semanaNom}</option>
-                    </c:forEach>
-                </select><br><br>
-            </form>
-            <c:forEach var="datos" items="${nominas}" varStatus="iter">
-                <div class="table">
-                    <div class="row">
-                        <div class="col-lg-7" style="background-color: #000"><img src="img/banner.jpg" alt="" width="50%"></div>
-                    </div><br>
-                    <div class="row">
-                        <div class="col-lg-3">HHI INSTALACIONES INDUSTRIALES</div>
-                        <div class="col-lg-4" align="right">Fecha: ${datos.date}</div>
+            <h3>Imprimir Recibos</h3>
+            <form class="form-group" role="form" method="post" action="generar">
+                <div class="row">
+                    <div class="col-lg-4"> Generar por Semana: <select class="form-control" name="semana" id="semana">
+                            <option>--Seleccione Semana--</option>
+                            <c:forEach var="semana" items="${semanas}" varStatus="iter">
+                                <option value="${semana.semanaNom}">${semana.semanaNom}</option>
+                            </c:forEach>
+                        </select><br><br>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-7" align="center"><h5><b>RECIBO DE NÓMINA</b></h5></div>
-                    </div>
-                    <div class="row"><font size="1">
-                        <div class="col-lg-3">ID: ${datos.id_empleado}</div>
-                        <div class="col-lg-4" align="right">Período:</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4">Nombre: ${datos.empleado.persona.nombrePersona}&nbsp;${datos.empleado.persona.apellidoPpersona}&nbsp;${datos.empleado.persona.apellidoMpersona}</div>
-                        <div class="col-lg-3" align="right">${datos.semanaNom}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3">Horas Trabajadas: ${datos.hrsTotales}</div>
-                    </div><br>
-                    <div class="row">
-                        <div class="col-lg-4" align="left"><b>Ingresos</b></div>
-                        <div class="col-lg-3" align="left"><b>Deducciones:</b></div>
-                    </div></font><font size="1">
-                    <div class="row">
-                        <div class="col-lg-7">-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-2">Normal:</div>
-                        <div class="col-lg-2">$ ${datos.sueldo_N} M.N.</div>
-                        <div class="col-lg-2">Infonavit:</div>
-                        <div class="col-lg-1">$ ${datos.infonavit}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-2">Tiempo Extra:</div>
-                        <div class="col-lg-2">$ ${datos.sueldoEx} M.N.</div>
-                        <div class="col-lg-2">Otros:</div>
-                        <div class="col-lg-1">$ ${datos.otros_deducciones} M.N.</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-2">SobreSueldo:</div>
-                        <div class="col-lg-2">$ ${datos.sobresueldo} M.N.</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-2">Viaticos</div>
-                        <div class="col-lg-2">$ ${datos.viaticos} M.N.</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-2">Otros:</div>
-                        <div class="col-lg-2">$ ${datos.otros_ingresos} M.N.</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-7">-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-2"><b>Total Ingresos:</b></div>
-                        <div class="col-lg-2">$ ${datos.total_ingresos} M.N.</div>
-                        <div class="col-lg-2"><b>Total Deducciones:</b></div>
-                        <div class="col-lg-1">$ ${datos.total_deducciones} M.N.</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-2"></div>
-                        <div class="col-lg-2"></div>
-                        <div class="col-lg-2"><b>Salario Total:</b></div>
-                        <div class="col-lg-1">$ ${datos.sueldoT} M.N.</div>
-                    </div></font>
-                    <div class="row">
-                        <div class="col-lg-5"><h6>Recibi de conformidad las prestaciones correspondientes al periodo que se indica arriba y que liquida totalmente hasta esta fecha, mi salario ordinario, extraordinario, 7o. Día, salario de compensación y demas prestaciones.</h6></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-5"></div>
-                        <div class="col-lg-2" align="center">_________________</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-5"></div>
-                        <div class="col-lg-2" align="center">FIRMA</div></h5>
+                    <div class="col-lg-6">
+                        <br>
+                        <button type="summit" class="btn btn-default">Buscar</button>
+                        <a href="javascript:imprSelec('imprime')" role="button" class="btn btn-info">Imprimir</a>
                     </div>
                 </div>
-            </c:forEach>
+            </form><br>
+            <div id="imprime" style="height:375px; overflow: scroll">
+                <c:forEach var="datos" items="${nominas}" varStatus="iter">
+                    <div class="table-bordered">
+                        <div class="row">
+                            <div class="col-xs-8" style="background-color: #000"><img src="img/banner.jpg" alt="" width="50%"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-5"><font size="1">HHI INSTALACIONES INDUSTRIALES</div>
+                            <div class="col-xs-3" align="right">Fecha: ${datos.date}</div></font>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8" align="center"><h5><b>RECIBO DE NÓMINA</b></h5></div>
+                        </div>
+                        <div class="row"><font size="1">
+                            <div class="col-xs-3">ID: ${datos.id_empleado}</div>
+                            <div class="col-xs-5" align="right">Período:</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4">Nombre: ${datos.empleado.persona.nombrePersona}&nbsp;${datos.empleado.persona.apellidoPpersona}&nbsp;${datos.empleado.persona.apellidoMpersona}</div>
+                            <div class="col-xs-4" align="right">${datos.semanaNom}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4">Horas Trabajadas: ${datos.hrsTotales}</div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-xs-4" align="left"><b>Ingresos</b></div>
+                            <div class="col-xs-4" align="left"><b>Deducciones:</b></div>
+                        </div></font><font size="1">
+                        <div class="row">
+                            <div class="col-xs-8" align="center">-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2">Normal:</div>
+                            <div class="col-xs-2">$ ${datos.sueldo_N} M.N.</div>
+                            <div class="col-xs-2">Infonavit:</div>
+                            <div class="col-xs-2">$ ${datos.infonavit}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2">Tiempo Extra:</div>
+                            <div class="col-xs-2">$ ${datos.sueldoEx} M.N.</div>
+                            <div class="col-xs-2">Otros:</div>
+                            <div class="col-xs-2">$ ${datos.otros_deducciones} M.N.</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2">SobreSueldo:</div>
+                            <div class="col-xs-2">$ ${datos.sobresueldo} M.N.</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2">Viaticos</div>
+                            <div class="col-xs-2">$ ${datos.viaticos} M.N.</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2">Otros:</div>
+                            <div class="col-xs-2">$ ${datos.otros_ingresos} M.N.</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2"><b>Total Ingresos:</b></div>
+                            <div class="col-xs-2">$ ${datos.total_ingresos} M.N.</div>
+                            <div class="col-xs-2"><b>Total Deducciones:</b></div>
+                            <div class="col-xs-2">$ ${datos.total_deducciones} M.N.</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2"></div>
+                            <div class="col-xs-2"></div>
+                            <div class="col-xs-2"><b>Salario Total:</b></div>
+                            <div class="col-xs-2">$ ${datos.sueldoT} M.N.</div><br>
+                        </div></font>
+                        <div class="row"><font size="1">
+                            <div class="col-xs-5">Recibi de conformidad las prestaciones correspondientes al periodo que se indica arriba y que liquida totalmente hasta esta fecha, mi salario ordinario, extraordinario, 7o. Día, salario de compensación y demas prestaciones.</div></font>
+                            <div class="col-xs-1"></div>
+                            <div class="col-xs-2" align="center"><br>_________________<br>FIRMA</div>
+                        </div>
+                    </div>
+                </c:forEach></div>
         </div>
     </body>
 </html>

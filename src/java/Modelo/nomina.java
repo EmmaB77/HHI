@@ -237,7 +237,7 @@ public class nomina {
         List<NominaBean> lista = new ArrayList<>();
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "Select idNom, ID_EMPLEADO, semana, viernes, lunes, martes, miercoles, jueves, horas_extra, hrstotales, sueldoT from nomina";
+        String query = "Select idNom, ID_EMPLEADO, semana, viernes, lunes, martes, miercoles, jueves, horas_extra, hrstotales, sueldoT from nomina order by idNom desc";
         try {
             ps = con.prepareStatement(query);
             ResultSet rs;
