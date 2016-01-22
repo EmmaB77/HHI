@@ -171,11 +171,45 @@
                                 </div>
                                 <div class="row form-group">
                                     <div class="col-lg-2">Hrs V: <input type="number" class="form-control" name="viernes" id="viernes" required></div>
+                                    <div class="col-lg-4">
+                                        Trabajó Viernes en:<select class="form-control">
+                                            <option>--Trabajos--</option>
+                                        </select>
+                                    </div>
                                     <div class="col-lg-2">Hrs L: <input type="number" class="form-control" name="lunes" id="lunes" required></div>
+                                    <div class="col-lg-4">
+                                        Trabajó Lunes en:<select class="form-control">
+                                            <option>--Trabajos--</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row form-group" >
                                     <div class="col-lg-2">Hrs M: <input type="number" class="form-control" name="martes" id="martes" required></div>
+                                    <div class="col-lg-4">
+                                        Trabajó Martes en:<select class="form-control">
+                                            <option>--Trabajos--</option>
+                                        </select>
+                                    </div>
                                     <div class="col-lg-2">Hrs Mie: <input type="number" class="form-control" name="miercoles" id="miercoles" required></div>
+                                    <div class="col-lg-4">
+                                        Trabajó Miércoles en:<select class="form-control">
+                                            <option>--Trabajos--</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
                                     <div class="col-lg-2">Hrs J: <input type="number" class="form-control" name="jueves" id="jueves" required></div>
+                                    <div class="col-lg-4">
+                                        Trabajó Jueves en:<select class="form-control">
+                                            <option>--Trabajos--</option>
+                                        </select>
+                                    </div>
                                     <div class="col-lg-2">Hrs T.Ex:<input type="number" class="form-control" name="tiempo_extra" id="tiempo_extra" required></div>
+                                    <div class="col-lg-4">
+                                        Trabajó Horas Extra en:<select class="form-control">
+                                            <option>--Trabajos--</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="row form-group">
                                     <h5>&nbsp;&nbsp;&nbsp;&nbsp;Ingresos Extra:</h5>
