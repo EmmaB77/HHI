@@ -282,5 +282,4 @@ public class NominaBean {
         this.ventanilla = ventanilla;
     }
     
-    
 }

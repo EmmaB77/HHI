@@ -15,29 +15,37 @@ public class nomina {
         int status = 0;
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "insert into nomina (ID_EMPLEADO, SEMANA, VIERNES, LUNES, MARTES, MIERCOLES, JUEVES, HORAS_EXTRA, HRSTOTALES, SOBRESUELDO, VIATICOS, OTROS_INGRESOS, INFONAVIT, OTROS_DEDUCCIONES, SUELDO_NORMAL, SUELDO_EXTRA, TOTAL_INGRESOS,\n"
-                + " TOTAL_DEDUCCIONES, SUELDOT, FECHA_CREACION) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,current_date)";
+        String query = "insert into nomina (ID_EMPLEADO, SEMANA, VIERNES, IDPV, LUNES, IDPL, MARTES, IDPMA, MIERCOLES, IDPMI, JUEVES, IDPJ, "
+                + "IDPHE, HORAS_EXTRA, HRSTOTALES, SOBRESUELDO, VIATICOS, OTROS_INGRESOS, INFONAVIT, OTROS_DEDUCCIONES, SUELDO_NORMAL, SUELDO_EXTRA, TOTAL_INGRESOS,\n"
+                + " TOTAL_DEDUCCIONES, SUELDOT, DEPOSITO_VENTANILLA, FECHA_CREACION) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,current_date)";
         try {
             ps = con.prepareStatement(query);
             ps.setObject(1, nomina.getId_empleado());
             ps.setObject(2, nomina.getSemanaNom());
             ps.setObject(3, nomina.getHrsViernes());
-            ps.setObject(4, nomina.getHrsLunes());
-            ps.setObject(5, nomina.getHrsMartes());
-            ps.setObject(6, nomina.getHrsMiercoles());
-            ps.setObject(7, nomina.getHrsJueves());
-            ps.setObject(8, nomina.getHrsExtra());
-            ps.setObject(9, nomina.getHrsTotales());
-            ps.setObject(10, nomina.getSobresueldo());
-            ps.setObject(11, nomina.getViaticos());
-            ps.setObject(12, nomina.getOtros_ingresos());
-            ps.setObject(13, nomina.getInfonavit());
-            ps.setObject(14, nomina.getOtros_deducciones());
-            ps.setObject(15, nomina.getSueldo_N());
-            ps.setObject(16, nomina.getSueldoEx());
-            ps.setObject(17, nomina.getTotal_ingresos());
-            ps.setObject(18, nomina.getTotal_deducciones());
-            ps.setObject(19, nomina.getSueldoT());
+            ps.setObject(4, nomina.getIdPv());
+            ps.setObject(5, nomina.getHrsLunes());
+            ps.setObject(6, nomina.getIdPl());
+            ps.setObject(7, nomina.getHrsMartes());
+            ps.setObject(8, nomina.getIdPMa());
+            ps.setObject(9, nomina.getHrsMiercoles());
+            ps.setObject(10, nomina.getIdPMi());
+            ps.setObject(11, nomina.getHrsJueves());
+            ps.setObject(12, nomina.getIdPj());
+            ps.setObject(13, nomina.getHrsExtra());
+            ps.setObject(14, nomina.getIdPhe());
+            ps.setObject(15, nomina.getHrsTotales());
+            ps.setObject(16, nomina.getSobresueldo());
+            ps.setObject(17, nomina.getViaticos());
+            ps.setObject(18, nomina.getOtros_ingresos());
+            ps.setObject(19, nomina.getInfonavit());
+            ps.setObject(20, nomina.getOtros_deducciones());
+            ps.setObject(21, nomina.getSueldo_N());
+            ps.setObject(22, nomina.getSueldoEx());
+            ps.setObject(23, nomina.getTotal_ingresos());
+            ps.setObject(24, nomina.getTotal_deducciones());
+            ps.setObject(25, nomina.getSueldoT());
+            ps.setObject(26, nomina.getVentanilla());
             status = ps.executeUpdate();
             System.out.println("Exito en el registro");
             con.close();
@@ -68,10 +76,11 @@ public class nomina {
         float salarioSemana;
         float salarioExtra;
         float salarioT;
+        float deposito;
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
         String query1 = "select VIERNES, LUNES, MARTES, MIERCOLES, JUEVES, HORAS_EXTRA, HRSTOTALES, SOBRESUELDO, VIATICOS, OTROS_INGRESOS, INFONAVIT, OTROS_DEDUCCIONES, SUELDO_NORMAL, TOTAL_INGRESOS,\n"
-                + " TOTAL_DEDUCCIONES, SUELDOT from nomina where idNom= " + idNom + ";";
+                + " TOTAL_DEDUCCIONES, SUELDOT, DEPOSITO_VENTANILLA from nomina where idNom= " + idNom + ";";
 
         try {
             ps = con.prepareStatement(query1);
@@ -94,6 +103,8 @@ public class nomina {
                 totalI = rs.getFloat("total_ingresos");
                 totalD = rs.getFloat("total_deducciones");
                 salarioT = rs.getFloat("sueldot");
+                deposito = rs.getFloat("deposito_ventanilla");
+                
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -115,8 +126,10 @@ public class nomina {
                     totalD = info + otrasD;
 
                     nvSal = totalI - totalD;
+                    
+                    deposito = nvSal - obtenerTransCtaBNMX(idEmp);
 
-                    String query = "update nomina set lunes= " + lunes + ", sueldo_extra=" + salarioExtra + ", sueldo_normal=" + salarioSemana + ", total_ingresos=" + totalI + ", total_deducciones=" + totalD + ", sueldot=" + nvSal + ", hrstotales= " + hrstotales + " where idNom=" + idNom;
+                    String query = "update nomina set lunes= " + lunes + ", sueldo_extra=" + salarioExtra + ", sueldo_normal=" + salarioSemana + ", total_ingresos=" + totalI + ", total_deducciones=" + totalD + ", sueldot=" + nvSal + ", hrstotales= " + hrstotales + ", deposito_ventanilla= "+ deposito + " where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -137,7 +150,10 @@ public class nomina {
                     totalD = info + otrasD;
 
                     nvSal = totalI - totalD;
-                    String query = "update nomina set martes= " + martes + ", sueldo_extra=" + salarioExtra + ", sueldo_normal=" + salarioSemana + ", total_ingresos=" + totalI + ", total_deducciones=" + totalD + ", sueldot=" + nvSal + ", hrstotales= " + hrstotales + " where idNom=" + idNom;
+                    
+                    deposito = nvSal - obtenerTransCtaBNMX(idEmp);
+                    
+                    String query = "update nomina set martes= " + martes + ", sueldo_extra=" + salarioExtra + ", sueldo_normal=" + salarioSemana + ", total_ingresos=" + totalI + ", total_deducciones=" + totalD + ", sueldot=" + nvSal + ", hrstotales= " + hrstotales + ", deposito_ventanilla= "+ deposito + " where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -158,7 +174,10 @@ public class nomina {
                     totalD = info + otrasD;
 
                     nvSal = totalI - totalD;
-                    String query = "update nomina set miercoles= " + miercoles + ", sueldo_extra=" + salarioExtra + ", sueldo_normal=" + salarioSemana + ", total_ingresos=" + totalI + ", total_deducciones=" + totalD + ", sueldot=" + nvSal + ", hrstotales= " + hrstotales + " where idNom=" + idNom;
+                    
+                    deposito = nvSal - obtenerTransCtaBNMX(idEmp);
+                    
+                    String query = "update nomina set miercoles= " + miercoles + ", sueldo_extra=" + salarioExtra + ", sueldo_normal=" + salarioSemana + ", total_ingresos=" + totalI + ", total_deducciones=" + totalD + ", sueldot=" + nvSal + ", hrstotales= " + hrstotales + ", deposito_ventanilla= "+ deposito + " where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -179,7 +198,10 @@ public class nomina {
                     totalD = info + otrasD;
 
                     nvSal = totalI - totalD;
-                    String query = "update nomina set jueves= " + jueves + ", sueldo_extra=" + salarioExtra + ", sueldo_normal=" + salarioSemana + ", total_ingresos=" + totalI + ", total_deducciones=" + totalD + ", sueldot=" + nvSal + ", hrstotales= " + hrstotales + " where idNom=" + idNom;
+                    
+                    deposito = nvSal - obtenerTransCtaBNMX(idEmp);
+                    
+                    String query = "update nomina set jueves= " + jueves + ", sueldo_extra=" + salarioExtra + ", sueldo_normal=" + salarioSemana + ", total_ingresos=" + totalI + ", total_deducciones=" + totalD + ", sueldot=" + nvSal + ", hrstotales= " + hrstotales + ", deposito_ventanilla= "+ deposito + " where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -200,7 +222,10 @@ public class nomina {
                     totalD = info + otrasD;
 
                     nvSal = totalI - totalD;
-                    String query = "update nomina set viernes= " + viernes + ", sueldo_extra=" + salarioExtra + ", sueldo_normal=" + salarioSemana + ", total_ingresos=" + totalI + ", total_deducciones=" + totalD + ", sueldot=" + nvSal + ", hrstotales= " + hrstotales + " where idNom=" + idNom;
+                    
+                    deposito = nvSal - obtenerTransCtaBNMX(idEmp);
+                    
+                    String query = "update nomina set viernes= " + viernes + ", sueldo_extra=" + salarioExtra + ", sueldo_normal=" + salarioSemana + ", total_ingresos=" + totalI + ", total_deducciones=" + totalD + ", sueldot=" + nvSal + ", hrstotales= " + hrstotales + ", deposito_ventanilla= "+ deposito + " where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -221,7 +246,10 @@ public class nomina {
                     totalD = info + otrasD;
 
                     nvSal = totalI - totalD;
-                    String query = "update nomina set horas_extra= " + horasEx + ", sueldo_extra=" + salarioExtra + ", sueldo_normal=" + salarioSemana + ", total_ingresos=" + totalI + ", total_deducciones=" + totalD + ", sueldot=" + nvSal + ", hrstotales= " + hrstotales + " where idNom=" + idNom;
+                    
+                    deposito = nvSal - obtenerTransCtaBNMX(idEmp);
+                    
+                    String query = "update nomina set horas_extra= " + horasEx + ", sueldo_extra=" + salarioExtra + ", sueldo_normal=" + salarioSemana + ", total_ingresos=" + totalI + ", total_deducciones=" + totalD + ", sueldot=" + nvSal + ", hrstotales= " + hrstotales + ", deposito_ventanilla= "+ deposito + " where idNom=" + idNom;
                     ps = con.prepareStatement(query);
                     ps.executeUpdate();
                     con.close();
@@ -363,6 +391,24 @@ public class nomina {
             System.out.println(e);
         }
         return infonavit;
+    }
+    
+    public static float obtenerTransCtaBNMX(int idEmp) {
+        float salario = 0;
+        Connection con = Conexion.getConnetion();
+        PreparedStatement ps;
+        String query = "select TRANS_CTA_BANAMEX from empleado where id_empleado=" + idEmp + ";";
+        try {
+            ps = con.prepareStatement(query);
+            ResultSet rs;
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                salario = rs.getFloat("TRANS_CTA_BANAMEX");
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return salario;
     }
 
     public static float obtenerSalarioT(int idNom) {

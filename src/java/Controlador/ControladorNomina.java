@@ -3,6 +3,8 @@ package Controlador;
 import Beans.EmpleadoBean;
 import Beans.NominaBean;
 import Beans.UserSystBean;
+import Beans.ProyectoBean;
+import Modelo.Proyecto;
 import Modelo.nomina;
 import Modelo.Empleado;
 import java.io.IOException;
@@ -32,6 +34,9 @@ public class ControladorNomina extends HttpServlet {
             listaNomina = nomina.listaNom();
             List<EmpleadoBean> listaEmpleados;
             listaEmpleados = Empleado.listarEmpleados();
+            List<ProyectoBean> listaProyectos;
+            listaProyectos = Proyecto.listaProyectos();
+            varSesion.setAttribute("proyectos", listaProyectos);
             varSesion.setAttribute("nominas", listaNomina);
             varSesion.setAttribute("empleados", listaEmpleados);
             response.sendRedirect("nomina.jsp");

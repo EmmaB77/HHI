@@ -3,6 +3,7 @@
 <%@page import="java.sql.*" %>
 <%@page import="Conexion.Conexion" %><!DOCTYPE html>
 <%@page import="Modelo.nomina"%>
+<%@page import="Modelo.Proyecto"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -174,12 +175,20 @@
                                     <div class="col-lg-4">
                                         Trabajó Viernes en:<select class="form-control">
                                             <option>--Trabajos--</option>
+                                            <option value="No Trabajó">No Trabajó</option>
+                                            <c:forEach var="proyecto" items="${proyectos}" varStatus="iter">
+                                                <option value="${proyecto.idProyecto}">${proyecto.nombreProyecto}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>
                                     <div class="col-lg-2">Hrs L: <input type="number" class="form-control" name="lunes" id="lunes" required></div>
                                     <div class="col-lg-4">
                                         Trabajó Lunes en:<select class="form-control">
                                             <option>--Trabajos--</option>
+                                            <option value="No Trabajó">No Trabajó</option>
+                                            <c:forEach var="proyecto" items="${proyectos}" varStatus="iter">
+                                                <option value="${proyecto.idProyecto}">${proyecto.nombreProyecto}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>
                                 </div>
@@ -188,12 +197,20 @@
                                     <div class="col-lg-4">
                                         Trabajó Martes en:<select class="form-control">
                                             <option>--Trabajos--</option>
+                                            <option value="No Trabajó">No Trabajó</option>
+                                            <c:forEach var="proyecto" items="${proyectos}" varStatus="iter">
+                                                <option value="${proyecto.idProyecto}">${proyecto.nombreProyecto}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>
                                     <div class="col-lg-2">Hrs Mie: <input type="number" class="form-control" name="miercoles" id="miercoles" required></div>
                                     <div class="col-lg-4">
                                         Trabajó Miércoles en:<select class="form-control">
                                             <option>--Trabajos--</option>
+                                            <option value="No Trabajó">No Trabajó</option>
+                                            <c:forEach var="proyecto" items="${proyectos}" varStatus="iter">
+                                                <option value="${proyecto.idProyecto}">${proyecto.nombreProyecto}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>
                                 </div>
@@ -202,12 +219,20 @@
                                     <div class="col-lg-4">
                                         Trabajó Jueves en:<select class="form-control">
                                             <option>--Trabajos--</option>
+                                            <option value="No Trabajó">No Trabajó</option>
+                                            <c:forEach var="proyecto" items="${proyectos}" varStatus="iter">
+                                                <option value="${proyecto.idProyecto}">${proyecto.nombreProyecto}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>
                                     <div class="col-lg-2">Hrs T.Ex:<input type="number" class="form-control" name="tiempo_extra" id="tiempo_extra" required></div>
                                     <div class="col-lg-4">
                                         Trabajó Horas Extra en:<select class="form-control">
                                             <option>--Trabajos--</option>
+                                            <option value="No Trabajó">No Trabajó</option>
+                                            <c:forEach var="proyecto" items="${proyectos}" varStatus="iter">
+                                                <option value="${proyecto.idProyecto}">${proyecto.nombreProyecto}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>
                                 </div>
