@@ -63,11 +63,17 @@ public class ControladorNomina extends HttpServlet {
             String semana2 = request.getParameter("semana2");
             String semana = "Semana del " + semana1 + " al " + semana2;
             float viernes = Float.parseFloat(request.getParameter("viernes"));
+            int idpv = Integer.parseInt(request.getParameter("idpv"));
             float lunes = Float.parseFloat(request.getParameter("lunes"));
+            int idpl = Integer.parseInt(request.getParameter("idpl"));
             float martes = Float.parseFloat(request.getParameter("martes"));
+            int idpma = Integer.parseInt(request.getParameter("idpma"));
             float miercoles = Float.parseFloat(request.getParameter("miercoles"));
+            int idpmi = Integer.parseInt(request.getParameter("idpmi"));
             float jueves = Float.parseFloat(request.getParameter("jueves"));
+            int idpj = Integer.parseInt(request.getParameter("idpj"));
             float hrsExtra = Float.parseFloat(request.getParameter("tiempo_extra"));
+            int idphe = Integer.parseInt(request.getParameter("idphe"));
             float sobreS = Float.parseFloat(request.getParameter("sobre"));
             float viaticos = Float.parseFloat(request.getParameter("viaticos"));
             float otrosI = Float.parseFloat(request.getParameter("otrosI"));

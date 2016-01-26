@@ -173,7 +173,7 @@
                                 <div class="row form-group">
                                     <div class="col-lg-2">Hrs V: <input type="number" class="form-control" name="viernes" id="viernes" required></div>
                                     <div class="col-lg-4">
-                                        Trabajó Viernes en:<select class="form-control">
+                                        Trabajó Viernes en:<select class="form-control" name="idpv" id="idpv">
                                             <option>--Trabajos--</option>
                                             <option value="No Trabajó">No Trabajó</option>
                                             <c:forEach var="proyecto" items="${proyectos}" varStatus="iter">
@@ -183,7 +183,7 @@
                                     </div>
                                     <div class="col-lg-2">Hrs L: <input type="number" class="form-control" name="lunes" id="lunes" required></div>
                                     <div class="col-lg-4">
-                                        Trabajó Lunes en:<select class="form-control">
+                                        Trabajó Lunes en:<select class="form-control" name="idpl" id="idpl">
                                             <option>--Trabajos--</option>
                                             <option value="No Trabajó">No Trabajó</option>
                                             <c:forEach var="proyecto" items="${proyectos}" varStatus="iter">
@@ -195,7 +195,7 @@
                                 <div class="row form-group" >
                                     <div class="col-lg-2">Hrs M: <input type="number" class="form-control" name="martes" id="martes" required></div>
                                     <div class="col-lg-4">
-                                        Trabajó Martes en:<select class="form-control">
+                                        Trabajó Martes en:<select class="form-control" name="idpma" id="idpma">
                                             <option>--Trabajos--</option>
                                             <option value="No Trabajó">No Trabajó</option>
                                             <c:forEach var="proyecto" items="${proyectos}" varStatus="iter">
@@ -205,7 +205,7 @@
                                     </div>
                                     <div class="col-lg-2">Hrs Mie: <input type="number" class="form-control" name="miercoles" id="miercoles" required></div>
                                     <div class="col-lg-4">
-                                        Trabajó Miércoles en:<select class="form-control">
+                                        Trabajó Miércoles en:<select class="form-control" name="idpmi" id="idpmi">
                                             <option>--Trabajos--</option>
                                             <option value="No Trabajó">No Trabajó</option>
                                             <c:forEach var="proyecto" items="${proyectos}" varStatus="iter">
@@ -217,7 +217,7 @@
                                 <div class="row form-group">
                                     <div class="col-lg-2">Hrs J: <input type="number" class="form-control" name="jueves" id="jueves" required></div>
                                     <div class="col-lg-4">
-                                        Trabajó Jueves en:<select class="form-control">
+                                        Trabajó Jueves en:<select class="form-control" name="idpj" id="idpj">
                                             <option>--Trabajos--</option>
                                             <option value="No Trabajó">No Trabajó</option>
                                             <c:forEach var="proyecto" items="${proyectos}" varStatus="iter">
@@ -227,7 +227,7 @@
                                     </div>
                                     <div class="col-lg-2">Hrs T.Ex:<input type="number" class="form-control" name="tiempo_extra" id="tiempo_extra" required></div>
                                     <div class="col-lg-4">
-                                        Trabajó Horas Extra en:<select class="form-control">
+                                        Trabajó Horas Extra en:<select class="form-control" name="idphe" id="idphe">
                                             <option>--Trabajos--</option>
                                             <option value="No Trabajó">No Trabajó</option>
                                             <c:forEach var="proyecto" items="${proyectos}" varStatus="iter">
