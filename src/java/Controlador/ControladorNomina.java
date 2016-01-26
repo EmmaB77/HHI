@@ -46,7 +46,7 @@ public class ControladorNomina extends HttpServlet {
             varSesion.setAttribute("semanas", listaSemanas);
             response.sendRedirect("recibosN.jsp");
         } else {
-            System.out.println("El Servidor esta de nena y algo hizo mal |:|");
+            System.out.println("NO SE ENCUENTRA LA FUNCION REQUERIDA");
         }
     }
 
@@ -86,6 +86,7 @@ public class ControladorNomina extends HttpServlet {
             float ingresos;
             float deducciones;
             float sueldo;
+            float ventanilla;
 
             normal = hrsSemana * nomina.obtenerSalario(idEmp);
             extra = hrsExtra * nomina.obtenerSalario(idEmp) * 2;
@@ -94,16 +95,24 @@ public class ControladorNomina extends HttpServlet {
             deducciones = deducc + infonavit;
 
             sueldo = ingresos - deducciones;
+            
+            ventanilla = sueldo-nomina.obtenerTransCtaBNMX(idEmp);
 
             NominaBean nominac = new NominaBean();
             nominac.setId_empleado(idEmp);
             nominac.setSemanaNom(semana);
             nominac.setHrsViernes(viernes);
+            nominac.setIdPv(idpv);
             nominac.setHrsLunes(lunes);
+            nominac.setIdPl(idpl);
             nominac.setHrsMartes(martes);
+            nominac.setIdPMa(idpma);
             nominac.setHrsMiercoles(miercoles);
+            nominac.setIdPMi(idpmi);
             nominac.setHrsJueves(jueves);
+            nominac.setIdPj(idpj);
             nominac.setHrsExtra(hrsExtra);
+            nominac.setIdPhe(idphe);
             nominac.setHrsTotales(hrsTotales);
             nominac.setSobresueldo(sobreS);
             nominac.setViaticos(viaticos);
@@ -115,6 +124,7 @@ public class ControladorNomina extends HttpServlet {
             nominac.setTotal_ingresos(ingresos);
             nominac.setTotal_deducciones(deducciones);
             nominac.setSueldoT(sueldo);
+            nominac.setVentanilla(ventanilla);
             nomina.calcularNom(nominac);
             System.out.println("Normal: " + normal + ", Extra: " + extra + ", Total Ingresos: " + ingresos + ", Total Deducciones: " + deducciones + ", Sueldo Total: " + sueldo);
             response.sendRedirect("nomina");

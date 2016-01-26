@@ -283,7 +283,7 @@ public class nomina {
                 nomina.setHrsExtra(rs.getFloat("horas_extra"));
                 nomina.setHrsTotales(rs.getFloat("hrstotales"));
                 nomina.setSueldoT(rs.getFloat("sueldoT"));
-                nomina.setEmpleado(Empleado.obtenerEmpleado(nomina.getId_empleado()));
+                nomina.setEmpleado(Empleado.obtenerEmpleado(nomina.getId_empleado())); 
                 lista.add(nomina);
             }
             con.close();
