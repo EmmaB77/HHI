@@ -106,6 +106,15 @@
         </nav>
         <div class="container">
             <h2>Nómina:</h2>
+            <div>
+                <div class="col-lg-4"><h4>Acciones</h4>
+                    <SELECT NAME="pago" onChange="pagoOnChange(this)" class="form-control">
+                        <OPTION VALUE="transferencia">Transferéncia</OPTION>
+                        <OPTION VALUE="tarjeta">Pago con tarjeta</OPTION> 
+                    </SELECT>
+                </div>
+            </div><br><br>
+            <div>
             <div><a data-toggle="modal" href="#calcularnom" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Calcular</a></div>
             <br>
             <br>
@@ -148,7 +157,7 @@
                         </c:forEach>
                     </tbody>
                 </table>
-            </div>
+            </div></div>
             <form class="form" role="form" method="post" action="calcularnom">
                 <div class="modal fade" id="calcularnom">
                     <div class="modal-dialog modal-lg">
@@ -177,7 +186,7 @@
                                             <option>--Trabajos--</option>
                                             <option value="No Trabajó">No Trabajó</option>
                                             <c:forEach var="proyecto" items="${proyectos}" varStatus="iter">
-                                                <option value="${proyecto.idProyecto}">${proyecto.nombreProyecto}</option>
+                                                <option value="${proyecto.nombreProyecto}">${proyecto.nombreProyecto}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
@@ -187,7 +196,7 @@
                                             <option>--Trabajos--</option>
                                             <option value="No Trabajó">No Trabajó</option>
                                             <c:forEach var="proyecto" items="${proyectos}" varStatus="iter">
-                                                <option value="${proyecto.idProyecto}">${proyecto.nombreProyecto}</option>
+                                                <option value="${proyecto.nombreProyecto}">${proyecto.nombreProyecto}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
@@ -199,7 +208,7 @@
                                             <option>--Trabajos--</option>
                                             <option value="No Trabajó">No Trabajó</option>
                                             <c:forEach var="proyecto" items="${proyectos}" varStatus="iter">
-                                                <option value="${proyecto.idProyecto}">${proyecto.nombreProyecto}</option>
+                                                <option value="${proyecto.nombreProyecto}">${proyecto.nombreProyecto}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
@@ -209,7 +218,7 @@
                                             <option>--Trabajos--</option>
                                             <option value="No Trabajó">No Trabajó</option>
                                             <c:forEach var="proyecto" items="${proyectos}" varStatus="iter">
-                                                <option value="${proyecto.idProyecto}">${proyecto.nombreProyecto}</option>
+                                                <option value="${proyecto.nombreProyecto}">${proyecto.nombreProyecto}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
@@ -221,7 +230,7 @@
                                             <option>--Trabajos--</option>
                                             <option value="No Trabajó">No Trabajó</option>
                                             <c:forEach var="proyecto" items="${proyectos}" varStatus="iter">
-                                                <option value="${proyecto.idProyecto}">${proyecto.nombreProyecto}</option>
+                                                <option value="${proyecto.nombreProyecto}">${proyecto.nombreProyecto}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
@@ -231,7 +240,7 @@
                                             <option>--Trabajos--</option>
                                             <option value="No Trabajó">No Trabajó</option>
                                             <c:forEach var="proyecto" items="${proyectos}" varStatus="iter">
-                                                <option value="${proyecto.idProyecto}">${proyecto.nombreProyecto}</option>
+                                                <option value="${proyecto.nombreProyecto}">${proyecto.nombreProyecto}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
@@ -301,6 +310,7 @@
                     </div>
                 </div>
             </form>
+
         </div>
     </body>
 </html>

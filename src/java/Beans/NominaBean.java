@@ -4,12 +4,12 @@ public class NominaBean {
 
     private int idNom;
     private int id_empleado;
-    private int idPv;
-    private int idPl;
-    private int idPMa;
-    private int idPMi;
-    private int idPj;
-    private int idPhe;
+    private String proyectov;
+    private String proyectol;
+    private String proyectoMa;
+    private String proyectoMi;
+    private String proyectoJ;
+    private String proyectoHe;
     private PersonaBean persona;
     private EmpleadoBean empleado;
     private ProyectoBean proyecto;
@@ -34,6 +34,70 @@ public class NominaBean {
     private String date;
     private float ventanilla;
 
+    public int getIdNom() {
+        return idNom;
+    }
+
+    public void setIdNom(int idNom) {
+        this.idNom = idNom;
+    }
+
+    public int getId_empleado() {
+        return id_empleado;
+    }
+
+    public void setId_empleado(int id_empleado) {
+        this.id_empleado = id_empleado;
+    }
+
+    public String getProyectov() {
+        return proyectov;
+    }
+
+    public void setProyectov(String proyectov) {
+        this.proyectov = proyectov;
+    }
+
+    public String getProyectol() {
+        return proyectol;
+    }
+
+    public void setProyectol(String proyectol) {
+        this.proyectol = proyectol;
+    }
+
+    public String getProyectoMa() {
+        return proyectoMa;
+    }
+
+    public void setProyectoMa(String proyectoMa) {
+        this.proyectoMa = proyectoMa;
+    }
+
+    public String getProyectoMi() {
+        return proyectoMi;
+    }
+
+    public void setProyectoMi(String proyectoMi) {
+        this.proyectoMi = proyectoMi;
+    }
+
+    public String getProyectoJ() {
+        return proyectoJ;
+    }
+
+    public void setProyectoJ(String proyectoJ) {
+        this.proyectoJ = proyectoJ;
+    }
+
+    public String getProyectoHe() {
+        return proyectoHe;
+    }
+
+    public void setProyectoHe(String proyectoHe) {
+        this.proyectoHe = proyectoHe;
+    }
+
     public PersonaBean getPersona() {
         return persona;
     }
@@ -46,8 +110,24 @@ public class NominaBean {
         return empleado;
     }
 
-    public void setEmpleado(EmpleadoBean empleadoNom) {
-        this.empleado = empleadoNom;
+    public void setEmpleado(EmpleadoBean empleado) {
+        this.empleado = empleado;
+    }
+
+    public ProyectoBean getProyecto() {
+        return proyecto;
+    }
+
+    public void setProyecto(ProyectoBean proyecto) {
+        this.proyecto = proyecto;
+    }
+
+    public String getSemanaNom() {
+        return semanaNom;
+    }
+
+    public void setSemanaNom(String semanaNom) {
+        this.semanaNom = semanaNom;
     }
 
     public float getHrsLunes() {
@@ -94,8 +174,8 @@ public class NominaBean {
         return hrsExtra;
     }
 
-    public void setHrsExtra(float horasExtra) {
-        this.hrsExtra = horasExtra;
+    public void setHrsExtra(float hrsExtra) {
+        this.hrsExtra = hrsExtra;
     }
 
     public float getHrsTotales() {
@@ -104,38 +184,6 @@ public class NominaBean {
 
     public void setHrsTotales(float hrsTotales) {
         this.hrsTotales = hrsTotales;
-    }
-
-    public float getSueldoT() {
-        return sueldoT;
-    }
-
-    public void setSueldoT(float sueldoT) {
-        this.sueldoT = sueldoT;
-    }
-
-    public String getSemanaNom() {
-        return semanaNom;
-    }
-
-    public void setSemanaNom(String semanaNom) {
-        this.semanaNom = semanaNom;
-    }
-
-    public int getIdNom() {
-        return idNom;
-    }
-
-    public void setIdNom(int idNom) {
-        this.idNom = idNom;
-    }
-
-    public int getId_empleado() {
-        return id_empleado;
-    }
-
-    public void setId_empleado(int id_empleado) {
-        this.id_empleado = id_empleado;
     }
 
     public float getSobresueldo() {
@@ -178,6 +226,22 @@ public class NominaBean {
         this.otros_deducciones = otros_deducciones;
     }
 
+    public float getSueldo_N() {
+        return sueldo_N;
+    }
+
+    public void setSueldo_N(float sueldo_N) {
+        this.sueldo_N = sueldo_N;
+    }
+
+    public float getSueldoEx() {
+        return sueldoEx;
+    }
+
+    public void setSueldoEx(float sueldoEx) {
+        this.sueldoEx = sueldoEx;
+    }
+
     public float getTotal_ingresos() {
         return total_ingresos;
     }
@@ -194,12 +258,12 @@ public class NominaBean {
         this.total_deducciones = total_deducciones;
     }
 
-    public float getSueldo_N() {
-        return sueldo_N;
+    public float getSueldoT() {
+        return sueldoT;
     }
 
-    public void setSueldo_N(float sueldo_N) {
-        this.sueldo_N = sueldo_N;
+    public void setSueldoT(float sueldoT) {
+        this.sueldoT = sueldoT;
     }
 
     public String getDate() {
@@ -210,70 +274,6 @@ public class NominaBean {
         this.date = date;
     }
 
-    public float getSueldoEx() {
-        return sueldoEx;
-    }
-
-    public void setSueldoEx(float sueldoEx) {
-        this.sueldoEx = sueldoEx;
-    }
-
-    public ProyectoBean getProyecto() {
-        return proyecto;
-    }
-
-    public void setProyecto(ProyectoBean proyecto) {
-        this.proyecto = proyecto;
-    }
-
-    public int getIdPv() {
-        return idPv;
-    }
-
-    public void setIdPv(int idPv) {
-        this.idPv = idPv;
-    }
-
-    public int getIdPl() {
-        return idPl;
-    }
-
-    public void setIdPl(int idPl) {
-        this.idPl = idPl;
-    }
-
-    public int getIdPMa() {
-        return idPMa;
-    }
-
-    public void setIdPMa(int idPMa) {
-        this.idPMa = idPMa;
-    }
-
-    public int getIdPMi() {
-        return idPMi;
-    }
-
-    public void setIdPMi(int idPMi) {
-        this.idPMi = idPMi;
-    }
-
-    public int getIdPj() {
-        return idPj;
-    }
-
-    public void setIdPj(int idPj) {
-        this.idPj = idPj;
-    }
-
-    public int getIdPhe() {
-        return idPhe;
-    }
-
-    public void setIdPhe(int idPhe) {
-        this.idPhe = idPhe;
-    }
-
     public float getVentanilla() {
         return ventanilla;
     }
@@ -281,5 +281,5 @@ public class NominaBean {
     public void setVentanilla(float ventanilla) {
         this.ventanilla = ventanilla;
     }
-    
+
 }

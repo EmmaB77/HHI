@@ -15,25 +15,25 @@ public class nomina {
         int status = 0;
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "insert into nomina (ID_EMPLEADO, SEMANA, VIERNES, IDPV, LUNES, IDPL, MARTES, IDPMA, MIERCOLES, IDPMI, JUEVES, IDPJ, "
-                + "IDPHE, HORAS_EXTRA, HRSTOTALES, SOBRESUELDO, VIATICOS, OTROS_INGRESOS, INFONAVIT, OTROS_DEDUCCIONES, SUELDO_NORMAL, SUELDO_EXTRA, TOTAL_INGRESOS,\n"
+        String query = "insert into nomina (ID_EMPLEADO, SEMANA, VIERNES, ProyectoV, LUNES, proyectoL, MARTES, ProyectoMA, MIERCOLES, ProyectoMI, JUEVES, ProyectoJ, "
+                + "HORAS_EXTRA, ProyectoHE, HRSTOTALES, SOBRESUELDO, VIATICOS, OTROS_INGRESOS, INFONAVIT, OTROS_DEDUCCIONES, SUELDO_NORMAL, SUELDO_EXTRA, TOTAL_INGRESOS,\n"
                 + " TOTAL_DEDUCCIONES, SUELDOT, DEPOSITO_VENTANILLA, FECHA_CREACION) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,current_date)";
         try {
             ps = con.prepareStatement(query);
             ps.setObject(1, nomina.getId_empleado());
             ps.setObject(2, nomina.getSemanaNom());
             ps.setObject(3, nomina.getHrsViernes());
-            ps.setObject(4, nomina.getIdPv());
+            ps.setObject(4, nomina.getProyectov());
             ps.setObject(5, nomina.getHrsLunes());
-            ps.setObject(6, nomina.getIdPl());
+            ps.setObject(6, nomina.getProyectol());
             ps.setObject(7, nomina.getHrsMartes());
-            ps.setObject(8, nomina.getIdPMa());
+            ps.setObject(8, nomina.getProyectoMa());
             ps.setObject(9, nomina.getHrsMiercoles());
-            ps.setObject(10, nomina.getIdPMi());
+            ps.setObject(10, nomina.getProyectoMi());
             ps.setObject(11, nomina.getHrsJueves());
-            ps.setObject(12, nomina.getIdPj());
+            ps.setObject(12, nomina.getProyectoJ());
             ps.setObject(13, nomina.getHrsExtra());
-            ps.setObject(14, nomina.getIdPhe());
+            ps.setObject(14, nomina.getProyectoHe());
             ps.setObject(15, nomina.getHrsTotales());
             ps.setObject(16, nomina.getSobresueldo());
             ps.setObject(17, nomina.getViaticos());
