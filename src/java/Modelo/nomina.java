@@ -265,7 +265,7 @@ public class nomina {
         List<NominaBean> lista = new ArrayList<>();
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "Select idNom, ID_EMPLEADO, semana, viernes, lunes, martes, miercoles, jueves, horas_extra, hrstotales, sueldoT from nomina order by idNom desc";
+        String query = "Select idNom, ID_EMPLEADO, semana, proyectov, viernes, proyectol, lunes, proyectoma, martes, proyectomi, miercoles, proyectoj, jueves, proyectohe, horas_extra, hrstotales, sueldoT from nomina order by idNom desc";
         try {
             ps = con.prepareStatement(query);
             ResultSet rs;
@@ -275,12 +275,18 @@ public class nomina {
                 nomina.setIdNom(rs.getInt("idNom"));
                 nomina.setId_empleado(rs.getInt("id_empleado"));
                 nomina.setSemanaNom(rs.getString("semana"));
+                nomina.setProyectov(rs.getString("proyectov"));
                 nomina.setHrsViernes(rs.getFloat("viernes"));
+                nomina.setProyectol(rs.getString("proyectol"));
                 nomina.setHrsLunes(rs.getFloat("lunes"));
+                nomina.setProyectoMa(rs.getString("proyectoma"));
                 nomina.setHrsMartes(rs.getFloat("martes"));
+                nomina.setProyectoMi(rs.getString("proyectomi"));
                 nomina.setHrsMiercoles(rs.getFloat("miercoles"));
+                nomina.setProyectoJ(rs.getString("proyectoj"));
                 nomina.setHrsJueves(rs.getFloat("jueves"));
                 nomina.setHrsExtra(rs.getFloat("horas_extra"));
+                nomina.setProyectoHe(rs.getString("proyevtohe"));
                 nomina.setHrsTotales(rs.getFloat("hrstotales"));
                 nomina.setSueldoT(rs.getFloat("sueldoT"));
                 nomina.setEmpleado(Empleado.obtenerEmpleado(nomina.getId_empleado())); 

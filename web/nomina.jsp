@@ -23,6 +23,7 @@
         <script type="text/javascript">
             $(function () {
                 $('#tabla_cot').dataTable();
+                $('#tabla_pro').dataTable();
             });
         </script>
         <script>
@@ -34,6 +35,17 @@
                     $(e.currentTarget).find('#idNomD').val(prov);
                 });
             });
+        </script>
+        <script>
+            function mostrar(sel) {
+                if (sel.value == "horas") {
+                    $("#tabla-horas").show();
+                    $("#tabla-trabajos").hide();
+                } else {
+                    $("#tabla-horas").hide();
+                    $("#tabla-trabajos").show();
+                }
+            }
         </script>
     </head>
     <body>
@@ -108,7 +120,7 @@
             <h2>Nómina:</h2>
             <div class="row">
                 <div class="col-lg-4">
-                    <SELECT NAME="nominas" onChange="pagoOnChange(this)" class="form-control">
+                    <SELECT NAME="nominas" onChange="mostrar(this)" class="form-control">
                         <OPTION VALUE="horas">Ver por Horas</OPTION>
                         <OPTION VALUE="trabajos">Ver por Trabajos</OPTION> 
                     </SELECT>
@@ -117,7 +129,7 @@
                     <a data-toggle="modal" href="#calcularnom" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Calcular</a>
                 </div>
             </div><br>
-            <div class="table-responsive container">
+            <div class="table-responsive container" id="tabla-horas" style="display:">
                 <table class="table" id="tabla_cot" name="nomina">
                     <thead>
                         <tr>
@@ -157,43 +169,41 @@
                     </tbody>
                 </table>
             </div>
-            <div>
-                <br>
-                <br>
-                <div class="table-responsive container">
-                    <table class="table" id="tabla_cot" name="nomina">
-                        <thead>
+            <div class="table-responsive container" id="tabla-trabajos" style="display: none">
+                <table class="table" id="tabla_pro" name="nomina">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Empleado</th>
+                            <th>Semana</th>
+                            <th>Vie</th>
+                            <th>Lun</th>
+                            <th>Mar</th>
+                            <th>Mier</th>
+                            <th>Jue</th>
+                            <th>T. EX</th>
+                            <th>Total Hrs</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="nomina" items="${nominas}" varStatus="iter">
                             <tr>
-                                <th>ID</th>
-                                <th>Empleado</th>
-                                <th>Semana</th>
-                                <th>Vie</th>
-                                <th>Lun</th>
-                                <th>Mar</th>
-                                <th>Mier</th>
-                                <th>Jue</th>
-                                <th>T. EX</th>
-                                <th>---</th>
+                                <td><h6>${nomina.idNom}</h6></td>
+                                <td><h6>${nomina.empleado.persona.nombrePersona}&nbsp;${nomina.empleado.persona.apellidoPpersona}&nbsp;${nomina.empleado.persona.apellidoMpersona}</h6></td>
+                                <td><h6>${nomina.semanaNom}</h6></td>
+                                <td><h6>${nomina.proyectov}</h6></td>
+                                <td><h6>${nomina.proyectol}</h6></td>
+                                <td><h6>${nomina.proyectoMa}</h6></td>
+                                <td><h6>${nomina.proyectoMi}</h6></td>
+                                <td><h6>${nomina.proyectoJ}</h6></td>
+                                <td><h6>${nomina.proyectoHe}</h6></td>
+                                <td><h6>${nomina.hrsTotales}</h6></td>
+                                <td><h6>$ ${nomina.sueldoT} 00/100 M.N.</h6></td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="nomina" items="${nominas}" varStatus="iter">
-                                <tr>
-                                    <td><h6>${nomina.idNom}</h6></td>
-                                    <td><h6>${nomina.empleado.persona.nombrePersona}&nbsp;${nomina.empleado.persona.apellidoPpersona}&nbsp;${nomina.empleado.persona.apellidoMpersona}</h6></td>
-                                    <td><h6>${nomina.semanaNom}</h6></td>
-                                    <td><h6>${nomina.hrsViernes}</h6></td>
-                                    <td><h6>${nomina.hrsLunes}</h6></td>
-                                    <td><h6>${nomina.hrsMartes}</h6></td>
-                                    <td><h6>${nomina.hrsMiercoles}</h6></td>
-                                    <td><h6>${nomina.hrsJueves}</h6></td>
-                                    <td><h6>${nomina.hrsExtra}</h6></td>
-                                    <td></td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
+                        </c:forEach>
+                    </tbody>
+                </table>
             </div>
             <form class="form" role="form" method="post" action="calcularnom">
                 <div class="modal fade" id="calcularnom">
@@ -347,5 +357,6 @@
                     </div>
                 </div>
             </form>
+        </div>
     </body>
 </html>
