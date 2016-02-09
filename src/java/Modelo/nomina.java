@@ -286,7 +286,7 @@ public class nomina {
                 nomina.setProyectoJ(rs.getString("proyectoj"));
                 nomina.setHrsJueves(rs.getFloat("jueves"));
                 nomina.setHrsExtra(rs.getFloat("horas_extra"));
-                nomina.setProyectoHe(rs.getString("proyevtohe"));
+                nomina.setProyectoHe(rs.getString("proyectohe"));
                 nomina.setHrsTotales(rs.getFloat("hrstotales"));
                 nomina.setSueldoT(rs.getFloat("sueldoT"));
                 nomina.setEmpleado(Empleado.obtenerEmpleado(nomina.getId_empleado())); 
@@ -303,8 +303,9 @@ public class nomina {
         List<NominaBean> lista = new ArrayList<>();
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "Select idNom, ID_EMPLEADO, semana, VIERNES, LUNES, MARTES, MIERCOLES, JUEVES, HORAS_EXTRA, HRSTOTALES, SOBRESUELDO, VIATICOS, OTROS_INGRESOS, INFONAVIT, OTROS_DEDUCCIONES, SUELDO_NORMAL, SUELDO_EXTRA, TOTAL_INGRESOS,\n"
-                + " TOTAL_DEDUCCIONES, SUELDOT, FECHA_CREACION from nomina where semana = '" + semana + "' ;";
+        String query = "Select nomina.idNom, nomina.ID_EMPLEADO, nomina.semana, nomina.VIERNES, nomina.LUNES, nomina.MARTES, nomina.MIERCOLES, nomina.JUEVES, nomina.HORAS_EXTRA, nomina.HRSTOTALES, nomina.SOBRESUELDO, nomina.VIATICOS, "
+                + "nomina.OTROS_INGRESOS, nomina.INFONAVIT, nomina.OTROS_DEDUCCIONES, nomina.SUELDO_NORMAL, nomina.SUELDO_EXTRA, nomina.TOTAL_INGRESOS,\n"
+                + " nomina.TOTAL_DEDUCCIONES, nomina.SUELDOT, nomina.FECHA_CREACION, empleado.CTA_BANCO, empleado.TRANS_CTA_BANAMEX, nomina.DEPOSITO_VENTANILLA from nomina inner join empleado on (nomina.id_empleado=empleado.id_empleado) where semana = '" + semana + "' ;";
         try {
             ps = con.prepareStatement(query);
             ResultSet rs;
@@ -332,6 +333,9 @@ public class nomina {
                 nomina.setTotal_deducciones(rs.getFloat("total_deducciones"));
                 nomina.setSueldoT(rs.getFloat("sueldoT"));
                 nomina.setDate(rs.getString("FECHA_CREACION"));
+                nomina.setCta_banco(rs.getString("cta_banco"));
+                nomina.setTrans_cta(rs.getFloat("TRANS_CTA_BANAMEX"));
+                nomina.setVentanilla(rs.getFloat("deposito_ventanilla"));
                 nomina.setEmpleado(Empleado.obtenerEmpleado(nomina.getId_empleado()));
                 lista.add(nomina);
             }

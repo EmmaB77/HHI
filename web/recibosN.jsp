@@ -120,7 +120,7 @@
                     <div class="col-lg-6">
                         <br>
                         <button type="summit" class="btn btn-default">Buscar</button>
-                        <a href="javascript:imprSelec('imprime')" role="button" class="btn btn-info">Imprimir</a>
+                        <a href="javascript:imprSelec('imprime')" role="button" class="btn btn-info">Imprimir Recibo</a>
                     </div>
                 </div>
             </form><br>
@@ -197,7 +197,35 @@
                             <div class="col-xs-2" align="center"><br>_________________<br>FIRMA</div>
                         </div>
                     </div>
-                </c:forEach></div>
+                </c:forEach></div><br><br>
+            <div>
+                <div>
+                    <div>
+                        <table class="table table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Nomina</th>
+                                    <th>Empleado</th>
+                                    <th>Semana</th>
+                                    <th>Cuenta Banamex</th>
+                                    <th>Deposito Ventanilla</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach var="nomina" items="${nominas}" varStatus="iter">
+                                    <tr>
+                                        <td>${nomina.idNom}</td>
+                                        <td>${nomina.empleado.persona.nombrePersona}&nbsp;${nomina.empleado.persona.apellidoPpersona}&nbsp;${nomina.empleado.persona.apellidoMpersona}</td>
+                                        <td>${nomina.semanaNom}</td>
+                                        <td>${nomina.cta_banco}</td>
+                                        <td>$ ${nomina.ventanilla} M.N</td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

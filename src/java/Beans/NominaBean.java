@@ -33,6 +33,8 @@ public class NominaBean {
     private float sueldoT;
     private String date;
     private float ventanilla;
+    private String cta_banco;
+    private float trans_cta;
 
     public int getIdNom() {
         return idNom;
@@ -282,4 +284,21 @@ public class NominaBean {
         this.ventanilla = ventanilla;
     }
 
+    public String getCta_banco() {
+        return cta_banco;
+    }
+
+    public void setCta_banco(String cta_banco) {
+        this.cta_banco = cta_banco;
+    }
+
+    public float getTrans_cta() {
+        return trans_cta;
+    }
+
+    public void setTrans_cta(float trans_cta) {
+        this.trans_cta = trans_cta;
+    }
+    
+    
 }
