@@ -37,6 +37,42 @@
                 ventimp.close();
             }
         </script> 
+        <script>
+            function imprimeR(imprimeR)
+            {
+                var ficha = document.getElementById(imprimeR);
+                var ventimp = window.open(' ', '_blank');
+                ventimp.document.write(ficha.innerHTML);
+                var css = ventimp.document.createElement("link");
+                css.setAttribute("href", "css/bootstrap.min.css");
+                css.setAttribute("rel", "stylesheet");
+                css.setAttribute("type", "text/css");
+                var src1 = ventimp.document.createElement("script");
+                src1.setAttribute("src", "js/jquery.js");
+                var src2 = ventimp.document.createElement("script");
+                src2.setAttribute("src", "js/bootstrap.min.js");
+                ventimp.document.head.appendChild(css);
+                ventimp.document.head.appendChild(src1);
+                ventimp.document.head.appendChild(src2);
+                ventimp.print( );
+                ventimp.close();
+            }
+        </script>
+        <script>
+            function mostrar(sel) {
+                if (sel.value == "recibo") {
+                    $("#recibob").show();
+                    $("#reporte").hide();
+                    $("#imprime").show();
+                    $("#imprimeR").hide();
+                } else {
+                    $("#recibob").hide();
+                    $("#reporte").show();
+                    $("#imprime").hide();
+                    $("#imprimeR").show();
+                }
+            }
+        </script>
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-static-top">
@@ -110,17 +146,23 @@
             <h3>Imprimir Recibos</h3>
             <form class="form-group" role="form" method="post" action="generar">
                 <div class="row">
-                    <div class="col-lg-4"> Generar por Semana: <select class="form-control" name="semana" id="semana">
+                    <div class="col-lg-3"> Generar por Semana: <select class="form-control" name="semana" id="semana" onChange='this.form.submit()'>
                             <option>--Seleccione Semana--</option>
                             <c:forEach var="semana" items="${semanas}" varStatus="iter">
                                 <option value="${semana.semanaNom}">${semana.semanaNom}</option>
                             </c:forEach>
-                        </select><br><br>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        Ver: <select class="form-control" name="Vista" onChange="mostrar(this)">
+                            <option value="recibo">Recibos</option>
+                            <option value="reporte">Reporte</option>
+                        </select>
                     </div>
                     <div class="col-lg-6">
                         <br>
-                        <button type="summit" class="btn btn-default">Buscar</button>
-                        <a href="javascript:imprSelec('imprime')" role="button" class="btn btn-info">Imprimir Recibo</a>
+                        <a href="javascript:imprSelec('imprime')" role="button" class="btn btn-info" id="recibob" name="recibob">Imprimir Recibo</a>
+                        <a href="javascript:imprimeR('imprimeR')" role="button" class="btn btn-info" id="reporte" name="reporte" style="display:none">Imprimir Reporte</a>
                     </div>
                 </div>
             </form><br>
@@ -198,33 +240,31 @@
                         </div>
                     </div>
                 </c:forEach></div><br><br>
-            <div>
-                <div>
-                    <div>
-                        <table class="table table-responsive">
-                            <thead>
-                                <tr>
-                                    <th>Nomina</th>
-                                    <th>Empleado</th>
-                                    <th>Semana</th>
-                                    <th>Cuenta Banamex</th>
-                                    <th>Deposito Ventanilla</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach var="nomina" items="${nominas}" varStatus="iter">
-                                    <tr>
-                                        <td>${nomina.idNom}</td>
-                                        <td>${nomina.empleado.persona.nombrePersona}&nbsp;${nomina.empleado.persona.apellidoPpersona}&nbsp;${nomina.empleado.persona.apellidoMpersona}</td>
-                                        <td>${nomina.semanaNom}</td>
-                                        <td>${nomina.cta_banco}</td>
-                                        <td>$ ${nomina.ventanilla} M.N</td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+            <div id="imprimeR" style="display: none">
+                <table class="table table-responsive">
+                    <h2>HHI INSTALACIONES INDUSTRIALES</h2>
+                    <h3>Reporte de Pagos en Ventanilla</h3>
+                    <thead>
+                        <tr>
+                            <th><h6>ID</h6></th>
+                            <th><h6>Empleado</h6></th>
+                            <th><h6>Semana</h6></th>
+                            <th><h6>Cuenta Banamex</h6></th>
+                            <th><h6>Deposito Ventanilla</h6></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="nomina" items="${nominas}" varStatus="iter">
+                            <tr>
+                                <td class="col-xs-1"><h6>${nomina.idNom}</h6></td>
+                                <td class="col-xs-2"><h6>${nomina.empleado.persona.nombrePersona}&nbsp;${nomina.empleado.persona.apellidoPpersona}&nbsp;${nomina.empleado.persona.apellidoMpersona}</h6></td>
+                                <td class="col-xs-4"><h6>${nomina.semanaNom}</h6></td>
+                                <td class="col-xs-3"><h6>${nomina.cta_banco}</h6></td>
+                                <td class="col-xs-2"><h6>$ ${nomina.ventanilla} M.N</h6></td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
             </div>
         </div>
     </body>
