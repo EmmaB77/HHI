@@ -23,7 +23,7 @@ public class Cotizacion {
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
         String query = "insert into COTIZACION(NUM_COT,FECHA_SOL,SOL_COT,REFERENCIA,TITULO,DESCRIPCION,FECHA_COT,MONTO,ORDEN_COMPRA,RECIBIDO,ID_USUARIO,FECHA_ENTREGA,ID_EMPLEADO,AVANCE,STATUS,\n"
-                + "NUM_FACT,DIAS_CREDIT,TOTAL,CANTIDAD_LETRA,VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+                + "NUM_FACT,DIAS_CREDIT,TOTAL,CANTIDAD_LETR) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
         try {
             ps = con.prepareStatement(query);
             ps.setObject(1, cotizac.getNumCot());
@@ -49,15 +49,27 @@ public class Cotizacion {
             System.out.println("Exito en el registro");
             con.close();
         } catch (SQLException e) {
-            try {
-                System.out.println("Error, rollback");
-                con.rollback();
-            } catch (SQLException ex) {
-                Logger.getLogger(Cotizacion.class.getName()).log(Level.SEVERE, null, ex);
-            }
             System.out.println(e);
         }
+        return status;
+    }
 
+    public int agregarDetalle(int idCot, CotDetalleBean coti) {
+        int status = 0;
+        Connection con = Conexion.getConnetion();
+        PreparedStatement ps;
+        String query = "insert into DETALLE_COT(ID_COTI,INCISO,DESC_DETAIL,CANTIDAD,UNIDAD,IMPORTE) VALUES (?,?,?,?,?,?);";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setObject(1,coti.getIdCot());
+            ps.setObject(2, coti.getIncisoCotDet());
+            ps.setObject(3, coti.getDescCotDet());
+            ps.setObject(4, coti.getCantCotDet());
+            ps.setObject(5, coti.getUniCotDet());
+            ps.setObject(6, coti.getImporteCotDet());
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         return status;
     }
 
