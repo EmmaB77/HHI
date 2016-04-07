@@ -61,7 +61,7 @@ public class Cotizacion {
         String query = "insert into DETALLE_COT(ID_COTI,INCISO,DESC_DETAIL,CANTIDAD,UNIDAD,IMPORTE) VALUES (?,?,?,?,?,?);";
         try {
             ps = con.prepareStatement(query);
-            ps.setObject(1,coti.getIdCot());
+            ps.setObject(1, coti.getIdCot());
             ps.setObject(2, coti.getIncisoCotDet());
             ps.setObject(3, coti.getDescCotDet());
             ps.setObject(4, coti.getCantCotDet());

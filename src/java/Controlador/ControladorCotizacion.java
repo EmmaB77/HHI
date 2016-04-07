@@ -28,11 +28,22 @@ public class ControladorCotizacion extends HttpServlet {
             response.sendRedirect("acceso.jsp");
         } else if (userPath.equals("/cotizacion")) {
             List<CotizacionBean> listaCot;
-                listaCot = Cotizacion.listarCotizaciones();
-                varSesion.setAttribute("cotizaciones", listaCot);
+            listaCot = Cotizacion.listarCotizaciones();
+            varSesion.setAttribute("cotizaciones", listaCot);
             response.sendRedirect("cotizacion.jsp");
         }
-
     }
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        String userPath = request.getServletPath();
+        HttpSession varSesion = request.getSession();
+        
+        if(userPath.equals("/agregarCoti")){
+            
+        } 
+    }
 }

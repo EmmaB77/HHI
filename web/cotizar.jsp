@@ -146,48 +146,33 @@
                             </div>
                             <div class="table container modal-body">
                                 <div class="row form-group">
-                                    <div class="col-lg-6">Título:<input type="text" class="form-control"></div>
-                                    <div class="col-lg-4">Referencia: <input type="text" class="form-control"></div>
+                                    <div class="col-lg-6">Título:<input type="text" class="form-control" id="titulo" name="titulo"></div>
+                                    <div class="col-lg-4">Referencia: <input type="text" class="form-control" id="referencia" name="referencia"></div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col-lg-3">Fecha de Solicitud: <input type="date" class="form-control"></div>
-                                    <div class="col-lg-3">Fecha de Cotizacion: <input type="date" class="form-control"></div>
-                                    <div class="col-lg-3">Recibida: <input type="date" class="form-control"></div>
-                                    <div class="col-lg-3">Fecha de Entrega: <input type="date" class="form-control"></div>
+                                    <div class="col-lg-3">Fecha de Solicitud: <input type="date" class="form-control" id="fechasol" name="fechasol"></div>
+                                    <div class="col-lg-3">Fecha de Cotizacion: <input type="date" class="form-control" id="fechacot" name="fechacot"></div>
+                                    <div class="col-lg-3">Recibida: <input type="date" class="form-control" id="recibida" name="recibida"></div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col-lg-2">Orden de Compra: <input type="text" class="form-control"></div>
-                                    <div class="col-lg-2">Solicitud: <input type="text" class="form-control"></div>
-                                    <div class="col-lg-2">Cotización: <input type="text" class="form-control"></div>
-                                    <div class="col-lg-2">Usuario: <select class="form-control"></select></div>
-                                    <div class="col-lg-2">Monto: <input type="text" class="form-control"></div>
-                                    <div class="col-lg-2">Factura: <input type="text" class="form-control"></div>
+                                    <div class="col-lg-2">Orden de Compra: <input type="text" class="form-control" id="ordenC" name="ordenC"></div>
+                                    <div class="col-lg-2">Solicitud: <input type="text" class="form-control" id="solCot" name="solCot"></div>
+                                    <div class="col-lg-2">Cotización: <input type="text" class="form-control" id="coti" name="coti"></div>
+                                    <div class="col-lg-2">Usuario: <select class="form-control" id="usuario" name="usuario"></select></div>
+                                    <div class="col-lg-2">Monto: <input type="text" class="form-control" id="monto" name="monto"></div>
+                                    <div class="col-lg-2">Factura: <input type="text" class="form-control" id="factura" name="factura"></div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col-lg-4">Descripción:<textarea class="form-control" style="resize:none"></textarea></div>
-                                    <div class="col-lg-2">Ejecutor: <select class="form-control"></select></div>
-                                    <div class="col-lg-2">Avance: <input type="texr" class="form-control"></div>
-                                    <div class="col-lg-2">Estatus: <select class="form-control">
+                                    <div class="col-lg-4">Descripción:<textarea class="form-control" style="resize:none" id="desc" name="desc"></textarea></div>
+                                    <div class="col-lg-2">Ejecutor: <select class="form-control" id="ejecutor" name="ejecutor"></select></div>
+                                    <div class="col-lg-2">Avance: <input type="texr" class="form-control" id="avance" name="avance"></div>
+                                    <div class="col-lg-2">Estatus: <select class="form-control" name="estatus" id="estatus">
                                             <option value="...">...</option>
                                             <option value="Facturado">Facturado</option>
                                             <option value="Cotizado">Cotizado</option>
                                             <option value="En Proceso">En Proceso</option>
                                             <option value="Perdida">Perdida</option>
                                             <option value="Cancelada">Cancelada</option>
-                                            <option value="Por Cotizar">Por Cotizar</option>
-                                        </select></div>
-                                    <div class="col-lg-2">Días de Crédito: <select class="form-control">
-                                            <option value="...">...</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">6</option>
-                                            <option value="7">7</option>
-                                            <option value="8">8</option>
-                                            <option value="9">9</option>
-                                            <option value="10">10</option>
                                         </select></div>
                                 </div>
                                 <div><h4>Total</h4></div>

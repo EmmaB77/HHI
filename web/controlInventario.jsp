@@ -171,7 +171,7 @@
                                             <div>Estatus:<select class="form-control" name="est" id="est">
                                                     <option value="...">...</option>
                                                     <option value="En Almacen">En Almacen</option>
-                                                    <option value="Roto">Roto</option>
+                                                    <option value="Por Reparar">Por Reparar</option>
                                                     <option value="Prestada">Prestado</option>
                                                     <option value="Reemplazar">Reemplazar</option>
                                                 </select></div>
