@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "ControladorCotizacion", urlPatterns = {"/ControladorCotizacion", "/cotizacion"})
+@WebServlet(name = "ControladorCotizacion", urlPatterns = {"/ControladorCotizacion", "/cotizacion", "/agregar_cot"})
 public class ControladorCotizacion extends HttpServlet {
 
     @Override
@@ -42,7 +42,7 @@ public class ControladorCotizacion extends HttpServlet {
         String userPath = request.getServletPath();
         HttpSession varSesion = request.getSession();
         
-        if(userPath.equals("/agregarCoti")){
+        if(userPath.equals("/agregar_cot")){
             
         } 
     }

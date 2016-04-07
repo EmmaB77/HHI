@@ -177,8 +177,8 @@
                                 </div>
                                 <div><h4>Total</h4></div>
                                 <div class="row form-group">
-                                    <div class="col-lg-3">Total: <input type="text" class="form-control"></div>
-                                    <div class="col-lg-6">Total Letra: <input type="text" class="form-control"></div>
+                                    <div class="col-lg-3">Total: <input type="text" class="form-control" id="totalnum" name="totalnum"></div>
+                                    <div class="col-lg-6">Total Letra: <input type="text" class="form-control" id="totaletra" name="totaletra"></div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="summit" class="btn btn-success">Agregar</button>
@@ -188,6 +188,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
             </form>
         </div>
     </body>
