@@ -4,7 +4,7 @@ import java.util.List;
 
 public class CotizacionBean {
     
-    private int idCot;;
+    private int idCot;
     private String referencia;
     private String fechaSolCot;
     private String solCot;
@@ -14,69 +14,30 @@ public class CotizacionBean {
     private String fechaCot;
     private float montoCot;
     private String ordComCot;
-    private String fechaReciCot;
     private UsuarioBean usuario;
     private EmpleadoBean empleado;
-    private String fechaEnCot;
     private int avanceCot;
     private String estatusCot;
     private String numFactCot;
-    private int diasCredCot;
     private float total;
     private String canLetCot;
-    private List<Integer> inciso;
-    private List<String> Desc_Detail;
-    private List<Integer> cantidad;
-    private List<String> unidad;
-    private List<Float> importe;
+    private int iduser;
+    private int idemplo;
 
-    public List<Integer> getInciso() {
-        return inciso;
-    }
-
-    public void setInciso(List<Integer> inciso) {
-        this.inciso = inciso;
-    }
-
-    public List<String> getDesc_Detail() {
-        return Desc_Detail;
-    }
-
-    public void setDesc_Detail(List<String> Desc_Detail) {
-        this.Desc_Detail = Desc_Detail;
-    }
-
-    public List<Integer> getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(List<Integer> cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public List<String> getUnidad() {
-        return unidad;
-    }
-
-    public void setUnidad(List<String> unidad) {
-        this.unidad = unidad;
-    }
-
-    public List<Float> getImporte() {
-        return importe;
-    }
-
-    public void setImporte(List<Float> importe) {
-        this.importe = importe;
-    }
-    
-    
     public int getIdCot() {
         return idCot;
     }
 
     public void setIdCot(int idCot) {
         this.idCot = idCot;
+    }
+
+    public String getReferencia() {
+        return referencia;
+    }
+
+    public void setReferencia(String referencia) {
+        this.referencia = referencia;
     }
 
     public String getFechaSolCot() {
@@ -143,14 +104,6 @@ public class CotizacionBean {
         this.ordComCot = ordComCot;
     }
 
-    public String getFechaReciCot() {
-        return fechaReciCot;
-    }
-
-    public void setFechaReciCot(String fechaReciCot) {
-        this.fechaReciCot = fechaReciCot;
-    }
-
     public UsuarioBean getUsuario() {
         return usuario;
     }
@@ -165,14 +118,6 @@ public class CotizacionBean {
 
     public void setEmpleado(EmpleadoBean empleado) {
         this.empleado = empleado;
-    }
-
-    public String getFechaEnCot() {
-        return fechaEnCot;
-    }
-
-    public void setFechaEnCot(String fechaEnCot) {
-        this.fechaEnCot = fechaEnCot;
     }
 
     public int getAvanceCot() {
@@ -199,14 +144,6 @@ public class CotizacionBean {
         this.numFactCot = numFactCot;
     }
 
-    public int getDiasCredCot() {
-        return diasCredCot;
-    }
-
-    public void setDiasCredCot(int diasCredCot) {
-        this.diasCredCot = diasCredCot;
-    }
-
     public float getTotal() {
         return total;
     }
@@ -222,13 +159,23 @@ public class CotizacionBean {
     public void setCanLetCot(String canLetCot) {
         this.canLetCot = canLetCot;
     }
-    
-    public String getReferencia() {
-        return referencia;
+
+    public int getIduser() {
+        return iduser;
     }
 
-    public void setReferencia(String referencia) {
-        this.referencia = referencia;
+    public void setIduser(int iduser) {
+        this.iduser = iduser;
     }
+
+    public int getIdemplo() {
+        return idemplo;
+    }
+
+    public void setIdemplo(int idemplo) {
+        this.idemplo = idemplo;
+    }
+ 
+    
     
 }

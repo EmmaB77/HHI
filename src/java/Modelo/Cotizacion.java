@@ -22,8 +22,8 @@ public class Cotizacion {
         int status = 0;
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "insert into COTIZACION(NUM_COT,FECHA_SOL,SOL_COT,REFERENCIA,TITULO,DESCRIPCION,FECHA_COT,MONTO,ORDEN_COMPRA,RECIBIDO,ID_USUARIO,FECHA_ENTREGA,ID_EMPLEADO,AVANCE,STATUS,\n"
-                + "NUM_FACT,DIAS_CREDIT,TOTAL,CANTIDAD_LETR) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+        String query = "insert into COTIZACION(NUM_COT,FECHA_SOL,SOL_COT,REFERENCIA,TITULO,DESCRIPCION,FECHA_COT,MONTO,ORDEN_COMPRA,ID_USUARIO,ID_EMPLEADO,AVANCE,STATUS,\n"
+                + "NUM_FACT,TOTAL,CANTIDAD_LETR) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
         try {
             ps = con.prepareStatement(query);
             ps.setObject(1, cotizac.getNumCot());
@@ -35,16 +35,13 @@ public class Cotizacion {
             ps.setObject(7, cotizac.getFechaCot());
             ps.setObject(8, cotizac.getMontoCot());
             ps.setObject(9, cotizac.getOrdComCot());
-            ps.setObject(10, cotizac.getFechaReciCot());
-            ps.setObject(11, cotizac.getUsuario());
-            ps.setObject(12, cotizac.getFechaEnCot());
-            ps.setObject(13, cotizac.getEmpleado());
-            ps.setObject(14, cotizac.getAvanceCot());
-            ps.setObject(15, cotizac.getEstatusCot());
-            ps.setObject(16, cotizac.getNumFactCot());
-            ps.setObject(17, cotizac.getDiasCredCot());
-            ps.setObject(18, cotizac.getTotal());
-            ps.setObject(19, cotizac.getCanLetCot());
+            ps.setObject(10, cotizac.getUsuario());
+            ps.setObject(11, cotizac.getEmpleado());
+            ps.setObject(12, cotizac.getAvanceCot());
+            ps.setObject(13, cotizac.getEstatusCot());
+            ps.setObject(14, cotizac.getNumFactCot());
+            ps.setObject(15, cotizac.getTotal());
+            ps.setObject(16, cotizac.getCanLetCot());
             status = ps.executeUpdate();
             System.out.println("Exito en el registro");
             con.close();

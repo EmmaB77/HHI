@@ -152,18 +152,17 @@
                                 <div class="row form-group">
                                     <div class="col-lg-3">Fecha de Solicitud: <input type="date" class="form-control" id="fechasol" name="fechasol"></div>
                                     <div class="col-lg-3">Fecha de Cotizacion: <input type="date" class="form-control" id="fechacot" name="fechacot"></div>
-                                    <div class="col-lg-3">Recibida: <input type="date" class="form-control" id="recibida" name="recibida"></div>
+                                    <div class="col-lg-3">Orden de Compra: <input type="text" class="form-control" id="ordenC" name="ordenC"></div>
+                                    <div class="col-lg-3">Solicitud: <input type="text" class="form-control" id="solCot" name="solCot"></div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col-lg-2">Orden de Compra: <input type="text" class="form-control" id="ordenC" name="ordenC"></div>
-                                    <div class="col-lg-2">Solicitud: <input type="text" class="form-control" id="solCot" name="solCot"></div>
-                                    <div class="col-lg-2">Cotización: <input type="text" class="form-control" id="coti" name="coti"></div>
-                                    <div class="col-lg-2">Usuario: <select class="form-control" id="usuario" name="usuario"></select></div>
-                                    <div class="col-lg-2">Monto: <input type="text" class="form-control" id="monto" name="monto"></div>
-                                    <div class="col-lg-2">Factura: <input type="text" class="form-control" id="factura" name="factura"></div>
+                                    <div class="col-lg-3">Cotización: <input type="text" class="form-control" id="coti" name="coti"></div>
+                                    <div class="col-lg-3">Usuario: <select class="form-control" id="usuario" name="usuario"></select></div>
+                                    <div class="col-lg-3">Monto: <input type="text" class="form-control" id="monto" name="monto"></div>
+                                    <div class="col-lg-3">Factura: <input type="text" class="form-control" id="factura" name="factura"></div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col-lg-4">Descripción:<textarea class="form-control" style="resize:none" id="desc" name="desc"></textarea></div>
+                                    <div class="col-lg-6">Descripción:<textarea class="form-control" style="resize:none" id="desc" name="desc"></textarea></div>
                                     <div class="col-lg-2">Ejecutor: <select class="form-control" id="ejecutor" name="ejecutor"></select></div>
                                     <div class="col-lg-2">Avance: <input type="texr" class="form-control" id="avance" name="avance"></div>
                                     <div class="col-lg-2">Estatus: <select class="form-control" name="estatus" id="estatus">
