@@ -22,8 +22,8 @@ public class Cotizacion {
         int status = 0;
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "insert into COTIZACION(NUM_COT,FECHA_SOL,SOL_COT,REFERENCIA,TITULO,DESCRIPCION,FECHA_COT,MONTO,ORDEN_COMPRA,ID_USUARIO,ID_EMPLEADO,AVANCE,STATUS,\n"
-                + "NUM_FACT,TOTAL,CANTIDAD_LETR) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+        String query = "insert into COTIZACION(NUM_COT,FECHA_SOL,SOL_COT,REFERENCIA,TITULO,DESCRIPCION,FECHA_COT,ID_USUARIO,ID_EMPLEADO,STATUS,\n"
+                + "TOTAL,CANTIDAD_LETRA,ORDEN_COMPRA,AVANCE,NUM_FACT,TIEMPO_ENTREGA) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
         try {
             ps = con.prepareStatement(query);
             ps.setObject(1, cotizac.getNumCot());
@@ -33,15 +33,15 @@ public class Cotizacion {
             ps.setObject(5, cotizac.getTituloCot());
             ps.setObject(6, cotizac.getDescCot());
             ps.setObject(7, cotizac.getFechaCot());
-            ps.setObject(8, cotizac.getMontoCot());
-            ps.setObject(9, cotizac.getOrdComCot());
-            ps.setObject(10, cotizac.getUsuario());
-            ps.setObject(11, cotizac.getEmpleado());
-            ps.setObject(12, cotizac.getAvanceCot());
-            ps.setObject(13, cotizac.getEstatusCot());
-            ps.setObject(14, cotizac.getNumFactCot());
-            ps.setObject(15, cotizac.getTotal());
-            ps.setObject(16, cotizac.getCanLetCot());
+            ps.setObject(8, cotizac.getIduser());
+            ps.setObject(9, cotizac.getIdemplo());
+            ps.setObject(10, cotizac.getEstatusCot());
+            ps.setObject(11, cotizac.getTotal());
+            ps.setObject(12, cotizac.getCanLetCot());
+            ps.setObject(13, cotizac.getOrdComCot());
+            ps.setObject(14, cotizac.getAvanceCot());
+            ps.setObject(15, cotizac.getNumFactCot());
+            ps.setObject(16, cotizac.getTiempoEntrega());
             status = ps.executeUpdate();
             System.out.println("Exito en el registro");
             con.close();
@@ -51,11 +51,11 @@ public class Cotizacion {
         return status;
     }
 
-    public int agregarDetalle(int idCot, CotDetalleBean coti) {
+    public static int agregarDetalle(CotDetalleBean coti) {
         int status = 0;
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "insert into DETALLE_COT(ID_COTI,INCISO,DESC_DETAIL,CANTIDAD,UNIDAD,IMPORTE) VALUES (?,?,?,?,?,?);";
+        String query = "insert into DETALLE_COT(ID_COTI,INCISO,DESC_DETAIL,CANTIDAD,UNIDAD,PRECIO_U,IMPORTE) VALUES (?,?,?,?,?,?,?);";
         try {
             ps = con.prepareStatement(query);
             ps.setObject(1, coti.getIdCot());
@@ -63,7 +63,11 @@ public class Cotizacion {
             ps.setObject(3, coti.getDescCotDet());
             ps.setObject(4, coti.getCantCotDet());
             ps.setObject(5, coti.getUniCotDet());
-            ps.setObject(6, coti.getImporteCotDet());
+            ps.setObject(6, coti.getPrecioUni());
+            ps.setObject(7, coti.getImporteCotDet());
+            status = ps.executeUpdate();
+            System.out.println("Exito: Concepto Agregado");
+            con.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -90,7 +94,75 @@ public class Cotizacion {
         Connection con = Conexion.getConnetion();
         List<CotizacionBean> lista = new ArrayList<>();
         PreparedStatement ps;
-        String query = "Select NUM_COT, REFERENCIA, SOL_COT, TITULO, FECHA_COT, MONTO, STATUS from cotizacion;";
+        String query = "Select ID_COTI, NUM_COT, REFERENCIA, SOL_COT, TITULO, FECHA_COT, TOTAL, STATUS, ORDEN_COMPRA, AVANCE, NUM_FACT, ID_USUARIO, TIEMPO_ENTREGA from cotizacion;";
+        try {
+            ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                CotizacionBean cotizac = new CotizacionBean();
+                cotizac.setIdCot(rs.getInt("ID_COTI"));
+                cotizac.setNumCot(rs.getString("NUM_COT"));
+                cotizac.setReferencia(rs.getString("REFERENCIA"));
+                cotizac.setSolCot(rs.getString("SOL_COT"));
+                cotizac.setTituloCot(rs.getString("TITULO"));
+                cotizac.setFechaCot(rs.getString("FECHA_COT"));
+                cotizac.setTotal(rs.getFloat("TOTAL"));
+                cotizac.setEstatusCot(rs.getString("STATUS"));
+                cotizac.setOrdComCot(rs.getString("ORDEN_COMPRA"));
+                cotizac.setAvanceCot(rs.getString("AVANCE"));
+                cotizac.setNumFactCot(rs.getString("NUM_FACT"));
+                cotizac.setIduser(rs.getInt("ID_USUARIO"));
+                cotizac.setTiempoEntrega(rs.getString("TIEMPO_ENTREGA"));
+                cotizac.setUsuario(Solicitante.obtenerUsuario(cotizac.getIduser()));
+                lista.add(cotizac);
+            }
+            con.close();
+            System.out.println("Se realizo la siguiente consulta: " + query);
+            System.out.println("Estoy haciendo magia espera...");
+            System.out.println("Se imprimio algo... tal vez no lo veas pero este mensaje lo confirma");
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return lista;
+    }
+
+    public static int asignarOrdenCompra(String numcot, String orden) {
+        int status=0;
+        Connection con = Conexion.getConnetion();
+        PreparedStatement ps;
+        String query = "Update Cotizacion set orden_compra='"+orden+"' where num_cot='"+numcot+"';";
+        try {
+            ps = con.prepareStatement(query);
+            status = ps.executeUpdate();
+            System.out.println("Exito: Orden Asignada");
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return status;
+    }
+    
+    public static int agregarFactura(String numcot, String nueva, String avance) {
+        int status=0;
+        Connection con = Conexion.getConnetion();
+        PreparedStatement ps;
+        String query = "Update Cotizacion set num_fact='"+nueva+"', avance='"+avance+"' where num_cot='"+numcot+"';";
+        try {
+            ps = con.prepareStatement(query);
+            status = ps.executeUpdate();
+            System.out.println("Exito: Nueva Factura Agregada");
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return status;
+    }
+    
+    public static List<CotizacionBean> obtenerCotizacion(int idCot) {
+        Connection con = Conexion.getConnetion();
+        List<CotizacionBean> lista = new ArrayList<>();
+        PreparedStatement ps;
+        String query = "Select NUM_COT, REFERENCIA, SOL_COT, TITULO, FECHA_COT, TOTAL, ID_USUARIO, TIEMPO_ENTREGA, DESCRIPCION, CANTIDAD_LETRA from cotizacion where id_coti="+idCot+";";
         try {
             ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
@@ -101,14 +173,42 @@ public class Cotizacion {
                 cotizac.setSolCot(rs.getString("SOL_COT"));
                 cotizac.setTituloCot(rs.getString("TITULO"));
                 cotizac.setFechaCot(rs.getString("FECHA_COT"));
-                cotizac.setMontoCot(rs.getFloat("MONTO"));
-                cotizac.setEstatusCot(rs.getString("STATUS"));
+                cotizac.setTotal(rs.getFloat("TOTAL"));
+                cotizac.setIduser(rs.getInt("ID_USUARIO"));
+                cotizac.setTiempoEntrega(rs.getString("TIEMPO_ENTREGA"));
+                cotizac.setDescCot(rs.getString("DESCRIPCION"));
+                cotizac.setCanLetCot(rs.getString("CANTIDAD_LETRA"));
+                cotizac.setUsuario(Solicitante.obtenerUsuario(cotizac.getIduser()));
                 lista.add(cotizac);
             }
             con.close();
             System.out.println("Se realizo la siguiente consulta: " + query);
-            System.out.println("Estoy haciendo magia espera...");
-            System.out.println("Se imprimio algo... tal vez no lo veas pero este mensaje lo confirma");
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return lista;
+    }
+    
+    public static List<CotDetalleBean> obtenerDetallesCot(int idCot) {
+        Connection con = Conexion.getConnetion();
+        List<CotDetalleBean> lista = new ArrayList<>();
+        PreparedStatement ps;
+        String query = "Select INCISO, DESC_DETAIL, CANTIDAD, UNIDAD, PRECIO_U, IMPORTE from detalle_cot where id_coti="+idCot+";";
+        try {
+            ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                CotDetalleBean cotizac = new CotDetalleBean();
+                cotizac.setIncisoCotDet(rs.getInt("INCISO"));
+                cotizac.setDescCotDet(rs.getString("DESC_DETAIL"));
+                cotizac.setCantCotDet(rs.getFloat("CANTIDAD"));
+                cotizac.setUniCotDet(rs.getString("UNIDAD"));
+                cotizac.setPrecioUni(rs.getFloat("PRECIO_U"));
+                cotizac.setImporteCotDet(rs.getFloat("IMPORTE"));
+                lista.add(cotizac);
+            }
+            con.close();
+            System.out.println("Se realizo la siguiente consulta: " + query);
         } catch (SQLException e) {
             System.out.println(e);
         }

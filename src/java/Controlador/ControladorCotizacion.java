@@ -1,8 +1,13 @@
 package Controlador;
 
 import Beans.CotizacionBean;
+import Beans.CotDetalleBean;
+import Beans.EmpleadoBean;
 import Beans.UserSystBean;
+import Beans.UsuarioBean;
 import Modelo.Cotizacion;
+import Modelo.Empleado;
+import Modelo.Solicitante;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -13,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "ControladorCotizacion", urlPatterns = {"/ControladorCotizacion", "/cotizacion", "/agregar_cot"})
+@WebServlet(name = "ControladorCotizacion", urlPatterns = {"/ControladorCotizacion", "/cotizacion", "/agregar_cot", "/agregar_concp", "/asignar_orden", "/facturar", "/ver_cot"})
 public class ControladorCotizacion extends HttpServlet {
 
     @Override
@@ -30,7 +35,25 @@ public class ControladorCotizacion extends HttpServlet {
             List<CotizacionBean> listaCot;
             listaCot = Cotizacion.listarCotizaciones();
             varSesion.setAttribute("cotizaciones", listaCot);
-            response.sendRedirect("cotizacion.jsp");
+            List<EmpleadoBean> listaEmpleados;
+            listaEmpleados = Empleado.listarEmpleados();
+            varSesion.setAttribute("empleados", listaEmpleados);
+            List<UsuarioBean> listaUsuarios;
+            listaUsuarios = Solicitante.listarUsuarios();
+            varSesion.setAttribute("usuarios", listaUsuarios);
+            response.sendRedirect("cotizar.jsp");
+        }
+        if (userPath.equals("/ver_cot")) {
+            int idCot = Integer.parseInt(request.getParameter("idCoti"));
+            List<CotizacionBean> listaCot;
+            listaCot = Cotizacion.obtenerCotizacion(idCot);
+            varSesion.setAttribute("cotizacion", listaCot);
+            List<CotDetalleBean> listaDet;
+            listaDet = Cotizacion.obtenerDetallesCot(idCot);
+            varSesion.setAttribute("detalles", listaDet);
+            response.sendRedirect("verDetalleCot.jsp");
+        } else {
+            System.out.println("No se puede");
         }
     }
 
@@ -50,15 +73,15 @@ public class ControladorCotizacion extends HttpServlet {
             String numcot = request.getParameter("coti");
             String desc = request.getParameter("desc");
             String fecot = request.getParameter("fechacot");
-            float monto = Float.parseFloat(request.getParameter("monto"));
-            String oc = request.getParameter("ordenC");
             int iduser = Integer.parseInt(request.getParameter("usuario"));
             int idemp = Integer.parseInt(request.getParameter("ejecutor"));
-            int avance = Integer.parseInt(request.getParameter("avance"));
             String status = request.getParameter("estatus");
-            String numfact = request.getParameter("factura");
             float total = Float.parseFloat(request.getParameter("totalnum"));
             String totaletra = request.getParameter("totaletra");
+            String tiempo = request.getParameter("timen");
+            
+            System.out.println("Usuario: "+iduser);
+            System.out.println("Empleado: "+idemp);
 
             CotizacionBean coti = new CotizacionBean();
             coti.setFechaSolCot(fecsol);
@@ -68,16 +91,55 @@ public class ControladorCotizacion extends HttpServlet {
             coti.setNumCot(numcot);
             coti.setDescCot(desc);
             coti.setFechaCot(fecot);
-            coti.setMontoCot(monto);
-            coti.setOrdComCot(oc);
             coti.setIduser(iduser);
             coti.setIdemplo(idemp);
-            coti.setAvanceCot(avance);
             coti.setEstatusCot(status);
-            coti.setNumFactCot(numfact);
             coti.setTotal(total);
             coti.setCanLetCot(totaletra);
-            Cotizacion.agregarCot(coti);    
+            coti.setOrdComCot("SIN ORDEN DE COMPRA");
+            coti.setAvanceCot("SIN AVANCE");
+            coti.setNumFactCot("SIN FACTURAR");
+            coti.setTiempoEntrega(tiempo);
+            Cotizacion.agregarCot(coti); 
+            response.sendRedirect("cotizacion");
+        }
+        if(userPath.equals("/agregar_concp")){
+            int idcot = Integer.parseInt(request.getParameter("idcot"));
+            int inciso = Integer.parseInt(request.getParameter("inciso"));
+            String descon = request.getParameter("descon");
+            float canti = Float.parseFloat(request.getParameter("canti"));
+            String unidad = request.getParameter("unidad");
+            float preciu = Float.parseFloat(request.getParameter("pu"));
+            float importe = canti * preciu;
+            
+            CotDetalleBean cotcon = new CotDetalleBean();
+            cotcon.setIdCot(idcot);
+            cotcon.setIncisoCotDet(inciso);
+            cotcon.setDescCotDet(descon);
+            cotcon.setCantCotDet(canti);
+            cotcon.setUniCotDet(unidad);
+            cotcon.setPrecioUni(preciu);
+            cotcon.setImporteCotDet(importe);
+            
+            Cotizacion.agregarDetalle(cotcon);
+            response.sendRedirect("cotizacion");
+        }
+        
+        if(userPath.equals("/asignar_orden")){
+            String numcotoc = request.getParameter("numcotoc");
+            String orden = request.getParameter("ordenc");
+            
+            Cotizacion.asignarOrdenCompra(numcotoc, orden);
+            response.sendRedirect("cotizacion");
+        }
+        
+        if(userPath.equals("/facturar")){
+            String numcotoc = request.getParameter("numcotfa");
+            String factura = request.getParameter("facturan");
+            String avance = request.getParameter("avance");
+            
+            Cotizacion.agregarFactura(numcotoc, factura, avance);
+            response.sendRedirect("cotizacion");
         }
     }
 }

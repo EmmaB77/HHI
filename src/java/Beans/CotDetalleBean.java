@@ -9,6 +9,7 @@ public class CotDetalleBean {
     private String descCotDet;
     private float cantCotDet;
     private String uniCotDet;
+    private float precioUni;
     private float importeCotDet;
 
     public int getIdCotDet() {
@@ -47,7 +48,7 @@ public class CotDetalleBean {
         return cantCotDet;
     }
 
-    public void setCantCotDet(int cantCotDet) {
+    public void setCantCotDet(float cantCotDet) {
         this.cantCotDet = cantCotDet;
     }
 
@@ -74,4 +75,14 @@ public class CotDetalleBean {
     public void setIdCot(int idCot) {
         this.idCot = idCot;
     }
+
+    public float getPrecioUni() {
+        return precioUni;
+    }
+
+    public void setPrecioUni(float precioUni) {
+        this.precioUni = precioUni;
+    }
+    
+    
 }

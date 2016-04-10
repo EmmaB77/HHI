@@ -3,6 +3,7 @@ package Beans;
 public class UsuarioBean {
     
     private int idUsuario;
+    private int idPersona;
     private PersonaBean persona;
 
     public int getIdUsuario() {
@@ -19,6 +20,14 @@ public class UsuarioBean {
 
     public void setPersona(PersonaBean persona) {
         this.persona = persona;
+    }
+
+    public int getIdPersona() {
+        return idPersona;
+    }
+
+    public void setIdPersona(int idPersona) {
+        this.idPersona = idPersona;
     }
     
     

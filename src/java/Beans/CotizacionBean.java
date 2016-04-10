@@ -16,13 +16,14 @@ public class CotizacionBean {
     private String ordComCot;
     private UsuarioBean usuario;
     private EmpleadoBean empleado;
-    private int avanceCot;
+    private String avanceCot;
     private String estatusCot;
     private String numFactCot;
     private float total;
     private String canLetCot;
     private int iduser;
     private int idemplo;
+    String tiempoEntrega;
 
     public int getIdCot() {
         return idCot;
@@ -120,11 +121,11 @@ public class CotizacionBean {
         this.empleado = empleado;
     }
 
-    public int getAvanceCot() {
+    public String getAvanceCot() {
         return avanceCot;
     }
 
-    public void setAvanceCot(int avanceCot) {
+    public void setAvanceCot(String avanceCot) {
         this.avanceCot = avanceCot;
     }
 
@@ -174,6 +175,14 @@ public class CotizacionBean {
 
     public void setIdemplo(int idemplo) {
         this.idemplo = idemplo;
+    }
+
+    public String getTiempoEntrega() {
+        return tiempoEntrega;
+    }
+
+    public void setTiempoEntrega(String tiempoEntrega) {
+        this.tiempoEntrega = tiempoEntrega;
     }
  
     

@@ -28,6 +28,52 @@
                 $('#tabla_cot').dataTable();
             });
         </script>
+        <script>
+            $(document).ready(function (e) {
+                $('#Concepto').on('show.bs.modal', function (e) {
+                    var id = $(e.relatedTarget).data().id;
+                    $(e.currentTarget).find('#idcot').val(id);
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function (e) {
+                $('#Otros').on('show.bs.modal', function (e) {
+                    var numcot = $(e.relatedTarget).data().cot;
+                    var orden = $(e.relatedTarget).data().orden;
+                    var avance = $(e.relatedTarget).data().avance;
+                    var factura = $(e.relatedTarget).data().facturas;
+                    var usuario = $(e.relatedTarget).data().usuario;
+                    $(e.currentTarget).find('#numcot').val(numcot);
+                    $(e.currentTarget).find('#orden').val(orden);
+                    $(e.currentTarget).find('#avance').val(avance);
+                    $(e.currentTarget).find('#fact').val(factura);
+                    $(e.currentTarget).find('#user').val(usuario);
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function (e) {
+                $('#OrdenComp').on('show.bs.modal', function (e) {
+                    var numcot = $(e.relatedTarget).data().cot;
+                    var usuario = $(e.relatedTarget).data().usuario;
+                    $(e.currentTarget).find('#numcotoc').val(numcot);
+                    $(e.currentTarget).find('#useroc').val(usuario);
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function (e) {
+                $('#Factura').on('show.bs.modal', function (e) {
+                    var numcot = $(e.relatedTarget).data().cot;
+                    var usuario = $(e.relatedTarget).data().usuario;
+                    var factura = $(e.relatedTarget).data().fact;
+                    $(e.currentTarget).find('#numcotfa').val(numcot);
+                    $(e.currentTarget).find('#userfa').val(usuario);
+                    $(e.currentTarget).find('#facturan').val(factura);
+                });
+            });
+        </script>
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-static-top">
@@ -119,17 +165,20 @@
                     <tbody>
                         <c:forEach var="cotizacion" items="${cotizaciones}" varStatus="iter">
                             <tr>
-                                <td>${cotizacion.numCot}</td>
-                                <td>${cotizacion.referencia}</td>
-                                <td>${cotizacion.solCot}</td>
-                                <td>${cotizacion.tituloCot}</td>
-                                <td>${cotizacion.fechaCot}</td>
-                                <td>$ ${cotizacion.montoCot} M.N.</td>
-                                <td>${cotizacion.estatusCot}</td>
+                                <td><h6>${cotizacion.numCot}</h6></td>
+                                <td><h6>${cotizacion.referencia}</h6></td>
+                                <td><h6>${cotizacion.solCot}</h6></td>
+                                <td><h6>${cotizacion.tituloCot}</h6></td>
+                                <td><h6>${cotizacion.fechaCot}</h6></td>
+                                <td><h6>$ ${cotizacion.total} M.N.</h6></td>
+                                <td><h6>${cotizacion.estatusCot}</h6></td>
                                 <td>
-                                    <a href="#=${indirecto.idIndirect}" class="btn btn-sm btn-danger" role="button" title="Eliminar"><i class="glyphicon glyphicon-remove"></i></a>
-                                    <a title="Actualizar / Modificar" data-toggle="modal" href="#" class="btn btn-sm btn-info" role="button" data-target="#Update" data-id="${indirecto.idIndirect}" data-fecha="${indirecto.fechaIndirect}" data-mes="${indirecto.mesIndirect}" data-prov="${indirecto.proveeIndirect}" data-fact="${indirecto.numFactIndirect}" data-desc="${indirecto.descIndirect}" data-subt="${indirecto.subToIndirect}" ><i class="glyphicon glyphicon-floppy-open"></i></a>
-                                    <a href="#=${indirecto.idIndirect}" class="btn btn-sm btn-success" role="button" title="Ver Detalles"><i class="glyphicon glyphicon-eye-open"></i></a>
+                                    <a title="Agregar Concepto" data-toggle="modal" href="#" class="btn btn-sm btn-info" role="button" data-target="#Concepto" data-id="${cotizacion.idCot}"><i class="glyphicon glyphicon-plus"></i></a>
+                                    <a title="Otros Detalles" data-toggle="modal" href="#" class="btn btn-sm btn-warning" role="button" data-target="#Otros" data-cot="${cotizacion.numCot}" data-orden="${cotizacion.ordComCot}" data-avance="${cotizacion.avanceCot}" data-facturas="${cotizacion.numFactCot}" data-usuario="${cotizacion.usuario.persona.nombrePersona}&nbsp;${cotizacion.usuario.persona.apellidoPpersona}&nbsp;${cotizacion.usuario.persona.apellidoMpersona}"><i class="glyphicon glyphicon-eye-open"></i></a>
+                                    <a title="Asignar Orden de Compra" data-toggle="modal" href="#" class="btn btn-sm btn-default" role="button" data-target="#OrdenComp" data-cot="${cotizacion.numCot}" data-usuario="${cotizacion.usuario.persona.nombrePersona}&nbsp;${cotizacion.usuario.persona.apellidoPpersona}&nbsp;${cotizacion.usuario.persona.apellidoMpersona}"><i class="glyphicon glyphicon-star"></i></a>
+                                    <a title="Agregar Factura" data-toggle="modal" href="#" class="btn btn-sm btn-success" role="button" data-target="#Factura" data-cot="${cotizacion.numCot}" data-usuario="${cotizacion.usuario.persona.nombrePersona}&nbsp;${cotizacion.usuario.persona.apellidoPpersona}&nbsp;${cotizacion.usuario.persona.apellidoMpersona}" data-fact="${cotizacion.numFactCot}"><i class="glyphicon glyphicon-copy"></i></a>
+                                    <!--<a href="eliminar_equipo?idEquipo=${equipo.idEquipo}" class="btn btn-sm btn-danger" role="button"><i class="glyphicon glyphicon-remove"></i></a>-->
+                                    <a title="Ver Cotizacion" href="ver_cot?idCoti=${cotizacion.idCot}" class="btn btn-sm btn-info" role="button"><i class="glyphicon glyphicon-file"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -152,38 +201,158 @@
                                 <div class="row form-group">
                                     <div class="col-lg-3">Fecha de Solicitud: <input type="date" class="form-control" id="fechasol" name="fechasol"></div>
                                     <div class="col-lg-3">Fecha de Cotizacion: <input type="date" class="form-control" id="fechacot" name="fechacot"></div>
-                                    <div class="col-lg-3">Orden de Compra: <input type="text" class="form-control" id="ordenC" name="ordenC"></div>
                                     <div class="col-lg-3">Solicitud: <input type="text" class="form-control" id="solCot" name="solCot"></div>
+                                    <div class="col-lg-3">Cotización: <input type="text" class="form-control" id="coti" name="coti"></div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col-lg-3">Cotización: <input type="text" class="form-control" id="coti" name="coti"></div>
-                                    <div class="col-lg-3">Usuario: <select class="form-control" id="usuario" name="usuario"></select></div>
-                                    <div class="col-lg-3">Monto: <input type="text" class="form-control" id="monto" name="monto"></div>
-                                    <div class="col-lg-3">Factura: <input type="text" class="form-control" id="factura" name="factura"></div>
+                                    <div class="col-lg-4">Usuario: 
+                                        <select class="form-control" id="usuario" name="usuario">
+                                            <c:forEach var="usuario" items="${usuarios}" varStatus="iter">
+                                                <option value="${usuario.idUsuario}">${usuario.persona.nombrePersona}&nbsp;${usuario.persona.apellidoPpersona}&nbsp;${usuario.persona.apellidoMpersona}</option>
+                                            </c:forEach>
+                                        </select></div>
+                                    <div class="col-lg-4">Ejecutor: 
+                                        <select class="form-control" id="ejecutor" name="ejecutor">
+                                            <c:forEach var="empleado" items="${empleados}" varStatus="iter">
+                                                <option value="${empleado.idEmpleado}">${empleado.persona.nombrePersona}&nbsp;${empleado.persona.apellidoPpersona}&nbsp;${empleado.persona.apellidoMpersona}</option>
+                                            </c:forEach>
+                                        </select></div>
+                                    <div class="col-lg-3">Estatus: <select class="form-control" name="estatus" id="estatus">
+                                            <option value="Cotizado">Cotizado</option>
+                                            <option value="En Proceso">En Proceso</option>
+                                            <option value="Cancelada">Cancelada</option>
+                                        </select></div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col-lg-6">Descripción:<textarea class="form-control" style="resize:none" id="desc" name="desc"></textarea></div>
-                                    <div class="col-lg-2">Ejecutor: <select class="form-control" id="ejecutor" name="ejecutor"></select></div>
-                                    <div class="col-lg-2">Avance: <input type="texr" class="form-control" id="avance" name="avance"></div>
-                                    <div class="col-lg-2">Estatus: <select class="form-control" name="estatus" id="estatus">
-                                            <option value="...">...</option>
-                                            <option value="Facturado">Facturado</option>
-                                            <option value="Cotizado">Cotizado</option>
-                                            <option value="En Proceso">En Proceso</option>
-                                            <option value="Perdida">Perdida</option>
-                                            <option value="Cancelada">Cancelada</option>
-                                        </select></div>
+                                    <div class="col-lg-3">Tiempo de Entrega: <input type="text" class="form-control" id="timen" name="timen"></div>
                                 </div>
                                 <div><h4>Total</h4></div>
                                 <div class="row form-group">
                                     <div class="col-lg-3">Total: <input type="text" class="form-control" id="totalnum" name="totalnum"></div>
                                     <div class="col-lg-6">Total Letra: <input type="text" class="form-control" id="totaletra" name="totaletra"></div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="summit" class="btn btn-success">Agregar</button>
-                                    <button type="RESET" class="btn btn-info">Limpiar</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="summit" class="btn btn-success">Agregar</button>
+                                <button type="RESET" class="btn btn-info">Limpiar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form class="form" role="form" method="post" action="agregar_concp">
+                <div class="modal fade" id="Concepto">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">Agregar Concepto de Cotización</h3>
+                            </div>
+                            <div class="table container modal-body">
+                                <div class="form-group">
+                                    <div class="col-lg-1">ID:<input type="text" class="form-control" name="idcot" id="idcot" value="" readonly></div>
+                                    <div class="col-lg-2">Inciso:<input type="number" class="form-control" name="inciso" id="inciso" required></div>
+                                    <div class="col-lg-9">Descripcion<input type="text" class="form-control" name="descon" id="descon" required></div>
                                 </div>
+                                <div class="form-group">
+                                    <div class="col-lg-3">Cantidad:<input type="number" class="form-control" name="canti" id="canti" required></div>
+                                    <div class="col-lg-3">Unidad:
+                                        <select class="form-control" name="unidad" id="unidad" required>
+                                            <option value="SERVICIO">SERVICIO</option>
+                                            <option value="PIEZA">PIEZA</option>
+                                            <option value="LOTE">LOTE</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-4">Precio Unitario: <input type="number" class="form-control" name="pu" id="pu" required></div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="summit" class="btn btn-success">Agregar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="modal fade" id="Otros">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h3 class="modal-title">Datos Adicionales</h3>
+                        </div>
+                        <div class="table container modal-body">
+                            <div class="form-group">
+                                <div class="col-lg-3">Cotizacion: <input type="text" class="form-control" name="numcot" id="numcot" readonly value=""></div>
+                                <div class="col-lg-4">Orden de Compra: <input type="text" class="form-control" name="orden" id="orden" readonly value=""></div>
+                                <div class="col-lg-4">Usuario: <input type="text" class="form-control" name="user" id="user" readonly value=""></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-3">Avance: <input type="text" class="form-control" name="avance" id="avance" readonly value=""></div>
+                                <div class="col-lg-4">Facturas: <input type="text" class="form-control" name="fact" id="fact" readonly value=""></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form class="form" role="form" method="post" action="asignar_orden">
+                <div class="modal fade" id="OrdenComp">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">Asignar Orden de Compra</h3>
+                            </div>
+                            <div class="table container modal-body">
+                                <div class="form-group">
+                                    <div class="col-lg-3">Cotizacion: <input type="text" class="form-control" name="numcotoc" id="numcotoc" readonly value=""></div>
+                                    <div class="col-lg-4">Nueva Orden de Compra: <input type="text" class="form-control" name="ordenc" id="ordenc"></div>
+                                    <div class="col-lg-4">Usuario: <input type="text" class="form-control" name="useroc" id="useroc" readonly value=""></div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="summit" class="btn btn-success">Agregar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form class="form" role="form" method="post" action="facturar">
+                <div class="modal fade" id="Factura">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">Agregar Factura a Cotizacion</h3>
+                            </div>
+                            <div class="table container modal-body">
+                                <div class="form-group">
+                                    <div class="col-lg-3">Cotizacion: <input type="text" class="form-control" name="numcotfa" id="numcotfa" readonly value=""></div>
+                                    <div class="col-lg-3">Usuario: <input type="text" class="form-control" name="userfa" id="userfa" readonly value=""></div>
+                                    <div class="col-lg-3">Nueva Factura: <input type="text" class="form-control" name="facturan" id="facturan"></div>
+                                    <div class="col-lg-3">Avance:<select class="form-control" name="avance" id="avance">
+                                            <option value="Avance 10%">Avance 10%</option>
+                                            <option value="Avance 20%">Avance 20%</option>
+                                            <option value="Avance 30%">Avance 30%</option>
+                                            <option value="Avance 40%">Avance 40%</option>
+                                            <option value="Avance 50%">Avance 50%</option>
+                                            <option value="Avance 60%">Avance 60%</option>
+                                            <option value="Avance 70%">Avance 70%</option>
+                                            <option value="Avance 80%">Avance 80%</option>
+                                            <option value="Avance 90%">Avance 90%</option>
+                                            <option value="Terminado 100%">Terminado 100%</option>
+                                        </select> </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="summit" class="btn btn-success">Agregar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
                             </div>
                         </div>
                     </div>
