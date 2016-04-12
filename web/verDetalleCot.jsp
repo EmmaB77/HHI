@@ -3,9 +3,11 @@
     Created on : 22/10/2015, 10:45:03 AM
     Author     : Usuario
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@page import="java.sql.*" %>
+<%@page import="Conexion.Conexion" %>
+<%@page import="Modelo.Cotizacion" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -41,14 +43,14 @@
                             <a class="dropdown-toggle" href="#" data-toggle="dropdown" >Cotización</a> 
                             <ul class="dropdown-menu">
                                 <li><a href="cotizacion">Ver Cotizaciones</a></li> 
-                                <li><a href="agregarCot.jsp">Agregar Nueva Cotización</a></li> 
+                                <li><a href="#">Agregar Nueva Cotización</a></li> 
                             </ul> 
                         </li>
                         <li class="dropdown"> 
                             <a class="dropdown-toggle" href="#" data-toggle="dropdown" >Control de Proyectos</a> 
                             <ul class="dropdown-menu"> 
-                                <li><a href="proyecto.jsp">Ver Proyectos</a></li> 
-                                <li><a href="agregarProyecto.jsp">Agregar Nuevo Proyecto</a></li>
+                                <li><a href="#">Ver Proyectos</a></li> 
+                                <li><a href="#">Agregar Nuevo Proyecto</a></li>
                                 <li class="divider"></li>
                                 <li><a href="indirecto">Gastos Indirectos</a></li>
                                 <li><a href="inversion">Inversión en Herramienta</a></li>
@@ -94,104 +96,93 @@
                     <img src="img/encabezado.jpg" class="img-responsive img-rounded" align="center">
                 </div>
             </div><br>
-            <div class="table" align="right">
-                <div class="row">
-                    <div class="col-lg-7"></div>
-                    <div class="col-lg-5"><b>Santiago de Querétaro, Qro. a 22 de Octubre de 2015</b></div>
+            <c:forEach var="cotizacion" items="${cotizaciones}" varStatus="iter">
+                <div class="table" align="right">
+                    <div class="row">
+                        <div class="col-xs-7"></div>
+                        <div class="col-xs-5"><b>Santiago de Querétaro, Qro. a ${cotizacion.fechaCot}</b></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-9"></div>
+                        <div class="col-xs-3"><b>Cot. No: ${cotizacion.numCot}</b></div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-xs-7"></div>
+                        <div class="col-xs-5"><b>AT'N: ING. LILIANA MEHTA</b></div>
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-9"></div>
-                    <div class="col-lg-3"><b>Cot. No: I0666-15</b></div>
-                </div><br>
-                <div class="row">
-                    <div class="col-lg-7"></div>
-                    <div class="col-lg-5"><b>AT'N: ING. JORGE ARTURO GARCÍA</b></div>
+                <div class="table" align="left">
+                    <div class="row">
+                        <div class="col-xs-6"><b>CLIENTE: INDORAMA VENTURES</b></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3"><b>REF:</b> ${cotizacion.referencia}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3"><b>SOL COT:</b> ${cotizacion.solCot}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-5"><b>USUARIO:</b> ING. ${cotizacion.usuario.persona.nombrePersona}&nbsp;${cotizacion.usuario.persona.apellidoPpersona}</div>
+                    </div>
                 </div>
-            </div>
-            <div class="table" align="left">
-                <div class="row">
-                    <div class="col-lg-3"><b>CLIENTE: INDORAMA VENTURES</b></div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3"><b>REF:</b> SIN REFERENCIA</div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3"><b>SOL COT:</b> SIN SOL COT</div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3"><b>USUARIO:</b> ING. J. CARMEN AGUILAR</div>
-                </div>
-            </div>
-            <div class="table" align="center">
-                <div class="row">
-                    <div class="col-lg-12"><b>COTIZACIÓN REFERENTE AL SIGUIENTE SERVICIO</b></div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12" style="font-size: 150%"><b>INSTALACION DE SOPORTE PARA MOTOR</b></div>
-                </div>
-            </div><br>
-            <div class="table">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th style="color: #1C77D8"><b>ID</b></th>
-                            <th class="col-lg-6" style="color: #1C77D8"><b>DESCRIPCIÓN</b></th>
-                            <th style="color: #1C77D8"><b>CANTIDAD</b></th>
-                            <th style="color: #1C77D8"><b>UNIDAD</b></th>
-                            <th style="color: #1C77D8"><b>IMPORTE</b></th>
-                            <th style="color: #1C77D8"><b>TOTAL</b></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td><b>Instalacion de base para motor en el area z666</b></td>
-                            <td>2</td>
-                            <td>PIEZAS</td>
-                            <td>$78,000</td>
-                            <td>$156,000</td>
-                        </tr>
-                        <tr>
-                            <td>1.-</td>
-                            <td>Armazon de Acero Inoxidable</td>
-                            <td>2</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>2.-</td>
-                            <td>Soldadura de bases</td>
-                            <td>2</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                <div class="table" align="center">
+                    <div class="row">
+                        <div class="col-xs-12"><b>COTIZACIÓN REFERENTE AL SIGUIENTE SERVICIO</b></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12" style="font-size: 150%"><b>${cotizacion.tituloCot}</b></div>
+                    </div><br><br>
+                    <div class="table table-bordered row" align="left">
+                        <div class="col-xs-4"><b>Descripcion:</b></div>
+                        <div class="col-xs-8">${cotizacion.descCot}</div>
+                    </div>
+                </div><br></c:forEach>
+                <div class="table">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="color: #1C77D8"><h5><b>ID</b></h5></th>
+                                <th class="col-xs-6" style="color: #1C77D8"><h5><b>DESCRIPCIÓN</b></h5></th>
+                                <th style="color: #1C77D8"><h5><b>CANTIDAD</b></h5></th>
+                                <th style="color: #1C77D8"><h5><b>UNIDAD</b></h5></th>
+                                <th style="color: #1C77D8"><h5><b>PRECIO UNITARIO</h5></b></th>
+                                <th style="color: #1C77D8"><h5><b>TOTAL</b></h5></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="detalle" items="${detalles}" varStatus="iter">
+                            <tr>
+                                <td><h5>${detalle.incisoCotDet}</h5></td>
+                                <td><h5><b>${detalle.descCotDet}</h5></b></td>
+                                <td><h5>${detalle.cantCotDet}</h5></td>
+                                <td><h5>${detalle.uniCotDet}</h5></td>
+                                <td><h5>$ ${detalle.precioUni}</h5></td>
+                                <td><h5>$ ${detalle.importeCotDet}</h5></td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
             </div><br>
             <div class="table table-bordered" style="background-color: #a9b6d0">
-                <div class="row">
-                    <div class="col-lg-3"></div>
-                    <div class="col-lg-3" style="font-size: 150%"><b>COSTO DE LA OFERTA</b></div>
-                    <div class="col-lg-3" style="font-size: 150%"><b>$156,000</b></div>
-                    <div class="col-lg-3"></div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3"></div>
-                    <div class="col-lg-6"><b>(CIENTO CINCUENTA Y SEIS MIL PESOS 00/100 M.N.)</b></div>
-                </div>
-            </div><br>
-            <div class="table" align="left">
-                <div class="row">
-                    <div class="col-lg-3"><b>PRECIO MAS EL 16% DE IVA</b></div>
-                </div>
-            </div>
-            <div class="table" align="left" style="background-color: #1C77D8">
-                <div class="row">
-                    <div class="col-lg-3"><b>TIEMPO DE ENTREGA: 2 SEMANAS</b></div>
-                </div>
-            </div>
+                <c:forEach var="cotizacion" items="${cotizaciones}" varStatus="iter">
+                    <div class="row">
+                        <div class="col-xs-3"></div>
+                        <div class="col-xs-6" style="font-size: 100%"><b>COSTO TOTAL DE LA OFERTA $ ${cotizacion.total} M.N.</b></div>
+                        <div class="col-xs-3"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3"></div>
+                        <div class="col-xs-6"><b>(${cotizacion.canLetCot}/100 M.N.)</b></div>
+                    </div>
+                </div><br>
+                    <div class="row" align="left">
+                        <div class="col-xs-6"><h6><b>PRECIO MAS EL 16% DE IVA</b></h6></div>
+                    </div>
+                <div class="table" align="left" style="background-color: #1C77D8">
+                    <div class="row">
+                        <div class="col-xs-6"><h6><b>TIEMPO DE ENTREGA: ${cotizacion.tiempoEntrega}</b></h6></div>
+                    </div>
+                </div></c:forEach>
             <div class="table" align="left">
                 <table class="table-bordered">
                     <thead>
@@ -202,20 +193,20 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1.-</td>
-                            <td>ESTE PRESUPUESTO ESTA BASADO EN PRECIOS UNITARIOS EN TIEMPO NORMAL DE LUNES A VIERNES DE LAS 7:00 a.m. A LAS 6:00 p.m., EL TIEMPO EXTRA SE COBRARA POR SEPARADO.</td>
+                            <td><h6>1.-</h6></td>
+                            <td><h6>ESTE PRESUPUESTO ESTA BASADO EN PRECIOS UNITARIOS EN TIEMPO NORMAL DE LUNES A VIERNES DE LAS 7:00 a.m. A LAS 6:00 p.m., EL TIEMPO EXTRA SE COBRARA POR SEPARADO.</h6></td>
                         </tr>
                         <tr>
-                            <td>2.-</td>
-                            <td>EL INCREMENTO EN EL COSTO DE LOS MATERIALES MAYOR AL 3%, INVALIDARA ESTA COTIZACIÓN.</td>
+                            <td><h6>2.-</h6></td>
+                            <td><h6>EL INCREMENTO EN EL COSTO DE LOS MATERIALES MAYOR AL 3%, INVALIDARA ESTA COTIZACIÓN.</h6></td>
                         </tr>
                         <tr>
-                            <td>3.-</td>
-                            <td>CUALQUIER TRABAJO ADICIONAL FUERA DE EL ALCANCE DE ESTE PRESUPUESTO SE NEGOCIARA CON EL CLIENTE Y SE COSTEARÁ POR SEPARADO.</td>
+                            <td><h6>3.-</h6></td>
+                            <td><h6>CUALQUIER TRABAJO ADICIONAL FUERA DE EL ALCANCE DE ESTE PRESUPUESTO SE NEGOCIARA CON EL CLIENTE Y SE COSTEARÁ POR SEPARADO.</h6></td>
                         </tr>
                         <tr>
-                            <td>4.-</td>
-                            <td>CONDICIONES DE PAGO:  25 DÍAS CONTRA AVANCES</td>
+                            <td><h6>4.-</h6></td>
+                            <td><h6>CONDICIONES DE PAGO:  25 DÍAS CONTRA AVANCES</h6></td>
                         </tr>
                     </tbody>
                 </table>

@@ -47,7 +47,7 @@ public class ControladorCotizacion extends HttpServlet {
             int idCot = Integer.parseInt(request.getParameter("idCoti"));
             List<CotizacionBean> listaCot;
             listaCot = Cotizacion.obtenerCotizacion(idCot);
-            varSesion.setAttribute("cotizacion", listaCot);
+            varSesion.setAttribute("cotizaciones", listaCot);
             List<CotDetalleBean> listaDet;
             listaDet = Cotizacion.obtenerDetallesCot(idCot);
             varSesion.setAttribute("detalles", listaDet);

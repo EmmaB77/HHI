@@ -174,6 +174,7 @@
                                                     <option value="Por Reparar">Por Reparar</option>
                                                     <option value="Prestada">Prestado</option>
                                                     <option value="Reemplazar">Reemplazar</option>
+                                                    <OPTION value="Perdida">Perdida</OPTION>
                                                 </select></div>
                                         </div>
                                     </div>
