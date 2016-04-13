@@ -18,7 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "ControladorCotizacion", urlPatterns = {"/ControladorCotizacion", "/cotizacion", "/agregar_cot", "/agregar_concp", "/asignar_orden", "/facturar", "/ver_cot"})
+@WebServlet(name = "ControladorCotizacion", urlPatterns = {"/ControladorCotizacion", "/cotizacion", "/agregar_cot", "/agregar_concp", "/asignar_orden", "/facturar", 
+    "/ver_cot", "/mod_cot", "/eliminarDet", "/eliminar_cot", "/modificar_cot", "/modificar_det"})
 public class ControladorCotizacion extends HttpServlet {
 
     @Override
@@ -52,8 +53,33 @@ public class ControladorCotizacion extends HttpServlet {
             listaDet = Cotizacion.obtenerDetallesCot(idCot);
             varSesion.setAttribute("detalles", listaDet);
             response.sendRedirect("verDetalleCot.jsp");
-        } else {
-            System.out.println("No se puede");
+        }
+        if (userPath.equals("/mod_cot")) {
+            int idCot = Integer.parseInt(request.getParameter("idCoti"));
+            List<CotizacionBean> listaCot;
+            listaCot = Cotizacion.obtenerCotizacion(idCot);
+            varSesion.setAttribute("cotizaciones", listaCot);
+            List<CotDetalleBean> listaDet;
+            listaDet = Cotizacion.obtenerDetallesCot(idCot);
+            varSesion.setAttribute("detalles", listaDet);
+            List<EmpleadoBean> listaEmpleados;
+            listaEmpleados = Empleado.listarEmpleados();
+            varSesion.setAttribute("empleados", listaEmpleados);
+            List<UsuarioBean> listaUsuarios;
+            listaUsuarios = Solicitante.listarUsuarios();
+            varSesion.setAttribute("usuarios", listaUsuarios);
+            response.sendRedirect("modificarCotizacion.jsp");
+        }
+        if(userPath.equals("/eliminar_cot")){
+            int idCot = Integer.parseInt(request.getParameter("idCoti"));
+            Cotizacion.eliminarCot(idCot);
+            response.sendRedirect("cotizacion");
+        }
+        if(userPath.equals("/eliminar_det")){
+            int idCot = Integer.parseInt(request.getParameter("idCoti"));
+            int idDet = Integer.parseInt(request.getParameter("idDetCot"));
+            Cotizacion.eliminarDetalle(idDet);
+            response.sendRedirect("cotizacion?idCoti="+idCot);
         }
     }
 

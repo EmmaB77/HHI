@@ -73,8 +73,60 @@ public class Cotizacion {
         }
         return status;
     }
+    
+    public static int modificarCot(int idcoti, CotizacionBean cotizac) {
+        int status = 0;
+        Connection con = Conexion.getConnetion();
+        PreparedStatement ps;
+        String query = "update COTIZACION set NUM_COT=?, FECHA_SOL=?, SOL_COT=?, REFERENCIA=?, TITULO=?, DESCRIPCION=?, FECHA_COT=?, ID_USUARIO=?, ID_EMPLEADO=?, STATUS=?,\n"
+                + "TOTAL=?, CANTIDAD_LETRA=?, TIEMPO_ENTREGA=?;";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setObject(1, cotizac.getNumCot());
+            ps.setObject(2, cotizac.getFechaSolCot());
+            ps.setObject(3, cotizac.getSolCot());
+            ps.setObject(4, cotizac.getReferencia());
+            ps.setObject(5, cotizac.getTituloCot());
+            ps.setObject(6, cotizac.getDescCot());
+            ps.setObject(7, cotizac.getFechaCot());
+            ps.setObject(8, cotizac.getIduser());
+            ps.setObject(9, cotizac.getIdemplo());
+            ps.setObject(10, cotizac.getEstatusCot());
+            ps.setObject(11, cotizac.getTotal());
+            ps.setObject(12, cotizac.getCanLetCot());
+            ps.setObject(13, cotizac.getTiempoEntrega());
+            status = ps.executeUpdate();
+            System.out.println("Exito Cotizacion Modificada");
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return status;
+    }
+    
+    public static int modDetalle(int idCotDet, CotDetalleBean coti) {
+        int status = 0;
+        Connection con = Conexion.getConnetion();
+        PreparedStatement ps;
+        String query = "update detalle_cot set inciso=?, desc_detail=?, cantidad=?, unidad=?, precio_u=?, importe=? where id_detal_c="+idCotDet+";";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setObject(1, coti.getIncisoCotDet());
+            ps.setObject(2, coti.getDescCotDet());
+            ps.setObject(3, coti.getCantCotDet());
+            ps.setObject(4, coti.getUniCotDet());
+            ps.setObject(5, coti.getPrecioUni());
+            ps.setObject(6, coti.getImporteCotDet());
+            status = ps.executeUpdate();
+            System.out.println("Exito: Concepto Modificado");
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return status;
+    }
 
-    public static int eliminar(int idCot) {
+    public static int eliminarCot(int idCot) {
         int status = 0;
         Connection cn = Conexion.getConnetion();
         PreparedStatement ps;
@@ -82,6 +134,22 @@ public class Cotizacion {
         try {
             ps = cn.prepareStatement(query);
             ps.setObject(1, idCot);
+            status = ps.executeUpdate();
+            cn.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return status;
+    }
+    
+    public static int eliminarDetalle(int idCotDet) {
+        int status = 0;
+        Connection cn = Conexion.getConnetion();
+        PreparedStatement ps;
+        String query = "delete from detalle_cot where id_detal_c=?";
+        try {
+            ps = cn.prepareStatement(query);
+            ps.setObject(1, idCotDet);
             status = ps.executeUpdate();
             cn.close();
         } catch (SQLException e) {
@@ -162,16 +230,18 @@ public class Cotizacion {
         Connection con = Conexion.getConnetion();
         List<CotizacionBean> lista = new ArrayList<>();
         PreparedStatement ps;
-        String query = "Select NUM_COT, REFERENCIA, SOL_COT, TITULO, FECHA_COT, TOTAL, ID_USUARIO, TIEMPO_ENTREGA, DESCRIPCION, CANTIDAD_LETRA from cotizacion where id_coti="+idCot+";";
+        String query = "Select ID_COTI, NUM_COT, REFERENCIA, SOL_COT, TITULO, FECHA_SOL, FECHA_COT, TOTAL, ID_USUARIO, TIEMPO_ENTREGA, DESCRIPCION, CANTIDAD_LETRA from cotizacion where id_coti="+idCot+";";
         try {
             ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 CotizacionBean cotizac = new CotizacionBean();
+                cotizac.setIdCot(rs.getInt("ID_COTI"));
                 cotizac.setNumCot(rs.getString("NUM_COT"));
                 cotizac.setReferencia(rs.getString("REFERENCIA"));
                 cotizac.setSolCot(rs.getString("SOL_COT"));
                 cotizac.setTituloCot(rs.getString("TITULO"));
+                cotizac.setFechaSolCot(rs.getString("FECHA_SOL"));
                 cotizac.setFechaCot(rs.getString("FECHA_COT"));
                 cotizac.setTotal(rs.getFloat("TOTAL"));
                 cotizac.setIduser(rs.getInt("ID_USUARIO"));
@@ -193,12 +263,13 @@ public class Cotizacion {
         Connection con = Conexion.getConnetion();
         List<CotDetalleBean> lista = new ArrayList<>();
         PreparedStatement ps;
-        String query = "Select INCISO, DESC_DETAIL, CANTIDAD, UNIDAD, PRECIO_U, IMPORTE from detalle_cot where id_coti="+idCot+";";
+        String query = "Select ID_DETAL_C, INCISO, DESC_DETAIL, CANTIDAD, UNIDAD, PRECIO_U, IMPORTE from detalle_cot where id_coti="+idCot+";";
         try {
             ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 CotDetalleBean cotizac = new CotDetalleBean();
+                cotizac.setIdCotDet(rs.getInt("ID_DETAL_C"));
                 cotizac.setIncisoCotDet(rs.getInt("INCISO"));
                 cotizac.setDescCotDet(rs.getString("DESC_DETAIL"));
                 cotizac.setCantCotDet(rs.getFloat("CANTIDAD"));
