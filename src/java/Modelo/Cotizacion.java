@@ -130,11 +130,12 @@ public class Cotizacion {
         int status = 0;
         Connection cn = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "delete from cotizacion where idCoti=?";
+        String query = "delete from cotizacion where id_coti=?";
         try {
             ps = cn.prepareStatement(query);
             ps.setObject(1, idCot);
             status = ps.executeUpdate();
+            System.out.println("Eliminada Cotizacion con ID: "+idCot);
             cn.close();
         } catch (SQLException e) {
             System.out.println(e);
@@ -151,6 +152,7 @@ public class Cotizacion {
             ps = cn.prepareStatement(query);
             ps.setObject(1, idCotDet);
             status = ps.executeUpdate();
+            System.out.println("Eliminado Concepto ID:"+idCotDet);
             cn.close();
         } catch (SQLException e) {
             System.out.println(e);
@@ -263,13 +265,14 @@ public class Cotizacion {
         Connection con = Conexion.getConnetion();
         List<CotDetalleBean> lista = new ArrayList<>();
         PreparedStatement ps;
-        String query = "Select ID_DETAL_C, INCISO, DESC_DETAIL, CANTIDAD, UNIDAD, PRECIO_U, IMPORTE from detalle_cot where id_coti="+idCot+";";
+        String query = "Select ID_DETAL_C, ID_COTI, INCISO, DESC_DETAIL, CANTIDAD, UNIDAD, PRECIO_U, IMPORTE from detalle_cot where id_coti="+idCot+";";
         try {
             ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 CotDetalleBean cotizac = new CotDetalleBean();
                 cotizac.setIdCotDet(rs.getInt("ID_DETAL_C"));
+                cotizac.setIdCot(rs.getInt("ID_COTI"));
                 cotizac.setIncisoCotDet(rs.getInt("INCISO"));
                 cotizac.setDescCotDet(rs.getString("DESC_DETAIL"));
                 cotizac.setCantCotDet(rs.getFloat("CANTIDAD"));

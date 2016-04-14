@@ -112,10 +112,11 @@
                     <img src="img/encabezado.jpg" class="img-responsive img-rounded" align="center">
                 </div>
             </div><br>
-            <form class="form" role="form" method="post" action="agregar_cot">
+            <form class="form" role="form" method="post" action="modificar_cot">
                 <div class="table container">
                     <c:forEach var="cotizacion" items="${cotizaciones}" varStatus="iter">
                         <div class="row form-group">
+                            <div class="col-lg-2">ID Cotizacion <input type="text" class="form-control" id="idCoti" name="idCoti" value="${cotizacion.idCot}"></div>
                             <div class="col-lg-6">Título:<input type="text" class="form-control" id="titulo" name="titulo" value="${cotizacion.tituloCot}"></div>
                             <div class="col-lg-4">Referencia: <input type="text" class="form-control" id="referencia" name="referencia" value=" ${cotizacion.referencia}"></div>
                         </div>
@@ -182,7 +183,7 @@
                                 <td>
                                     <a title="Modificar Concepto" data-toggle="modal" href="#" class="btn btn-sm btn-success" role="button" data-target="#Concepto" data-id="${detalle.idCotDet}" data-inc="${detalle.incisoCotDet}" data-desc="${detalle.descCotDet}" data-cant="${detalle.cantCotDet}" 
                                        data-uni="${detalle.uniCotDet}" data-prec="${detalle.precioUni}"><i class="glyphicon glyphicon-file"></i></a>
-                                    <a title="Eliminar Detalle" href="eliminarDet?idDetCot=${detalle.idCotDet}" class="btn btn-sm btn-danger" role="button"><i class="glyphicon glyphicon-remove"></i></a>
+                                    <a title="Eliminar Detalle" href="eliminar_det?idDetCot=${detalle.idCotDet}&idCoti=${detalle.idCot}" class="btn btn-sm btn-danger" role="button"><i class="glyphicon glyphicon-remove"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>

@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "ControladorCotizacion", urlPatterns = {"/ControladorCotizacion", "/cotizacion", "/agregar_cot", "/agregar_concp", "/asignar_orden", "/facturar", 
-    "/ver_cot", "/mod_cot", "/eliminarDet", "/eliminar_cot", "/modificar_cot", "/modificar_det"})
+    "/ver_cot", "/mod_cot", "/eliminar_det", "/eliminar_cot", "/modificar_cot", "/modificar_det"})
 public class ControladorCotizacion extends HttpServlet {
 
     @Override
@@ -79,7 +79,7 @@ public class ControladorCotizacion extends HttpServlet {
             int idCot = Integer.parseInt(request.getParameter("idCoti"));
             int idDet = Integer.parseInt(request.getParameter("idDetCot"));
             Cotizacion.eliminarDetalle(idDet);
-            response.sendRedirect("cotizacion?idCoti="+idCot);
+            response.sendRedirect("mod_cot?idCoti="+idCot);
         }
     }
 
@@ -167,5 +167,42 @@ public class ControladorCotizacion extends HttpServlet {
             Cotizacion.agregarFactura(numcotoc, factura, avance);
             response.sendRedirect("cotizacion");
         }
+        if (userPath.equals("/modificar_cot")) {
+            int idCot = Integer.parseInt(request.getParameter("idCoti"));
+            String fecsol = request.getParameter("fechasol");
+            String solcot = request.getParameter("solCot");
+            String refer = request.getParameter("referencia");
+            String title = request.getParameter("titulo");
+            String numcot = request.getParameter("coti");
+            String desc = request.getParameter("desc");
+            String fecot = request.getParameter("fechacot");
+            int iduser = Integer.parseInt(request.getParameter("usuario"));
+            int idemp = Integer.parseInt(request.getParameter("ejecutor"));
+            String status = request.getParameter("estatus");
+            float total = Float.parseFloat(request.getParameter("totalnum"));
+            String totaletra = request.getParameter("totaletra");
+            String tiempo = request.getParameter("timen");
+            
+            System.out.println("Usuario: "+iduser);
+            System.out.println("Empleado: "+idemp);
+
+            CotizacionBean coti = new CotizacionBean();
+            coti.setFechaSolCot(fecsol);
+            coti.setSolCot(solcot);
+            coti.setReferencia(refer);
+            coti.setTituloCot(title);
+            coti.setNumCot(numcot);
+            coti.setDescCot(desc);
+            coti.setFechaCot(fecot);
+            coti.setIduser(iduser);
+            coti.setIdemplo(idemp);
+            coti.setEstatusCot(status);
+            coti.setTotal(total);
+            coti.setCanLetCot(totaletra);
+            coti.setTiempoEntrega(tiempo);
+            Cotizacion.modificarCot(idCot, coti);
+            response.sendRedirect("ver_cot?idCoti="+idCot);
+        }
+        
     }
 }
