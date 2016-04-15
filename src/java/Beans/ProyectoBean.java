@@ -5,6 +5,7 @@ public class ProyectoBean {
     private int idProyecto;
     private String nombreProyecto;
     private EmpresaBean empresa;
+    private int idEmpresa;
     private String ordenComProyecto;
     private String requiProyecto;
     private String fehaIProyecto;
@@ -118,6 +119,14 @@ public class ProyectoBean {
 
     public void setUtilidadProyecto(int utilidadProyecto) {
         this.utilidadProyecto = utilidadProyecto;
+    }
+
+    public int getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(int idEmpresa) {
+        this.idEmpresa = idEmpresa;
     }
     
     
