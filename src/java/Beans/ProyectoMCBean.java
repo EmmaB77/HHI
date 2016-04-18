@@ -1,9 +1,10 @@
 package Beans;
 
 public class ProyectoMCBean {
-    
+
     private int idMatCon;
     private ProyectoBean proyecto;
+    private int idProyecto;
     private String fechaFactMatCon;
     private String preveedorMatCon;
     private String numFactMatCon;
@@ -11,6 +12,9 @@ public class ProyectoMCBean {
     private float subtMatCon;
     private float ivaMatCon;
     private float totalMatCon;
+    private float totalParcialMC;
+    private float totalIvaMC;
+    private float totalMC;
 
     public int getIdMatCon() {
         return idMatCon;
@@ -83,6 +87,38 @@ public class ProyectoMCBean {
     public void setTotalMatCon(float totalMatCon) {
         this.totalMatCon = totalMatCon;
     }
-    
+
+    public int getIdProyecto() {
+        return idProyecto;
+    }
+
+    public void setIdProyecto(int idProyecto) {
+        this.idProyecto = idProyecto;
+    }
+
+    public float getTotalParcialMC() {
+        return totalParcialMC;
+    }
+
+    public void setTotalParcialMC(float totalParcialMC) {
+        this.totalParcialMC = totalParcialMC;
+    }
+
+    public float getTotalIvaMC() {
+        return totalIvaMC;
+    }
+
+    public void setTotalIvaMC(float totalIvaMC) {
+        this.totalIvaMC = totalIvaMC;
+    }
+
+    public float getTotalMC() {
+        return totalMC;
+    }
+
+    public void setTotalMC(float totalMC) {
+        this.totalMC = totalMC;
+    }
+
     
 }

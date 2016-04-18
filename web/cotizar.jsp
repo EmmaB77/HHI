@@ -96,14 +96,12 @@
                             <a class="dropdown-toggle" href="#" data-toggle="dropdown" >Cotización</a> 
                             <ul class="dropdown-menu">
                                 <li><a href="cotizacion">Ver Cotizaciones</a></li> 
-                                <li><a href="agregarCot.jsp">Agregar Nueva Cotización</a></li> 
                             </ul> 
                         </li>
                         <li class="dropdown"> 
                             <a class="dropdown-toggle" href="#" data-toggle="dropdown" >Control de Proyectos</a> 
                             <ul class="dropdown-menu"> 
-                                <li><a href="proyecto.jsp">Ver Proyectos</a></li> 
-                                <li><a href="agregarProyecto.jsp">Agregar Nuevo Proyecto</a></li>
+                                <li><a href="proyecto">Ver Proyectos</a></li> 
                                 <li class="divider"></li>
                                 <li><a href="indirecto">Gastos Indirectos</a></li>
                                 <li><a href="inversion">Inversión en Herramienta</a></li>
@@ -179,7 +177,7 @@
                                     <a title="Agregar Factura" data-toggle="modal" href="#" class="btn btn-sm btn-success" role="button" data-target="#Factura" data-cot="${cotizacion.numCot}" data-usuario="${cotizacion.usuario.persona.nombrePersona}&nbsp;${cotizacion.usuario.persona.apellidoPpersona}&nbsp;${cotizacion.usuario.persona.apellidoMpersona}" data-fact="${cotizacion.numFactCot}"><i class="glyphicon glyphicon-copy"></i></a>
                                     <a title="Eliminar Cotizacion" href="eliminar_cot?idCoti=${cotizacion.idCot}" class="btn btn-sm btn-danger" role="button"><i class="glyphicon glyphicon-remove"></i></a>
                                     <a title="Ver Cotizacion" href="ver_cot?idCoti=${cotizacion.idCot}" class="btn btn-sm btn-info" role="button"><i class="glyphicon glyphicon-file"></i></a>
-                                    <a title="Modificar Cotizacion" href="mod_cot?idCoti=${cotizacion.idCot}" class="btn btn-sm btn-success" role="button"><i class="glyphicon glyphicon-comment"></i></a>
+                                    <a title="Modificar Cotizacion" href="mod_cot?idCoti=${cotizacion.idCot}" class="btn btn-sm btn-success" role="button"><i class="glyphicon glyphicon-edit"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>

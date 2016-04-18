@@ -65,14 +65,12 @@
                             <a class="dropdown-toggle" href="#" data-toggle="dropdown" >Cotización</a> 
                             <ul class="dropdown-menu">
                                 <li><a href="cotizacion">Ver Cotizaciones</a></li> 
-                                <li><a href="agregarCot.jsp">Agregar Nueva Cotización</a></li> 
                             </ul> 
                         </li>
                         <li class="dropdown"> 
                             <a class="dropdown-toggle" href="#" data-toggle="dropdown" >Control de Proyectos</a> 
                             <ul class="dropdown-menu"> 
-                                <li><a href="proyecto.jsp">Ver Proyectos</a></li> 
-                                <li><a href="agregarProyecto.jsp">Agregar Nuevo Proyecto</a></li>
+                                <li><a href="proyecto">Ver Proyectos</a></li> 
                                 <li class="divider"></li>
                                 <li><a href="indirecto">Gastos Indirectos</a></li>
                                 <li><a href="inversion">Inversión en Herramienta</a></li>

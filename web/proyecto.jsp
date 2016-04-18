@@ -3,13 +3,16 @@
     Created on : 23/10/2015, 07:39:05 AM
     Author     : Usuario
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.sql.*" %>
+<%@page import="Conexion.Conexion" %>
+<%@page import="Modelo.Proyecto" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Proyectos</title>
+        <title>Cotizacion</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -48,14 +51,12 @@
                             <a class="dropdown-toggle" href="#" data-toggle="dropdown" >Cotización</a> 
                             <ul class="dropdown-menu">
                                 <li><a href="cotizacion">Ver Cotizaciones</a></li> 
-                                <li><a href="agregarCot.jsp">Agregar Nueva Cotización</a></li> 
                             </ul> 
                         </li>
                         <li class="dropdown"> 
                             <a class="dropdown-toggle" href="#" data-toggle="dropdown" >Control de Proyectos</a> 
                             <ul class="dropdown-menu"> 
                                 <li><a href="proyecto.jsp">Ver Proyectos</a></li> 
-                                <li><a href="agregarProyecto.jsp">Agregar Nuevo Proyecto</a></li>
                                 <li class="divider"></li>
                                 <li><a href="indirecto">Gastos Indirectos</a></li>
                                 <li><a href="inversion">Inversión en Herramienta</a></li>
@@ -97,32 +98,74 @@
         </nav>
         <div class="container">
             <h3>Proyecto</h3>
-            <button type="button" class="btn btn-success" onclick="location.href = 'agregarCot.jsp'"> <i class="glyphicon glyphicon-plus"></i> Agregar Cotizacion</button>
+            <div><a data-toggle="modal" href="#AgregarPro" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Agregar Proyecto</a></div>
             <br><br>
             <div class="table-responsive">
                 <table class="table" id="tabla_proy" name="proyectos">
                     <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th>Cliente</th>
                             <th>Orden de compra</th>
-                            <th>Requision</th>
+                            <th>Requisión</th>
+                            <th>Presupuesto</th>
+                            <th>Disponible</th>
                             <th>Fecha Inicio</th>
-                            <th>Editar</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <td>CONSTRUCION E INSTALACION DE PUERTA</td>
-                    <td>INDORAMA VENTURES</td>
-                    <td>8500003666</td>
-                    <td>1600598566/0001</td>
-                    <td>2015-10-13</td>
-                    <td>
-                        <a href="modificar_cita?id_cita=${cita.idCita}" class="btn btn-sm btn-primary" role="button"><i class="glyphicon glyphicon-edit"></i></a>
-                        <a href="eliminar_cita?id_cita=${cita.idCita}" class="btn btn-sm btn-danger" role="button"><i class="glyphicon glyphicon-remove"></i></a>
-                    </td>
+                        <c:forEach var="proyecto" items="${proyectos}" varStatus="iter">
+                            <tr>
+                                <td>${proyecto.nombreProyecto}</td>
+                                <td>${proyecto.ordenComProyecto}</td>
+                                <td>${proyecto.requiProyecto}</td>
+                                <td>$ ${proyecto.presupuestoProyecto}</td>
+                                <td>$ ${proyecto.dispProyecto}</td>
+                                <td>${proyecto.fehaIProyecto}</td>
+                                <td>
+                                    <a title="Agregar Material Directo" data-toggle="modal" href="#" class="btn btn-sm btn-info" role="button" data-target="#Directo" data-id="${proyecto.idProyecto}"><i class="glyphicon glyphicon-plus"></i></a>
+                                    <a title="Agregar Material Consumo" data-toggle="modal" href="#" class="btn btn-sm btn-success" role="button" data-target="#Consumo" data-id="${proyecto.idProyecto}"><i class="glyphicon glyphicon-plus"></i></a>
+                                    <a title="Agregar Indirecto" data-toggle="modal" href="#" class="btn btn-sm btn-primary" role="button" data-target="#Indirecto" data-id="${proyecto.idProyecto}"><i class="glyphicon glyphicon-plus"></i></a>
+                                    <a title="Agregar Mano de Obra" data-toggle="modal" href="#" class="btn btn-sm btn-warning" role="button" data-target="#Mano_Obra" data-id="${proyecto.idProyecto}"><i class="glyphicon glyphicon-plus"></i></a>
+                                </td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
-            </div></div>
+            </div>
+            <form class="form" role="form" method="post" action="agregar_proy">
+                <div class="modal fade" id="AgregarPro">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">Agregar Proyecto</h3>
+                            </div>
+                            <div class="table container modal-body">
+                                <div class="row form-group">
+                                    <div class="col-lg-6">Nombre Proyecto:<input type="text" class="form-control" id="titulo" name="titulo"></div>
+                                    <div class="col-lg-3">Orden de Compra<input type="text" class="form-control" id="orden" name="orden"></div>
+                                    <div class="col-lg-3">Requisición<input type="text" class="form-control" id="requisicion" name="requisicion"></div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-lg-5">Fecha Inicio<input type="date" class="form-control" id="fechai" name="fechai"></div>
+                                    <div class="col-lg-5">Presupuesto<input type="number" class="form-control" id="presu" name="presu"></div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="summit" class="btn btn-success">Agregar</button>
+                                <button type="RESET" class="btn btn-info">Limpiar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form class="form" role="form" method="post" action="agregar_mat_direct">
+                <div class="modal fade" id="Directo">
+
+                </div>
+            </form>
+        </div>
     </body>
 </html>

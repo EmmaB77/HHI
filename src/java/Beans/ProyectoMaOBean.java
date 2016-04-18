@@ -1,9 +1,10 @@
 package Beans;
 
-public class ProyectoMaO {
+public class ProyectoMaOBean {
     
     private int idMaO;
     private ProyectoBean proyecto;
+    private int idProyecto;
     private String descMaO;
     private float subtMaO;
 
@@ -38,6 +39,13 @@ public class ProyectoMaO {
     public void setSubtMaO(float subtMaO) {
         this.subtMaO = subtMaO;
     }
-    
+
+    public int getIdProyecto() {
+        return idProyecto;
+    }
+
+    public void setIdProyecto(int idProyecto) {
+        this.idProyecto = idProyecto;
+    }
     
 }

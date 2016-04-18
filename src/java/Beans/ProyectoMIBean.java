@@ -1,9 +1,10 @@
 package Beans;
 
 public class ProyectoMIBean {
-    
+
     private int idMatIn;
     private ProyectoBean proyecto;
+    private int idProyecto;
     private String fechaFactMatIn;
     private String preveedorMatIn;
     private String numFactMatIn;
@@ -11,6 +12,9 @@ public class ProyectoMIBean {
     private float subtMatIn;
     private float ivaMatIn;
     private float totalMatIn;
+    private float totalParcialMI;
+    private float totalIvaMI;
+    private float totalMI;
 
     public int getIdMatIn() {
         return idMatIn;
@@ -83,7 +87,39 @@ public class ProyectoMIBean {
     public void setTotalMatIn(float totalMatIn) {
         this.totalMatIn = totalMatIn;
     }
+
+    public int getIdProyecto() {
+        return idProyecto;
+    }
+
+    public void setIdProyecto(int idProyecto) {
+        this.idProyecto = idProyecto;
+    }
+
+    public float getTotalParcialMI() {
+        return totalParcialMI;
+    }
+
+    public void setTotalParcialMI(float totalParcialMI) {
+        this.totalParcialMI = totalParcialMI;
+    }
+
+    public float getTotalIvaMI() {
+        return totalIvaMI;
+    }
+
+    public void setTotalIvaMI(float totalIvaMI) {
+        this.totalIvaMI = totalIvaMI;
+    }
+
+    public float getTotalMI() {
+        return totalMI;
+    }
+
+    public void setTotalMI(float totalMI) {
+        this.totalMI = totalMI;
+    }
     
     
-    
+
 }

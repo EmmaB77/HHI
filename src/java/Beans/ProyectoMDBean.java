@@ -4,6 +4,7 @@ public class ProyectoMDBean {
     
     private int idMatDirect;
     private ProyectoBean proyecto;
+    private int idProyecto;
     private String fechaFactMatDirect;
     private String preveedorMatDirect;
     private String numFactMatDirect;
@@ -11,6 +12,9 @@ public class ProyectoMDBean {
     private float subtMatDirect;
     private float ivaMatDirect;
     private float totalMatDirect;
+    private float totalParcialMD;
+    private float totalIvaMD;
+    private float totalMD;
 
     public int getIdMatDirect() {
         return idMatDirect;
@@ -82,6 +86,38 @@ public class ProyectoMDBean {
 
     public void setTotalMatDirect(float totalMatDirect) {
         this.totalMatDirect = totalMatDirect;
+    }
+
+    public int getIdProyecto() {
+        return idProyecto;
+    }
+
+    public void setIdProyecto(int idProyecto) {
+        this.idProyecto = idProyecto;
+    }
+
+    public float getTotalParcialMD() {
+        return totalParcialMD;
+    }
+
+    public void setTotalParcialMD(float totalParcialMD) {
+        this.totalParcialMD = totalParcialMD;
+    }
+
+    public float getTotalIvaMD() {
+        return totalIvaMD;
+    }
+
+    public void setTotalIvaMD(float totalIvaMD) {
+        this.totalIvaMD = totalIvaMD;
+    }
+
+    public float getTotalMD() {
+        return totalMD;
+    }
+
+    public void setTotalMD(float totalMD) {
+        this.totalMD = totalMD;
     }
     
     
