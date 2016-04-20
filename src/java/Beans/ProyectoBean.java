@@ -15,7 +15,7 @@ public class ProyectoBean {
     private float dispProyecto;
     private float ivaProyecto;
     private float totalproyecto;
-    private int utilidadProyecto;
+    private float utilidadProyecto;
 
     public int getIdProyecto() {
         return idProyecto;
@@ -113,11 +113,11 @@ public class ProyectoBean {
         this.totalproyecto = totalproyecto;
     }
 
-    public int getUtilidadProyecto() {
+    public float getUtilidadProyecto() {
         return utilidadProyecto;
     }
 
-    public void setUtilidadProyecto(int utilidadProyecto) {
+    public void setUtilidadProyecto(float utilidadProyecto) {
         this.utilidadProyecto = utilidadProyecto;
     }
 

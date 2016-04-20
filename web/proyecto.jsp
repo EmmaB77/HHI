@@ -29,6 +29,38 @@
                 $('#tabla_proy').dataTable();
             });
         </script>
+        <script>
+            $(document).ready(function (e) {
+                $('#Directo').on('show.bs.modal', function (e) {
+                    var id = $(e.relatedTarget).data().id;
+                    $(e.currentTarget).find('#idProyecto').val(id);
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function (e) {
+                $('#Indirecto').on('show.bs.modal', function (e) {
+                    var id = $(e.relatedTarget).data().id;
+                    $(e.currentTarget).find('#idProyecto').val(id);
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function (e) {
+                $('#Consumo').on('show.bs.modal', function (e) {
+                    var id = $(e.relatedTarget).data().id;
+                    $(e.currentTarget).find('#idProyecto').val(id);
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function (e) {
+                $('#Mano_Obra').on('show.bs.modal', function (e) {
+                    var id = $(e.relatedTarget).data().id;
+                    $(e.currentTarget).find('#idProyecto').val(id);
+                });
+            });
+        </script>
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-static-top">
@@ -127,6 +159,8 @@
                                     <a title="Agregar Material Consumo" data-toggle="modal" href="#" class="btn btn-sm btn-success" role="button" data-target="#Consumo" data-id="${proyecto.idProyecto}"><i class="glyphicon glyphicon-plus"></i></a>
                                     <a title="Agregar Indirecto" data-toggle="modal" href="#" class="btn btn-sm btn-primary" role="button" data-target="#Indirecto" data-id="${proyecto.idProyecto}"><i class="glyphicon glyphicon-plus"></i></a>
                                     <a title="Agregar Mano de Obra" data-toggle="modal" href="#" class="btn btn-sm btn-warning" role="button" data-target="#Mano_Obra" data-id="${proyecto.idProyecto}"><i class="glyphicon glyphicon-plus"></i></a>
+                                    <a title="Eliminar Proyecto" href="eliminar_proy?idproy=${proyecto.idProyecto}" class="btn btn-sm btn-danger" role="button"><i class="glyphicon glyphicon-remove"></i></a>
+                                    <a title="Ver Proyecto" href="ver_proyecto?idproy=${proyecto.idProyecto}" class="btn btn-sm btn-default" role="button"><i class="glyphicon glyphicon-eye-open"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -163,7 +197,109 @@
             </form>
             <form class="form" role="form" method="post" action="agregar_mat_direct">
                 <div class="modal fade" id="Directo">
-
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">Agregar Material Directo</h3>
+                            </div>
+                            <div class="table container modal-body">
+                                <div class="row form-group">
+                                    <div class="col-lg-2">Id Proyecto <input type="text" class="form-control" id="idProyecto" name="idProyecto" readonly></div>
+                                    <div class="col-lg-3">Fecha <input type="date" class="form-control" id="fechaf" name="fechaf"></div>
+                                    <div class="col-lg-3">Proveedor <input type="text" class="form-control" id="proveedor" name="proveedor"></div>
+                                    <div class="col-lg-3">Factura <input type="text" class="form-control" id="factura" name="factura"></div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-lg-4">Descripción <input type="text" class="form-control" id="descripcion" name="descripcion"></div>
+                                    <div class="col-lg-4">Subtotal <input type="number" class="form-control" id="subtotal" name="subtotal"></div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="summit" class="btn btn-success">Agregar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form class="form" role="form" method="post" action="agregar_mat_indirect">
+                <div class="modal fade" id="Indirecto">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">Agregar Material Indirecto</h3>
+                            </div>
+                            <div class="table container modal-body">
+                                <div class="row form-group">
+                                    <div class="col-lg-2">Id Proyecto <input type="text" class="form-control" id="idProyecto" name="idProyecto" readonly></div>
+                                    <div class="col-lg-3">Fecha <input type="date" class="form-control" id="fechaf" name="fechaf"></div>
+                                    <div class="col-lg-3">Proveedor <input type="text" class="form-control" id="proveedor" name="proveedor"></div>
+                                    <div class="col-lg-3">Factura <input type="text" class="form-control" id="factura" name="factura"></div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-lg-4">Descripción <input type="text" class="form-control" id="descripcion" name="descripcion"></div>
+                                    <div class="col-lg-4">Subtotal <input type="number" class="form-control" id="subtotal" name="subtotal"></div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="summit" class="btn btn-success">Agregar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form class="form" role="form" method="post" action="agregar_mat_consu">
+                <div class="modal fade" id="Consumo">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">Agregar Material Consumo</h3>
+                            </div>
+                            <div class="table container modal-body">
+                                <div class="row form-group">
+                                    <div class="col-lg-2">Id Proyecto <input type="text" class="form-control" id="idProyecto" name="idProyecto" readonly></div>
+                                    <div class="col-lg-3">Fecha <input type="date" class="form-control" id="fechaf" name="fechaf"></div>
+                                    <div class="col-lg-3">Proveedor <input type="text" class="form-control" id="proveedor" name="proveedor"></div>
+                                    <div class="col-lg-3">Factura <input type="text" class="form-control" id="factura" name="factura"></div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-lg-4">Descripción <input type="text" class="form-control" id="descripcion" name="descripcion"></div>
+                                    <div class="col-lg-4">Subtotal <input type="number" class="form-control" id="subtotal" name="subtotal"></div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="summit" class="btn btn-success">Agregar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form class="form" role="form" method="post" action="mano_obra">
+                <div class="modal fade" id="Mano_Obra">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">Agregar Mano de Obra</h3>
+                            </div>
+                            <div class="table container modal-body">
+                                <div class="row form-group">
+                                    <div class="col-lg-2">Id Proyecto <input type="text" class="form-control" id="idProyecto" name="idProyecto" readonly></div>
+                                    <div class="col-lg-5">Descripción <input type="text" class="form-control" id="descripcion" name="descripcion"></div>
+                                    <div class="col-lg-3">Subtotal <input type="number" class="form-control" id="subtotal" name="subtotal"></div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="summit" class="btn btn-success">Agregar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>

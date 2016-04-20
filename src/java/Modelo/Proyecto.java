@@ -48,7 +48,7 @@ public class Proyecto {
         PreparedStatement ps;
         PreparedStatement ps2;
         /*FECHA DATE|PROVEEDOR|NUM_FACT|DESCRIPCION|SUBTOTAL|IVA|TOTAL*/
-        String query = "insert into proyecto_mat_directo (id_proyecto, fecha, proveedor, num_fact, descripcion, subtotal, iva, total)"
+        String query = "insert into proyecto_mat_directo (id_proyecto, fecha_fact, proveedor, num_fact, descripcion, subtotal, iva, total)"
                 + " values(?,?,?,?,?,?,?,?)";
 
         String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=?";
@@ -87,7 +87,7 @@ public class Proyecto {
         PreparedStatement ps;
         PreparedStatement ps2;
         /*FECHA DATE|PROVEEDOR|NUM_FACT|DESCRIPCION|SUBTOTAL|IVA|TOTAL*/
-        String query = "insert into proyecto_mat_indirecto (id_proyecto, fecha, proveedor, num_fact, descripcion, subtotal, iva, total)"
+        String query = "insert into proyecto_mat_indirect (id_proyecto, fecha_fact, proveedor, num_fact, descripcion, subtotal, iva, total)"
                 + " values(?,?,?,?,?,?,?,?)";
 
         String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=?";
@@ -126,7 +126,7 @@ public class Proyecto {
         PreparedStatement ps;
         PreparedStatement ps2;
         /*FECHA DATE|PROVEEDOR|NUM_FACT|DESCRIPCION|SUBTOTAL|IVA|TOTAL*/
-        String query = "insert into proyecto_mat_consumo (id_proyecto, fecha, proveedor, num_fact, descripcion, subtotal, iva, total)"
+        String query = "insert into proyecto_mat_consumo (id_proyecto, fecha_fact, proveedor, num_fact, descripcion, subtotal, iva, total)"
                 + " values(?,?,?,?,?,?,?,?)";
 
         String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=?";
@@ -166,7 +166,7 @@ public class Proyecto {
         PreparedStatement ps2;
         /*FECHA DATE|PROVEEDOR|NUM_FACT|DESCRIPCION|SUBTOTAL|IVA|TOTAL*/
         String query = "insert into proyecto_mano_obra (id_proyecto, descripcion, subtotal)"
-                + " values(?,?,?,?,?,?,?)";
+                + " values(?,?,?)";
 
         String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=?";
 
@@ -256,7 +256,7 @@ public class Proyecto {
             ps = con.prepareStatement(query);
             ResultSet rs;
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 ProyectoMDBean proymd = new ProyectoMDBean();
                 proymd.setIdProyecto(rs.getInt("ID_PROYECTO"));
                 proymd.setTotalParcialMD(rs.getFloat("SUBTOTAL"));
@@ -270,17 +270,17 @@ public class Proyecto {
         }
         return lista;
     }
-    
+
     public static List<ProyectoMIBean> totalesIndirecto(int id) {
         List<ProyectoMIBean> lista = new ArrayList<>();
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "select ID_PROYECTO, sum(SUBTOTAL) as SUBTOTAL, sum(IVA) as TOTAL_IVA, sum(TOTAL) as TOTAL_FINAL from PROYECTO_MAT_INDIRECTO where ID_PROYECTO=" + id + " GROUP BY ID_PROYECTO";
+        String query = "select ID_PROYECTO, sum(SUBTOTAL) as SUBTOTAL, sum(IVA) as TOTAL_IVA, sum(TOTAL) as TOTAL_FINAL from PROYECTO_MAT_INDIRECT where ID_PROYECTO=" + id + " GROUP BY ID_PROYECTO";
         try {
             ps = con.prepareStatement(query);
             ResultSet rs;
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 ProyectoMIBean proymd = new ProyectoMIBean();
                 proymd.setIdProyecto(rs.getInt("ID_PROYECTO"));
                 proymd.setTotalParcialMI(rs.getFloat("SUBTOTAL"));
@@ -304,7 +304,7 @@ public class Proyecto {
             ps = con.prepareStatement(query);
             ResultSet rs;
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 ProyectoMCBean proymd = new ProyectoMCBean();
                 proymd.setIdProyecto(rs.getInt("ID_PROYECTO"));
                 proymd.setTotalParcialMC(rs.getFloat("SUBTOTAL"));
@@ -318,7 +318,7 @@ public class Proyecto {
         }
         return lista;
     }
-    
+
     public static List<ProyectoBean> listaProyectos() {
         List<ProyectoBean> lista = new ArrayList<>();
         Connection con = Conexion.getConnetion();
@@ -346,4 +346,271 @@ public class Proyecto {
         return lista;
     }
 
+    public static List<ProyectoBean> obtenerProyecto(int id) {
+        List<ProyectoBean> lista = new ArrayList<>();
+        Connection con = Conexion.getConnetion();
+        PreparedStatement ps;
+        String query = "Select ID_PROYECTO, NOMBRE_PROYECTO, NUM_ORD_COMP, REQUISICION, FECHA_INICIO, PRESUPUESTO, "
+                + "INCURRIDO, DISPONIBLE, UTILIDAD, IVA, TOTAL from Proyecto where id_proyecto=" + id;
+        try {
+            ps = con.prepareStatement(query);
+            ResultSet rs;
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ProyectoBean proyecto = new ProyectoBean();
+                proyecto.setIdProyecto(rs.getInt("id_proyecto"));
+                proyecto.setNombreProyecto(rs.getString("nombre_proyecto"));
+                proyecto.setOrdenComProyecto(rs.getString("NUM_ORD_COMP"));
+                proyecto.setRequiProyecto(rs.getString("REQUISICION"));
+                proyecto.setFehaIProyecto(rs.getString("FECHA_INICIO"));
+                proyecto.setPresupuestoProyecto(rs.getFloat("PRESUPUESTO"));
+                proyecto.setIncurridoProyecto(rs.getFloat("INCURRIDO"));
+                proyecto.setDispProyecto(rs.getFloat("DISPONIBLE"));
+                proyecto.setUtilidadProyecto(rs.getFloat("UTILIDAD"));
+                proyecto.setIvaProyecto(rs.getFloat("IVA"));
+                proyecto.setTotalproyecto(rs.getFloat("TOTAL"));
+                lista.add(proyecto);
+            }
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return lista;
+    }
+
+    public static List<ProyectoMDBean> obtenerDirectos(int id) {
+        List<ProyectoMDBean> lista = new ArrayList<>();
+        Connection con = Conexion.getConnetion();
+        PreparedStatement ps;
+        String query = "Select id_proyecto, fecha_fact, proveedor, num_fact, descripcion, subtotal, iva, total from proyecto_mat_directo where id_proyecto=" + id;
+
+        try {
+            ps = con.prepareStatement(query);
+            ResultSet rs;
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ProyectoMDBean directo = new ProyectoMDBean();
+                directo.setIdProyecto(rs.getInt("id_proyecto"));
+                directo.setFechaFactMatDirect(rs.getString("FECHA_FACT"));
+                directo.setPreveedorMatDirect(rs.getString("PROVEEDOR"));
+                directo.setNumFactMatDirect(rs.getString("NUM_FACT"));
+                directo.setDescripMatDirect(rs.getString("DESCRIPCION"));
+                directo.setSubtMatDirect(rs.getFloat("SUBTOTAL"));
+                directo.setIvaMatDirect(rs.getFloat("IVA"));
+                directo.setTotalMatDirect(rs.getFloat("TOTAL"));
+                lista.add(directo);
+            }
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return lista;
+    }
+    
+    public static List<ProyectoMIBean> obtenerIndirectos(int id) {
+        List<ProyectoMIBean> lista = new ArrayList<>();
+        Connection con = Conexion.getConnetion();
+        PreparedStatement ps;
+        String query = "Select id_proyecto, fecha_fact, proveedor, num_fact, descripcion, subtotal, iva, total from proyecto_mat_indirect where id_proyecto=" + id;
+
+        try {
+            ps = con.prepareStatement(query);
+            ResultSet rs;
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ProyectoMIBean directo = new ProyectoMIBean();
+                directo.setIdProyecto(rs.getInt("id_proyecto"));
+                directo.setFechaFactMatIn(rs.getString("FECHA_FACT"));
+                directo.setPreveedorMatIn(rs.getString("PROVEEDOR"));
+                directo.setNumFactMatIn(rs.getString("NUM_FACT"));
+                directo.setDescripMatIn(rs.getString("DESCRIPCION"));
+                directo.setSubtMatIn(rs.getFloat("SUBTOTAL"));
+                directo.setIvaMatIn(rs.getFloat("IVA"));
+                directo.setTotalMatIn(rs.getFloat("TOTAL"));
+                lista.add(directo);
+            }
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return lista;
+    }
+    
+    public static List<ProyectoMCBean> obtenerConsumo(int id) {
+        List<ProyectoMCBean> lista = new ArrayList<>();
+        Connection con = Conexion.getConnetion();
+        PreparedStatement ps;
+        String query = "Select id_proyecto, fecha_fact, proveedor, num_fact, descripcion, subtotal, iva, total from proyecto_mat_consumo where id_proyecto=" + id;
+
+        try {
+            ps = con.prepareStatement(query);
+            ResultSet rs;
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ProyectoMCBean directo = new ProyectoMCBean();
+                directo.setIdProyecto(rs.getInt("id_proyecto"));
+                directo.setFechaFactMatCon(rs.getString("FECHA_FACT"));
+                directo.setPreveedorMatCon(rs.getString("PROVEEDOR"));
+                directo.setNumFactMatCon(rs.getString("NUM_FACT"));
+                directo.setDescripMatCon(rs.getString("DESCRIPCION"));
+                directo.setSubtMatCon(rs.getFloat("SUBTOTAL"));
+                directo.setIvaMatCon(rs.getFloat("IVA"));
+                directo.setTotalMatCon(rs.getFloat("TOTAL"));
+                lista.add(directo);
+            }
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return lista;
+    }
+    
+    public static List<ProyectoMaOBean> obtenerManoObra(int id) {
+        List<ProyectoMaOBean> lista = new ArrayList<>();
+        Connection con = Conexion.getConnetion();
+        PreparedStatement ps;
+        String query = "Select id_proyecto, descripcion, subtotal from proyecto_mano_obra where id_proyecto=" + id;
+
+        try {
+            ps = con.prepareStatement(query);
+            ResultSet rs;
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ProyectoMaOBean directo = new ProyectoMaOBean();
+                directo.setIdProyecto(rs.getInt("id_proyecto"));
+                directo.setDescMaO(rs.getString("DESCRIPCION"));
+                directo.setSubtMaO(rs.getFloat("SUBTOTAL"));
+                lista.add(directo);
+            }
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return lista;
+    }
+    
+    public static int eliminarProyecto(int id){
+        int status = 0;
+        Connection cn = Conexion.getConnetion();
+        PreparedStatement ps;
+        String query = "delete from proyecto where id_proyecto=?";
+        try {
+            ps = cn.prepareStatement(query);
+            ps.setObject(1, id);
+            status = ps.executeUpdate();
+            System.out.println("Eliminado Proyecto con ID: "+id);
+            cn.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return status; 
+    }
+    
+    public static int eliminarDirecto(int id, ProyectoBean proy){
+        int status = 0;
+        Connection cn = Conexion.getConnetion();
+        PreparedStatement ps;
+        PreparedStatement ps2;
+        String query = "delete from proyecto_mat_directo where id_mat_directo=?";
+        String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=?";
+        try {
+            ps = cn.prepareStatement(query);
+            ps.setObject(1, id);
+            status = ps.executeUpdate();
+            System.out.println("Eliminado Proyecto con ID: "+id);
+            
+            ps2 = cn.prepareStatement(query2);
+            ps2.setObject(1, proy.getIncurridoProyecto());
+            ps2.setObject(2, proy.getDispProyecto());
+            ps2.setObject(3, proy.getUtilidadProyecto());
+            status = ps2.executeUpdate();
+            System.out.println("Proyecto Actualizado");
+
+            cn.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return status;
+    }
+    
+    public static int eliminarIndirecto(int id, ProyectoBean proy){
+        int status = 0;
+        Connection cn = Conexion.getConnetion();
+        PreparedStatement ps;
+        PreparedStatement ps2;
+        String query = "delete from proyecto_mat_indirect where id_mat_indirect=?";
+        String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=?";
+        try {
+            ps = cn.prepareStatement(query);
+            ps.setObject(1, id);
+            status = ps.executeUpdate();
+            System.out.println("Eliminado Proyecto con ID: "+id);
+            
+            ps2 = cn.prepareStatement(query2);
+            ps2.setObject(1, proy.getIncurridoProyecto());
+            ps2.setObject(2, proy.getDispProyecto());
+            ps2.setObject(3, proy.getUtilidadProyecto());
+            status = ps2.executeUpdate();
+            System.out.println("Proyecto Actualizado");
+
+            cn.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return status;
+    }
+    
+    public static int eliminarConsumo(int id, ProyectoBean proy){
+        int status = 0;
+        Connection cn = Conexion.getConnetion();
+        PreparedStatement ps;
+        PreparedStatement ps2;
+        String query = "delete from proyecto_mat_consumo where id_mat_consumo=?";
+        String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=?";
+        try {
+            ps = cn.prepareStatement(query);
+            ps.setObject(1, id);
+            status = ps.executeUpdate();
+            System.out.println("Eliminado Proyecto con ID: "+id);
+            
+            ps2 = cn.prepareStatement(query2);
+            ps2.setObject(1, proy.getIncurridoProyecto());
+            ps2.setObject(2, proy.getDispProyecto());
+            ps2.setObject(3, proy.getUtilidadProyecto());
+            status = ps2.executeUpdate();
+            System.out.println("Proyecto Actualizado");
+
+            cn.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return status;
+    }
+    
+    public static int eliminarManoObra(int id, ProyectoBean proy){
+        int status = 0;
+        Connection cn = Conexion.getConnetion();
+        PreparedStatement ps;
+        PreparedStatement ps2;
+        String query = "delete from proyecto_mano_obra where id_mano_obra=?";
+        String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=?";
+        try {
+            ps = cn.prepareStatement(query);
+            ps.setObject(1, id);
+            status = ps.executeUpdate();
+            System.out.println("Eliminado Proyecto con ID: "+id);
+            
+            ps2 = cn.prepareStatement(query2);
+            ps2.setObject(1, proy.getIncurridoProyecto());
+            ps2.setObject(2, proy.getDispProyecto());
+            ps2.setObject(3, proy.getUtilidadProyecto());
+            status = ps2.executeUpdate();
+            System.out.println("Proyecto Actualizado");
+
+            cn.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return status;
+    }
 }
