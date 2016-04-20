@@ -13,6 +13,10 @@ public class PersonaBean {
     private String estadoPersona;
     private String telefonoPersona;
     private String estatusPersona;
+    private String numSeguroPersona;
+    private String curpPersona;
+    private String rfcPersona;
+    private String fechaIngreso;
 
     public int getIdPersona() {
         return idPersona;
@@ -101,5 +105,38 @@ public class PersonaBean {
     public void setEstatusPersona(String estatusPersona) {
         this.estatusPersona = estatusPersona;
     }
+
+    public String getNumSeguroPersona() {
+        return numSeguroPersona;
+    }
+
+    public void setNumSeguroPersona(String numSeguroPersona) {
+        this.numSeguroPersona = numSeguroPersona;
+    }
+
+    public String getCurpPersona() {
+        return curpPersona;
+    }
+
+    public void setCurpPersona(String curpPersona) {
+        this.curpPersona = curpPersona;
+    }
+
+    public String getRfcPersona() {
+        return rfcPersona;
+    }
+
+    public void setRfcPersona(String rfcPersona) {
+        this.rfcPersona = rfcPersona;
+    }
+
+    public String getFechaIngreso() {
+        return fechaIngreso;
+    }
+
+    public void setFechaIngreso(String fechaIngreso) {
+        this.fechaIngreso = fechaIngreso;
+    }
+    
     
 }

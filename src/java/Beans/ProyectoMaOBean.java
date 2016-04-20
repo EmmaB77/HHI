@@ -7,6 +7,7 @@ public class ProyectoMaOBean {
     private int idProyecto;
     private String descMaO;
     private float subtMaO;
+    private float subTotalMao;
 
     public int getIdMaO() {
         return idMaO;
@@ -47,5 +48,15 @@ public class ProyectoMaOBean {
     public void setIdProyecto(int idProyecto) {
         this.idProyecto = idProyecto;
     }
+
+    public float getSubTotalMao() {
+        return subTotalMao;
+    }
+
+    public void setSubTotalMao(float subTotalMao) {
+        this.subTotalMao = subTotalMao;
+    }
+    
+    
     
 }

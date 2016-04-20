@@ -43,6 +43,16 @@
                 });
             });
         </script>
+        <script>
+            $(document).ready(function (e) {
+                $('#Eliminar').on('show.bs.modal', function (e) {
+                    var id = $(e.relatedTarget).data().id;
+                    var nom = $(e.relatedTarget).data().nombre;
+                    $(e.currentTarget).find('#idHerramienta').val(id);
+                    $(e.currentTarget).find('#nombreCot').val(nom);
+                });
+            });
+        </script>
     </head>
     <body >
         <nav class="navbar navbar-inverse navbar-static-top">
@@ -137,7 +147,7 @@
                                 <td>${herramienta.observacionesHerramienta}</td>
                                 <td>${herramienta.estatusHerramienta}</td>
                                 <td>
-                                    <a href="eliminar_tool?idHerramienta=${herramienta.idHerramienta}" class="btn btn-sm btn-danger" role="button"><i class="glyphicon glyphicon-remove"></i></a>
+                                    <a title="Eliminar Concepto" data-toggle="modal" href="#" class="btn btn-sm btn-danger" role="button" data-target="#Eliminar" data-id="${herramienta.idHerramienta}" data-nombre="${herramienta.descHerramienta}"><i class="glyphicon glyphicon-remove"></i></a>
                                     <a data-toggle="modal" href="#" class="btn btn-sm btn-info" role="button" data-target="#Update" data-id="${herramienta.idHerramienta}" data-osb="${herramienta.observacionesHerramienta}" data-cant="${herramienta.cantidadHerramienta}" data-desc="${herramienta.descHerramienta}"><i class="glyphicon glyphicon-floppy-open"></i></a>
                                 </td>
                             </tr>
@@ -146,82 +156,99 @@
                 </table>
             </div>
             <div class="table">
-                <div class="row">
-                    <form class="form" role="form" method="post" action="agregar_tool" >
-                        <div class="modal fade" id="myModal">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                        <h4 class="modal-title">Agregar Herramienta</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <div>Descripcion:<input type="text" class="form-control" name="desc" id="desc"></div>
-                                            <div>Cantidad:<input type="number" class="form-control" name="cant" id="cant"></div>
-                                            <div>Unidad:<select class="form-control" name="uni" id="uni">
-                                                    <option value="...">...</option>
-                                                    <option value="PIEZA">PIEZA</option>
-                                                    <option value="JUEGO">JUEGO</option>
-                                                </select>
-                                            </div>
-                                            <div>Observaciones:<textarea class="form-control" style="resize: none" name="obse" id="obse"></textarea></div>
-                                            <div>Estatus:<select class="form-control" name="est" id="est">
-                                                    <option value="...">...</option>
-                                                    <option value="En Almacen">En Almacen</option>
-                                                    <option value="Por Reparar">Por Reparar</option>
-                                                    <option value="Prestada">Prestado</option>
-                                                    <option value="Reemplazar">Reemplazar</option>
-                                                    <OPTION value="Perdida">Perdida</OPTION>
-                                                </select></div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="summit" class="btn btn-success">Agregar</button>
-                                        <button type="RESET" class="btn btn-info">Limpiar</button>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
-                                    </div>
+                <form class="form" role="form" method="post" action="agregar_tool" >
+                    <div class="modal fade" id="myModal">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">Agregar Herramienta</h4>
                                 </div>
-                            </div>
-                        </div>
-                    </form>
-                    <form class="form" role="form" method="post" action="modificar_tool">
-                        <div class="modal" id="Update">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                        <h4 class="modal-title">Actualizar Herramienta</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            ID de la Herramienta:<input type="text" class="form-control" name="idu" id="idu" value="" readonly><br>
-                                            Descripcion:<input type="text" class="form-control" name="descu" id="descu">
-                                            Cantidad:<input type="number" class="form-control" name="cantu" id="cantu">
-                                            Unidad:<select class="form-control" name="uniu" id="uniu">
-                                                    <option value="...">...</option>
-                                                    <option value="PIEZA">PIEZA</option>
-                                                    <option value="JUEGO">JUEGO</option>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <div>Descripcion:<input type="text" class="form-control" name="desc" id="desc" required></div>
+                                        <div>Cantidad:<input type="number" class="form-control" name="cant" id="cant" required></div>
+                                        <div>Unidad:<select class="form-control" name="uni" id="uni" required>
+                                                <option value="PIEZA">PIEZA</option>
+                                                <option value="JUEGO">JUEGO</option>
                                             </select>
-                                            Observaciones:<textarea class="form-control" style="resize: none" name="obseu" id="obseu"></textarea>
-                                            Estatus:<select class="form-control" name="estu" id="estu">
-                                                <option value="...">...</option>
+                                        </div>
+                                        <div>Observaciones:<textarea class="form-control" style="resize: none" name="obse" id="obse" required></textarea></div>
+                                        <div>Estatus:<select class="form-control" name="est" id="est">
                                                 <option value="En Almacen">En Almacen</option>
-                                                <option value="Roto">Roto</option>
+                                                <option value="Por Reparar">Por Reparar</option>
                                                 <option value="Prestada">Prestado</option>
                                                 <option value="Reemplazar">Reemplazar</option>
-                                            </select>
-                                        </div>
+                                                <OPTION value="Perdida">Perdida</OPTION>
+                                            </select></div>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="summit" class="btn btn-success">Actualizar</button>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
-                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="summit" class="btn btn-success">Agregar</button>
+                                    <button type="RESET" class="btn btn-info">Limpiar</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
+                <form class="form" role="form" method="post" action="modificar_tool">
+                    <div class="modal" id="Update">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">Actualizar Herramienta</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        ID de la Herramienta:<input type="text" class="form-control" name="idu" id="idu" value="" readonly><br>
+                                        Descripcion:<input type="text" class="form-control" name="descu" id="descu" required>
+                                        Cantidad:<input type="number" class="form-control" name="cantu" id="cantu" required>
+                                        Unidad:<select class="form-control" name="uniu" id="uniu">
+                                            <option value="PIEZA">PIEZA</option>
+                                            <option value="JUEGO">JUEGO</option>
+                                        </select>
+                                        Observaciones:<textarea class="form-control" style="resize: none" name="obseu" id="obseu" required></textarea>
+                                        Estatus:<select class="form-control" name="estu" id="estu">
+                                            <option value="En Almacen">En Almacen</option>
+                                            <option value="Roto">Roto</option>
+                                            <option value="Prestada">Prestado</option>
+                                            <option value="Reemplazar">Reemplazar</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="summit" class="btn btn-success">Actualizar</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <form class="form" role="form" method="get" action="eliminar_tool">
+                    <div class="modal fade" id="Eliminar">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h3 class="modal-title">¿Estas Seguro de Eliminar esta Herramienta?</h3>
+                                </div>
+                                <div class="table container modal-body">
+                                    <div class="form-group">
+                                        <div class="col-lg-3">ID: <input type="text" class="form-control" name="idHerramienta" id="idHerramienta" readonly value=""></div>
+                                        <div class="col-lg-5">Concepto: <input type="text" readonly class="form-control" name="nombreCot" id="nombreCot" value=""></div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="summit" class="btn btn-danger">Eliminar</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </body>

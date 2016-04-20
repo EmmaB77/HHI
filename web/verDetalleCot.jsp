@@ -97,7 +97,7 @@
             <c:forEach var="cotizacion" items="${cotizaciones}" varStatus="iter">
                 <div class="table" align="right">
                     <div class="row">
-                        <div class="col-xs-7"></div>
+                        <div class="col-xs-7"><a title="Ver Proyectos" href="cotizacion" class="btn btn-lg btn-info" role="button"><i class="glyphicon glyphicon-arrow-left"> Volver</i></a></div>
                         <div class="col-xs-5"><b>Santiago de Querétaro, Qro. a ${cotizacion.fechaCot}</b></div>
                     </div>
                     <div class="row">

@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  * @author windows
  */
 @WebServlet(name = "ControladorProyecto", urlPatterns = {"/ControladorProyecto","/proyecto","/agregar_proy","/agregar_mat_direct","/agregar_mat_indirect","/agregar_mat_consu",
-    "/mano_obra","/eliminar_proy","/ver_proyecto"})
+    "/mano_obra","/eliminar_proy","/ver_proyecto","/eliminar_md","/eliminar_mi","/eliminar_mc","/eliminar_mo"})
 public class ControladorProyecto extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -44,6 +44,94 @@ public class ControladorProyecto extends HttpServlet {
             int idProy = Integer.parseInt(request.getParameter("idproy"));
             Proyecto.eliminarProyecto(idProy);
             response.sendRedirect("proyecto");
+        }
+        if(userPath.equals("/eliminar_md")){
+            int idProy = Integer.parseInt(request.getParameter("idProy"));
+            int idDet = Integer.parseInt(request.getParameter("idMD"));
+            float subtotal = Float.parseFloat(request.getParameter("subT"));
+            float utilidad;
+            
+            float incurrido = Proyecto.obtenerIncurrido(idProy);
+            float disponible = Proyecto.obtenerDisponible(idProy);
+            float presupuesto = Proyecto.obtenerPresupuesto(idProy);
+            
+            float nincurrido = incurrido-subtotal;
+            float ndisponible = disponible+subtotal;
+            
+            utilidad = ndisponible/presupuesto*100;
+            ProyectoBean proy = new ProyectoBean();
+            proy.setIncurridoProyecto(nincurrido);
+            proy.setDispProyecto(ndisponible);
+            proy.setUtilidadProyecto(utilidad);
+            
+            Proyecto.eliminarDirecto(idDet, idProy, proy);
+            response.sendRedirect("ver_proyecto?idproy="+idProy);
+        }
+        if(userPath.equals("/eliminar_mi")){
+            int idProy = Integer.parseInt(request.getParameter("idProy"));
+            int idDet = Integer.parseInt(request.getParameter("idMI"));
+            float subtotal = Float.parseFloat(request.getParameter("subT"));
+            float utilidad;
+            
+            float incurrido = Proyecto.obtenerIncurrido(idProy);
+            float disponible = Proyecto.obtenerDisponible(idProy);
+            float presupuesto = Proyecto.obtenerPresupuesto(idProy);
+            
+            float nincurrido = incurrido-subtotal;
+            float ndisponible = disponible+subtotal;
+            
+            utilidad = ndisponible/presupuesto*100;
+            ProyectoBean proy = new ProyectoBean();
+            proy.setIncurridoProyecto(nincurrido);
+            proy.setDispProyecto(ndisponible);
+            proy.setUtilidadProyecto(utilidad);
+            
+            Proyecto.eliminarIndirecto(idDet, idProy, proy);
+            response.sendRedirect("ver_proyecto?idproy="+idProy);
+        }
+        if(userPath.equals("/eliminar_mc")){
+            int idProy = Integer.parseInt(request.getParameter("idProy"));
+            int idDet = Integer.parseInt(request.getParameter("idMC"));
+            float subtotal = Float.parseFloat(request.getParameter("subT"));
+            float utilidad;
+            
+            float incurrido = Proyecto.obtenerIncurrido(idProy);
+            float disponible = Proyecto.obtenerDisponible(idProy);
+            float presupuesto = Proyecto.obtenerPresupuesto(idProy);
+            
+            float nincurrido = incurrido-subtotal;
+            float ndisponible = disponible+subtotal;
+            
+            utilidad = ndisponible/presupuesto*100;
+            ProyectoBean proy = new ProyectoBean();
+            proy.setIncurridoProyecto(nincurrido);
+            proy.setDispProyecto(ndisponible);
+            proy.setUtilidadProyecto(utilidad);
+            
+            Proyecto.eliminarConsumo(idDet, idProy, proy);
+            response.sendRedirect("ver_proyecto?idproy="+idProy);
+        }
+        if(userPath.equals("/eliminar_mo")){
+            int idProy = Integer.parseInt(request.getParameter("idProy"));
+            int idDet = Integer.parseInt(request.getParameter("idMO"));
+            float subtotal = Float.parseFloat(request.getParameter("subT"));
+            float utilidad;
+            
+            float incurrido = Proyecto.obtenerIncurrido(idProy);
+            float disponible = Proyecto.obtenerDisponible(idProy);
+            float presupuesto = Proyecto.obtenerPresupuesto(idProy);
+            
+            float nincurrido = incurrido-subtotal;
+            float ndisponible = disponible+subtotal;
+            
+            utilidad = ndisponible/presupuesto*100;
+            ProyectoBean proy = new ProyectoBean();
+            proy.setIncurridoProyecto(nincurrido);
+            proy.setDispProyecto(ndisponible);
+            proy.setUtilidadProyecto(utilidad);
+            
+            Proyecto.eliminarManoObra(idDet, idProy, proy);
+            response.sendRedirect("ver_proyecto?idproy="+idProy);
         }
         if(userPath.equals("/ver_proyecto")){
             int id = Integer.parseInt(request.getParameter("idproy"));
@@ -68,6 +156,12 @@ public class ControladorProyecto extends HttpServlet {
             List<ProyectoMCBean> listaTotalMC;
             listaTotalMC = Proyecto.totalesConsumo(id);
             varSesion.setAttribute("totalesmc", listaTotalMC);
+            List<ProyectoMaOBean> listaMaO;
+            listaMaO = Proyecto.obtenerManoObra(id);
+            varSesion.setAttribute("detallesmo", listaMaO);
+            List<ProyectoMaOBean> listaTotalMaO;
+            listaTotalMaO = Proyecto.totalesMaO(id);
+            varSesion.setAttribute("totalesmo", listaTotalMaO);
             response.sendRedirect("verProyecto.jsp");
         }
     }
@@ -252,9 +346,6 @@ public class ControladorProyecto extends HttpServlet {
             
             Proyecto.agregarManoObra(idProyecto, matdirect, proy);
             response.sendRedirect("proyecto");
-        }
-        
-        
-        
+        }  
     }
 }

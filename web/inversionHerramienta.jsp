@@ -47,6 +47,16 @@
                 });
             });
         </script>
+        <script>
+            $(document).ready(function (e) {
+                $('#Eliminar').on('show.bs.modal', function (e) {
+                    var id = $(e.relatedTarget).data().id;
+                    var nom = $(e.relatedTarget).data().nombre;
+                    $(e.currentTarget).find('#idEquipo').val(id);
+                    $(e.currentTarget).find('#nombreCot').val(nom);
+                });
+            });
+        </script>
     </head>
     <body >
         <nav class="navbar navbar-inverse navbar-static-top">
@@ -145,7 +155,7 @@
                                 <td>$ ${equipo.ivaEquipo} MXN</td>
                                 <td>$ ${equipo.totalEquipo} MXN</td>
                                 <td>
-                                    <a href="eliminar_equipo?idEquipo=${equipo.idEquipo}" class="btn btn-sm btn-danger" role="button"><i class="glyphicon glyphicon-remove"></i></a>
+                                    <a title="Eliminar Concepto" data-toggle="modal" href="#" class="btn btn-sm btn-danger" role="button" data-target="#Eliminar" data-id="${equipo.idEquipo}" data-nombre="${equipo.descripEquipo}"><i class="glyphicon glyphicon-remove"></i></a>
                                     <a data-toggle="modal" href="#" class="btn btn-sm btn-info" role="button" data-target="#Update" data-id="${equipo.idEquipo}" data-prov="${equipo.proveedorEquipo}" data-fact="${equipo.facturaEquipo}" data-desc="${equipo.descripEquipo}" data-subt="${equipo.subtEquipo}" data-date="${equipo.fechaEquipo}"><i class="glyphicon glyphicon-floppy-open"></i></a>
                                 </td>
                             </tr>
@@ -165,14 +175,13 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="form-group">
-                                            <div>Fecha:<input type="date" class="form-control" name="fecha" id="fecha"></div>
-                                            <div>Proveedor:<input type="text" class="form-control" name="prov" id="prov"></div>
-                                            <div>Factura:<input type="text" class="form-control" name="fact" id="fact"></div>
-                                            <div>Descripción:<textarea class="form-control" style="resize: none" name="desc" id="desc"></textarea></div>
-                                            <div>Subtotal: <input type="number" step="any" class="form-control" name="subt" id="subt"></div>
+                                            <div>Fecha:<input type="date" class="form-control" name="fecha" id="fecha" required></div>
+                                            <div>Proveedor:<input type="text" class="form-control" name="prov" id="prov" required></div>
+                                            <div>Factura:<input type="text" class="form-control" name="fact" id="fact" required></div>
+                                            <div>Descripción:<textarea class="form-control" style="resize: none" name="desc" id="desc" required></textarea></div>
+                                            <div>Subtotal: <input type="number" step="any" class="form-control" name="subt" id="subt" required></div>
                                             <div>I.V.A
                                                 <select class="form-control" name="iva" id="iva">
-                                                    <option value="#">...</option>
                                                     <option value="si">SI</option>
                                                     <Option value="no">NO</option>
                                                 </select>
@@ -199,14 +208,13 @@
                                     <div class="modal-body">
                                         <div class="form-group">
                                             ID:<input type="text" class="form-control" name="idU" id="idU" readonly>
-                                            Fecha:<input type="date" class="form-control" name="fechaU" id="fechaU">
-                                            Proveedor:<input type="text" class="form-control" name="provU" id="provU">
-                                            Factura:<input type="text" class="form-control" name="factU" id="factU">
-                                            Descripción:<textarea class="form-control" style="resize: none" name="descU" id="descU"></textarea>
-                                            Subtotal: <input type="number" step="any" class="form-control" name="subtU" id="subtU">
+                                            Fecha:<input type="date" class="form-control" name="fechaU" id="fechaU" required>
+                                            Proveedor:<input type="text" class="form-control" name="provU" id="provU" required>
+                                            Factura:<input type="text" class="form-control" name="factU" id="factU" required>
+                                            Descripción:<textarea class="form-control" style="resize: none" name="descU" id="descU" required></textarea>
+                                            Subtotal: <input type="number" step="any" class="form-control" name="subtU" id="subtU" required>
                                             <div>I.V.A
                                                 <select class="form-control" name="ivaU" id="ivaU">
-                                                    <option value="#">...</option>
                                                     <option value="si">SI</option>
                                                     <Option value="no">NO</option>
                                                 </select>
@@ -223,6 +231,28 @@
                     </form>
                 </div>
             </div>
+            <form class="form" role="form" method="get" action="eliminar_equipo">
+                <div class="modal fade" id="Eliminar">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">¿Estas Seguro de Eliminar este Concepto?</h3>
+                            </div>
+                            <div class="table container modal-body">
+                                <div class="form-group">
+                                    <div class="col-lg-3">ID: <input type="text" class="form-control" name="idEquipo" id="idEquipo" readonly value=""></div>
+                                    <div class="col-lg-5">Concepto: <input type="text" readonly class="form-control" name="nombreCot" id="nombreCot" value=""></div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="summit" class="btn btn-danger">Eliminar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </body>
 </html>

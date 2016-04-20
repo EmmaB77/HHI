@@ -31,6 +31,16 @@
         </script>
         <script>
             $(document).ready(function (e) {
+                $('#Eliminar').on('show.bs.modal', function (e) {
+                    var id = $(e.relatedTarget).data().id;
+                    var nom = $(e.relatedTarget).data().nombre;
+                    $(e.currentTarget).find('#idproy').val(id);
+                    $(e.currentTarget).find('#nombreproy').val(nom);
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function (e) {
                 $('#Directo').on('show.bs.modal', function (e) {
                     var id = $(e.relatedTarget).data().id;
                     $(e.currentTarget).find('#idProyecto').val(id);
@@ -159,7 +169,7 @@
                                     <a title="Agregar Material Consumo" data-toggle="modal" href="#" class="btn btn-sm btn-success" role="button" data-target="#Consumo" data-id="${proyecto.idProyecto}"><i class="glyphicon glyphicon-plus"></i></a>
                                     <a title="Agregar Indirecto" data-toggle="modal" href="#" class="btn btn-sm btn-primary" role="button" data-target="#Indirecto" data-id="${proyecto.idProyecto}"><i class="glyphicon glyphicon-plus"></i></a>
                                     <a title="Agregar Mano de Obra" data-toggle="modal" href="#" class="btn btn-sm btn-warning" role="button" data-target="#Mano_Obra" data-id="${proyecto.idProyecto}"><i class="glyphicon glyphicon-plus"></i></a>
-                                    <a title="Eliminar Proyecto" href="eliminar_proy?idproy=${proyecto.idProyecto}" class="btn btn-sm btn-danger" role="button"><i class="glyphicon glyphicon-remove"></i></a>
+                                    <a title="Eliminar Cotizacion" data-toggle="modal" href="#" class="btn btn-sm btn-danger" role="button" data-target="#Eliminar" data-id="${proyecto.idProyecto}" data-nombre="${proyecto.nombreProyecto}"><i class="glyphicon glyphicon-remove"></i></a>
                                     <a title="Ver Proyecto" href="ver_proyecto?idproy=${proyecto.idProyecto}" class="btn btn-sm btn-default" role="button"><i class="glyphicon glyphicon-eye-open"></i></a>
                                 </td>
                             </tr>
@@ -177,13 +187,13 @@
                             </div>
                             <div class="table container modal-body">
                                 <div class="row form-group">
-                                    <div class="col-lg-6">Nombre Proyecto:<input type="text" class="form-control" id="titulo" name="titulo"></div>
-                                    <div class="col-lg-3">Orden de Compra<input type="text" class="form-control" id="orden" name="orden"></div>
-                                    <div class="col-lg-3">Requisición<input type="text" class="form-control" id="requisicion" name="requisicion"></div>
+                                    <div class="col-lg-6">Nombre Proyecto:<input type="text" class="form-control" id="titulo" name="titulo" required></div>
+                                    <div class="col-lg-3">Orden de Compra<input type="text" class="form-control" id="orden" name="orden" required></div>
+                                    <div class="col-lg-3">Requisición<input type="text" class="form-control" id="requisicion" name="requisicion" required></div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col-lg-5">Fecha Inicio<input type="date" class="form-control" id="fechai" name="fechai"></div>
-                                    <div class="col-lg-5">Presupuesto<input type="number" class="form-control" id="presu" name="presu"></div>
+                                    <div class="col-lg-5">Fecha Inicio<input type="date" class="form-control" id="fechai" name="fechai" required></div>
+                                    <div class="col-lg-5">Presupuesto<input type="number" class="form-control" id="presu" name="presu" required></div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -206,13 +216,13 @@
                             <div class="table container modal-body">
                                 <div class="row form-group">
                                     <div class="col-lg-2">Id Proyecto <input type="text" class="form-control" id="idProyecto" name="idProyecto" readonly></div>
-                                    <div class="col-lg-3">Fecha <input type="date" class="form-control" id="fechaf" name="fechaf"></div>
-                                    <div class="col-lg-3">Proveedor <input type="text" class="form-control" id="proveedor" name="proveedor"></div>
-                                    <div class="col-lg-3">Factura <input type="text" class="form-control" id="factura" name="factura"></div>
+                                    <div class="col-lg-3">Fecha <input type="date" class="form-control" id="fechaf" name="fechaf" required></div>
+                                    <div class="col-lg-3">Proveedor <input type="text" class="form-control" id="proveedor" name="proveedor" required></div>
+                                    <div class="col-lg-3">Factura <input type="text" class="form-control" id="factura" name="factura" required></div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col-lg-4">Descripción <input type="text" class="form-control" id="descripcion" name="descripcion"></div>
-                                    <div class="col-lg-4">Subtotal <input type="number" class="form-control" id="subtotal" name="subtotal"></div>
+                                    <div class="col-lg-4">Descripción <input type="text" class="form-control" id="descripcion" name="descripcion" required></div>
+                                    <div class="col-lg-4">Subtotal <input type="number" class="form-control" id="subtotal" name="subtotal" required></div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -234,13 +244,13 @@
                             <div class="table container modal-body">
                                 <div class="row form-group">
                                     <div class="col-lg-2">Id Proyecto <input type="text" class="form-control" id="idProyecto" name="idProyecto" readonly></div>
-                                    <div class="col-lg-3">Fecha <input type="date" class="form-control" id="fechaf" name="fechaf"></div>
-                                    <div class="col-lg-3">Proveedor <input type="text" class="form-control" id="proveedor" name="proveedor"></div>
-                                    <div class="col-lg-3">Factura <input type="text" class="form-control" id="factura" name="factura"></div>
+                                    <div class="col-lg-3">Fecha <input type="date" class="form-control" id="fechaf" name="fechaf" required></div>
+                                    <div class="col-lg-3">Proveedor <input type="text" class="form-control" id="proveedor" name="proveedor" required></div>
+                                    <div class="col-lg-3">Factura <input type="text" class="form-control" id="factura" name="factura" required></div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col-lg-4">Descripción <input type="text" class="form-control" id="descripcion" name="descripcion"></div>
-                                    <div class="col-lg-4">Subtotal <input type="number" class="form-control" id="subtotal" name="subtotal"></div>
+                                    <div class="col-lg-4">Descripción <input type="text" class="form-control" id="descripcion" name="descripcion" required></div>
+                                    <div class="col-lg-4">Subtotal <input type="number" class="form-control" id="subtotal" name="subtotal" required></div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -262,13 +272,13 @@
                             <div class="table container modal-body">
                                 <div class="row form-group">
                                     <div class="col-lg-2">Id Proyecto <input type="text" class="form-control" id="idProyecto" name="idProyecto" readonly></div>
-                                    <div class="col-lg-3">Fecha <input type="date" class="form-control" id="fechaf" name="fechaf"></div>
-                                    <div class="col-lg-3">Proveedor <input type="text" class="form-control" id="proveedor" name="proveedor"></div>
-                                    <div class="col-lg-3">Factura <input type="text" class="form-control" id="factura" name="factura"></div>
+                                    <div class="col-lg-3">Fecha <input type="date" class="form-control" id="fechaf" name="fechaf" required></div>
+                                    <div class="col-lg-3">Proveedor <input type="text" class="form-control" id="proveedor" name="proveedor" required></div>
+                                    <div class="col-lg-3">Factura <input type="text" class="form-control" id="factura" name="factura" required></div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col-lg-4">Descripción <input type="text" class="form-control" id="descripcion" name="descripcion"></div>
-                                    <div class="col-lg-4">Subtotal <input type="number" class="form-control" id="subtotal" name="subtotal"></div>
+                                    <div class="col-lg-4">Descripción <input type="text" class="form-control" id="descripcion" name="descripcion" required></div>
+                                    <div class="col-lg-4">Subtotal <input type="number" class="form-control" id="subtotal" name="subtotal" required></div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -290,12 +300,34 @@
                             <div class="table container modal-body">
                                 <div class="row form-group">
                                     <div class="col-lg-2">Id Proyecto <input type="text" class="form-control" id="idProyecto" name="idProyecto" readonly></div>
-                                    <div class="col-lg-5">Descripción <input type="text" class="form-control" id="descripcion" name="descripcion"></div>
-                                    <div class="col-lg-3">Subtotal <input type="number" class="form-control" id="subtotal" name="subtotal"></div>
+                                    <div class="col-lg-5">Descripción <input type="text" class="form-control" id="descripcion" name="descripcion" required></div>
+                                    <div class="col-lg-3">Subtotal <input type="number" class="form-control" id="subtotal" name="subtotal" required></div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="summit" class="btn btn-success">Agregar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form class="form" role="form" method="get" action="eliminar_proy">
+                <div class="modal fade" id="Eliminar">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">¿Estas Seguro de Eliminar este Proyecto?</h3>
+                            </div>
+                            <div class="table container modal-body">
+                                <div class="form-group">
+                                    <div class="col-lg-3">ID: <input type="text" class="form-control" name="idproy" id="idproy" readonly value=""></div>
+                                    <div class="col-lg-5">Cotizacion: <input type="text" readonly class="form-control" name="nombreproy" id="nombreproy" value=""></div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="summit" class="btn btn-danger">Eliminar</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
                             </div>
                         </div>

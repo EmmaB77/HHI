@@ -37,6 +37,18 @@
                 });
             });
         </script>
+        <script>
+            $(document).ready(function (e) {
+                $('#Eliminar').on('show.bs.modal', function (e) {
+                    var id = $(e.relatedTarget).data().id;
+                    var idCot = $(e.relatedTarget).data().id2;
+                    var nom = $(e.relatedTarget).data().nombre;
+                    $(e.currentTarget).find('#idDetCot').val(id);
+                    $(e.currentTarget).find('#idCoti').val(idCot);
+                    $(e.currentTarget).find('#nombreDetCot').val(nom);
+                });
+            });
+        </script>
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-static-top">
@@ -181,7 +193,7 @@
                                 <td>
                                     <a title="Modificar Concepto" data-toggle="modal" href="#" class="btn btn-sm btn-success" role="button" data-target="#Concepto" data-id="${detalle.idCotDet}" data-inc="${detalle.incisoCotDet}" data-desc="${detalle.descCotDet}" data-cant="${detalle.cantCotDet}" 
                                        data-uni="${detalle.uniCotDet}" data-prec="${detalle.precioUni}"><i class="glyphicon glyphicon-file"></i></a>
-                                    <a title="Eliminar Detalle" href="eliminar_det?idDetCot=${detalle.idCotDet}&idCoti=${detalle.idCot}" class="btn btn-sm btn-danger" role="button"><i class="glyphicon glyphicon-remove"></i></a>
+                                    <a title="Eliminar Detalle Cotizacion" data-toggle="modal" href="#" class="btn btn-sm btn-danger" role="button" data-target="#Eliminar" data-id="${detalle.idCotDet}" data-nombre="${detalle.descCotDet}" data-id2="${detalle.idCot}"><i class="glyphicon glyphicon-remove"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -216,6 +228,29 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="summit" class="btn btn-success">Modificar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form class="form" role="form" method="get" action="eliminar_det">
+                <div class="modal fade" id="Eliminar">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">¿Estas Seguro de Eliminar este Concepto?</h3>
+                            </div>
+                            <div class="table container modal-body">
+                                <div class="form-group">
+                                    <div class="col-lg-3">ID Detalle: <input type="text" class="form-control" name="idDetCot" id="idDetCot" readonly value=""></div>
+                                    <div class="col-lg-3">ID Cotización: <input type="text" class="form-control" name="idCoti" id="idCoti" readonly value=""></div>
+                                    <div class="col-lg-6">Cotizacion: <input type="text" readonly class="form-control" name="nombreDetCot" id="nombreDetCot" value=""></div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="summit" class="btn btn-danger">Eliminar</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
                             </div>
                         </div>

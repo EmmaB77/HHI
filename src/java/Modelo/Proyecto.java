@@ -51,7 +51,7 @@ public class Proyecto {
         String query = "insert into proyecto_mat_directo (id_proyecto, fecha_fact, proveedor, num_fact, descripcion, subtotal, iva, total)"
                 + " values(?,?,?,?,?,?,?,?)";
 
-        String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=?";
+        String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=? where id_proyecto="+idProy ;
 
         try {
             ps = con.prepareStatement(query);
@@ -90,7 +90,7 @@ public class Proyecto {
         String query = "insert into proyecto_mat_indirect (id_proyecto, fecha_fact, proveedor, num_fact, descripcion, subtotal, iva, total)"
                 + " values(?,?,?,?,?,?,?,?)";
 
-        String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=?";
+        String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=? where id_proyecto="+idProy;
 
         try {
             ps = con.prepareStatement(query);
@@ -129,7 +129,7 @@ public class Proyecto {
         String query = "insert into proyecto_mat_consumo (id_proyecto, fecha_fact, proveedor, num_fact, descripcion, subtotal, iva, total)"
                 + " values(?,?,?,?,?,?,?,?)";
 
-        String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=?";
+        String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=? where id_proyecto="+idProy;
 
         try {
             ps = con.prepareStatement(query);
@@ -168,7 +168,7 @@ public class Proyecto {
         String query = "insert into proyecto_mano_obra (id_proyecto, descripcion, subtotal)"
                 + " values(?,?,?)";
 
-        String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=?";
+        String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=? where id_proyecto="+idProy;
 
         try {
             ps = con.prepareStatement(query);
@@ -318,6 +318,28 @@ public class Proyecto {
         }
         return lista;
     }
+    
+    public static List<ProyectoMaOBean> totalesMaO(int id) {
+        List<ProyectoMaOBean> lista = new ArrayList<>();
+        Connection con = Conexion.getConnetion();
+        PreparedStatement ps;
+        String query = "select ID_PROYECTO, sum(SUBTOTAL) as SUBTOTAL from PROYECTO_MANO_OBRA where ID_PROYECTO=" + id + " GROUP BY ID_PROYECTO";
+        try {
+            ps = con.prepareStatement(query);
+            ResultSet rs;
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ProyectoMaOBean proymd = new ProyectoMaOBean();
+                proymd.setIdProyecto(rs.getInt("ID_PROYECTO"));
+                proymd.setSubTotalMao(rs.getFloat("SUBTOTAL"));
+                lista.add(proymd);
+            }
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return lista;
+    }
 
     public static List<ProyectoBean> listaProyectos() {
         List<ProyectoBean> lista = new ArrayList<>();
@@ -382,7 +404,7 @@ public class Proyecto {
         List<ProyectoMDBean> lista = new ArrayList<>();
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "Select id_proyecto, fecha_fact, proveedor, num_fact, descripcion, subtotal, iva, total from proyecto_mat_directo where id_proyecto=" + id;
+        String query = "Select id_proyecto, id_mat_directo, fecha_fact, proveedor, num_fact, descripcion, subtotal, iva, total from proyecto_mat_directo where id_proyecto=" + id;
 
         try {
             ps = con.prepareStatement(query);
@@ -391,6 +413,7 @@ public class Proyecto {
             while (rs.next()) {
                 ProyectoMDBean directo = new ProyectoMDBean();
                 directo.setIdProyecto(rs.getInt("id_proyecto"));
+                directo.setIdMatDirect(rs.getInt("id_mat_directo"));
                 directo.setFechaFactMatDirect(rs.getString("FECHA_FACT"));
                 directo.setPreveedorMatDirect(rs.getString("PROVEEDOR"));
                 directo.setNumFactMatDirect(rs.getString("NUM_FACT"));
@@ -411,7 +434,7 @@ public class Proyecto {
         List<ProyectoMIBean> lista = new ArrayList<>();
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "Select id_proyecto, fecha_fact, proveedor, num_fact, descripcion, subtotal, iva, total from proyecto_mat_indirect where id_proyecto=" + id;
+        String query = "Select id_proyecto, id_mat_indirect, fecha_fact, proveedor, num_fact, descripcion, subtotal, iva, total from proyecto_mat_indirect where id_proyecto=" + id;
 
         try {
             ps = con.prepareStatement(query);
@@ -420,6 +443,7 @@ public class Proyecto {
             while (rs.next()) {
                 ProyectoMIBean directo = new ProyectoMIBean();
                 directo.setIdProyecto(rs.getInt("id_proyecto"));
+                directo.setIdMatIn(rs.getInt("id_mat_indirect"));
                 directo.setFechaFactMatIn(rs.getString("FECHA_FACT"));
                 directo.setPreveedorMatIn(rs.getString("PROVEEDOR"));
                 directo.setNumFactMatIn(rs.getString("NUM_FACT"));
@@ -440,7 +464,7 @@ public class Proyecto {
         List<ProyectoMCBean> lista = new ArrayList<>();
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "Select id_proyecto, fecha_fact, proveedor, num_fact, descripcion, subtotal, iva, total from proyecto_mat_consumo where id_proyecto=" + id;
+        String query = "Select id_proyecto, id_mat_consumo, fecha_fact, proveedor, num_fact, descripcion, subtotal, iva, total from proyecto_mat_consumo where id_proyecto=" + id;
 
         try {
             ps = con.prepareStatement(query);
@@ -449,6 +473,7 @@ public class Proyecto {
             while (rs.next()) {
                 ProyectoMCBean directo = new ProyectoMCBean();
                 directo.setIdProyecto(rs.getInt("id_proyecto"));
+                directo.setIdMatCon(rs.getInt("id_mat_consumo"));
                 directo.setFechaFactMatCon(rs.getString("FECHA_FACT"));
                 directo.setPreveedorMatCon(rs.getString("PROVEEDOR"));
                 directo.setNumFactMatCon(rs.getString("NUM_FACT"));
@@ -469,7 +494,7 @@ public class Proyecto {
         List<ProyectoMaOBean> lista = new ArrayList<>();
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "Select id_proyecto, descripcion, subtotal from proyecto_mano_obra where id_proyecto=" + id;
+        String query = "Select id_proyecto, id_mano_obra, descripcion, subtotal from proyecto_mano_obra where id_proyecto=" + id;
 
         try {
             ps = con.prepareStatement(query);
@@ -478,6 +503,7 @@ public class Proyecto {
             while (rs.next()) {
                 ProyectoMaOBean directo = new ProyectoMaOBean();
                 directo.setIdProyecto(rs.getInt("id_proyecto"));
+                directo.setIdMaO(rs.getInt("id_mano_obra"));
                 directo.setDescMaO(rs.getString("DESCRIPCION"));
                 directo.setSubtMaO(rs.getFloat("SUBTOTAL"));
                 lista.add(directo);
@@ -506,13 +532,13 @@ public class Proyecto {
         return status; 
     }
     
-    public static int eliminarDirecto(int id, ProyectoBean proy){
+    public static int eliminarDirecto(int id, int idProy, ProyectoBean proy){
         int status = 0;
         Connection cn = Conexion.getConnetion();
         PreparedStatement ps;
         PreparedStatement ps2;
         String query = "delete from proyecto_mat_directo where id_mat_directo=?";
-        String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=?";
+        String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=? where id_proyecto="+idProy;
         try {
             ps = cn.prepareStatement(query);
             ps.setObject(1, id);
@@ -533,13 +559,13 @@ public class Proyecto {
         return status;
     }
     
-    public static int eliminarIndirecto(int id, ProyectoBean proy){
+    public static int eliminarIndirecto(int id, int idProy, ProyectoBean proy){
         int status = 0;
         Connection cn = Conexion.getConnetion();
         PreparedStatement ps;
         PreparedStatement ps2;
         String query = "delete from proyecto_mat_indirect where id_mat_indirect=?";
-        String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=?";
+        String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=? where id_proyecto="+idProy;
         try {
             ps = cn.prepareStatement(query);
             ps.setObject(1, id);
@@ -560,13 +586,13 @@ public class Proyecto {
         return status;
     }
     
-    public static int eliminarConsumo(int id, ProyectoBean proy){
+    public static int eliminarConsumo(int id, int idProy, ProyectoBean proy){
         int status = 0;
         Connection cn = Conexion.getConnetion();
         PreparedStatement ps;
         PreparedStatement ps2;
         String query = "delete from proyecto_mat_consumo where id_mat_consumo=?";
-        String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=?";
+        String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=? where id_proyecto="+idProy;
         try {
             ps = cn.prepareStatement(query);
             ps.setObject(1, id);
@@ -587,13 +613,13 @@ public class Proyecto {
         return status;
     }
     
-    public static int eliminarManoObra(int id, ProyectoBean proy){
+    public static int eliminarManoObra(int id, int idProy, ProyectoBean proy){
         int status = 0;
         Connection cn = Conexion.getConnetion();
         PreparedStatement ps;
         PreparedStatement ps2;
         String query = "delete from proyecto_mano_obra where id_mano_obra=?";
-        String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=?";
+        String query2 = "update proyecto set INCURRIDO=?, DISPONIBLE=?, UTILIDAD=? where id_proyecto="+idProy;
         try {
             ps = cn.prepareStatement(query);
             ps.setObject(1, id);

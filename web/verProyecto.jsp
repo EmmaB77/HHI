@@ -22,6 +22,62 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <script src="js/jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function (e) {
+                $('#EliminarMD').on('show.bs.modal', function (e) {
+                    var id = $(e.relatedTarget).data().id;
+                    var idDet = $(e.relatedTarget).data().id2;
+                    var nom = $(e.relatedTarget).data().nombre;
+                    var imp = $(e.relatedTarget).data().sub;
+                    $(e.currentTarget).find('#idProy').val(id);
+                    $(e.currentTarget).find('#idMD').val(idDet);
+                    $(e.currentTarget).find('#nombreDetCot').val(nom);
+                    $(e.currentTarget).find('#subT').val(imp);
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function (e) {
+                $('#EliminarMI').on('show.bs.modal', function (e) {
+                    var id = $(e.relatedTarget).data().id;
+                    var idDet = $(e.relatedTarget).data().id2;
+                    var nom = $(e.relatedTarget).data().nombre;
+                    var imp = $(e.relatedTarget).data().sub;
+                    $(e.currentTarget).find('#idProy').val(id);
+                    $(e.currentTarget).find('#idMI').val(idDet);
+                    $(e.currentTarget).find('#nombreDetCot').val(nom);
+                    $(e.currentTarget).find('#subT').val(imp);
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function (e) {
+                $('#EliminarMC').on('show.bs.modal', function (e) {
+                    var id = $(e.relatedTarget).data().id;
+                    var idDet = $(e.relatedTarget).data().id2;
+                    var nom = $(e.relatedTarget).data().nombre;
+                    var imp = $(e.relatedTarget).data().sub;
+                    $(e.currentTarget).find('#idProy').val(id);
+                    $(e.currentTarget).find('#idMC').val(idDet);
+                    $(e.currentTarget).find('#nombreDetCot').val(nom);
+                    $(e.currentTarget).find('#subT').val(imp);
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function (e) {
+                $('#EliminarMO').on('show.bs.modal', function (e) {
+                    var id = $(e.relatedTarget).data().id;
+                    var idDet = $(e.relatedTarget).data().id2;
+                    var nom = $(e.relatedTarget).data().nombre;
+                    var imp = $(e.relatedTarget).data().sub;
+                    $(e.currentTarget).find('#idProy').val(id);
+                    $(e.currentTarget).find('#idMO').val(idDet);
+                    $(e.currentTarget).find('#nombreDetCot').val(nom);
+                    $(e.currentTarget).find('#subT').val(imp);
+                });
+            });
+        </script>
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-static-top">
@@ -98,7 +154,7 @@
             <div class="row">
                 <div class="col-lg-3"></div>
                 <div class="col-lg-6"><h2>CONTROL DE PROYECTO</h2></div>
-                <div class="col-lg-3"></div>
+                <div class="col-lg-3"><a title="Ver Proyectos" href="proyecto" class="btn btn-lg btn-info" role="button"><i class="glyphicon glyphicon-arrow-left"> Volver</i></a></div>
             </div>
             <c:forEach var="proyecto" items="${proyectos}" varStatus="iter">
                 <div class="row">
@@ -124,7 +180,7 @@
             </c:forEach><br><br>
             <div class="row">
                 <div class="col-lg-3"></div>
-                <div class="col-lg-6"><h4>MATERIAL DIRECTO</h4></div>
+                <div class="col-lg-6"><h4><b>MATERIAL DIRECTO</b></h4></div>
                 <div class="col-lg-3"></div>
             </div>
             <div class="table">
@@ -153,7 +209,7 @@
                                 <td>$ ${detalle.ivaMatDirect} M.N.</td>
                                 <td>$ ${detalle.totalMatDirect} M.N.</td>
                                 <td>
-                                    <a title="Eliminar Material" href="eliminar_direct?idmd=${detalle.idMatDirect}" class="btn btn-sm btn-danger" role="button"><i class="glyphicon glyphicon-remove"></i></a>
+                                    <a title="Eliminar Material" data-toggle="modal" href="#" class="btn btn-sm btn-danger" role="button" data-target="#EliminarMD" data-id="${detalle.idProyecto}" data-nombre="${detalle.descripMatDirect}" data-id2="${detalle.idMatDirect}" data-sub="${detalle.subtMatDirect}"><i class="glyphicon glyphicon-remove"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -180,7 +236,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-3"></div>
-                <div class="col-lg-6"><h4>MATERIAL INDIRECTO</h4></div>
+                <div class="col-lg-6"><h4><b>MATERIAL INDIRECTO</b></h4></div>
                 <div class="col-lg-3"></div>
             </div>
             <div class="table">
@@ -209,7 +265,7 @@
                                 <td>$ ${detalle.ivaMatIn} M.N.</td>
                                 <td>$ ${detalle.totalMatIn} M.N.</td>
                                 <td>
-                                    <a title="Eliminar Material" href="eliminar_indirect?idmi=${detalle.idMatIn}" class="btn btn-sm btn-danger" role="button"><i class="glyphicon glyphicon-remove"></i></a>
+                                    <a title="Eliminar Material" data-toggle="modal" href="#" class="btn btn-sm btn-danger" role="button" data-target="#EliminarMI" data-id="${detalle.idProyecto}" data-nombre="${detalle.descripMatIn}" data-id2="${detalle.idMatIn}" data-sub="${detalle.subtMatIn}"><i class="glyphicon glyphicon-remove"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -236,7 +292,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-3"></div>
-                <div class="col-lg-6"><h4>MATERIAL DE CONSUMO</h4></div>
+                <div class="col-lg-6"><h4><b>MATERIAL DE CONSUMO</b></h4></div>
                 <div class="col-lg-3"></div>
             </div>
             <div class="table">
@@ -265,7 +321,7 @@
                                 <td>$ ${detalle.ivaMatCon} M.N.</td>
                                 <td>$ ${detalle.totalMatCon} M.N.</td>
                                 <td>
-                                    <a title="Eliminar Material" href="eliminar_indirect?idmi=${detalle.idMatCon}" class="btn btn-sm btn-danger" role="button"><i class="glyphicon glyphicon-remove"></i></a>
+                                    <a title="Eliminar Material" data-toggle="modal" href="#" class="btn btn-sm btn-danger" role="button" data-target="#EliminarMC" data-id="${detalle.idProyecto}" data-nombre="${detalle.descripMatCon}" data-id2="${detalle.idMatCon}" data-sub="${detalle.subtMatCon}"><i class="glyphicon glyphicon-remove"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -292,7 +348,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-3"></div>
-                <div class="col-lg-6"><h4>MANO DE OBRA</h4></div>
+                <div class="col-lg-6"><h4><b>MANO DE OBRA</b></h4></div>
                 <div class="col-lg-3"></div>
             </div>
             <div class="table">
@@ -306,15 +362,10 @@
                     <tbody>
                         <c:forEach var="detalle" items="${detallesmo}" varStatus="iter">
                             <tr>
-                                <td>${detalle.fechaFactMatCon}</td>
-                                <td>${detalle.preveedorMatCon}</td>
-                                <td>${detalle.descripMatCon}</td>
-                                <td>${detalle.numFactMatCon}</td>
-                                <td>$ ${detalle.subtMatCon} M.N.</td>
-                                <td>$ ${detalle.ivaMatCon} M.N.</td>
-                                <td>$ ${detalle.totalMatCon} M.N.</td>
+                                <td>${detalle.descMaO}</td>
+                                <td>$ ${detalle.subtMaO} M.N.</td>
                                 <td>
-                                    <a title="Eliminar Material" href="eliminar_indirect?idmi=${detalle.idMatCon}" class="btn btn-sm btn-danger" role="button"><i class="glyphicon glyphicon-remove"></i></a>
+                                    <a title="Eliminar Material" data-toggle="modal" href="#" class="btn btn-sm btn-danger" role="button" data-target="#EliminarMO" data-id="${detalle.idProyecto}" data-nombre="${detalle.descMaO}" data-id2="${detalle.idMaO}" data-sub="${detalle.subtMaO}"><i class="glyphicon glyphicon-remove"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -323,22 +374,118 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th><b>TOTAL PARCIAL</b></th>
-                            <th><b>TOTAL I.V.A</b></th>
-                            <th><b>TOTAL FINAL</b></th>   
+                            <th><b></b></th>
+                            <th><b>TOTAL</b></th>
+                            <th><b></b></th>   
                     </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="total" items="${totalesmc}" varStatus="iter">
+                        <c:forEach var="total" items="${totalesmo}" varStatus="iter">
                             <tr>
-                                <td>$ ${total.totalParcialMC} M.N.</td>
-                                <td>$ ${total.totalIvaMC} M.N.</td>
-                                <td>$ ${total.totalMC} M.N.</td>
+                                <td></td>
+                                <td>$ ${total.subTotalMao} M.N.</td>
+                                <td></td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
             </div>
+            <form class="form" role="form" method="get" action="eliminar_md">
+                <div class="modal fade" id="EliminarMD">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">¿Estas Seguro de Eliminar este Concepto?</h3>
+                            </div>
+                            <div class="table container modal-body">
+                                <div class="form-group">
+                                    <div class="col-lg-2">ID Material: <input type="text" class="form-control" name="idMD" id="idMD" readonly value=""></div>
+                                    <div class="col-lg-2">ID Proyecto: <input type="text" class="form-control" name="idProy" id="idProy" readonly value=""></div>
+                                    <div class="col-lg-4">Descripcion: <input type="text" readonly class="form-control" name="nombreDetCot" id="nombreDetCot" value=""></div>
+                                    <div class="col-lg-4">Importe: <input type="text" readonly class="form-control" name="subT" id="subT" value=""></div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="summit" class="btn btn-danger">Eliminar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form class="form" role="form" method="get" action="eliminar_mi">
+                <div class="modal fade" id="EliminarMI">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">¿Estas Seguro de Eliminar este Concepto?</h3>
+                            </div>
+                            <div class="table container modal-body">
+                                <div class="form-group">
+                                    <div class="col-lg-2">ID Material: <input type="text" class="form-control" name="idMI" id="idMI" readonly value=""></div>
+                                    <div class="col-lg-2">ID Proyecto: <input type="text" class="form-control" name="idProy" id="idProy" readonly value=""></div>
+                                    <div class="col-lg-4">Descripcion: <input type="text" readonly class="form-control" name="nombreDetCot" id="nombreDetCot" value=""></div>
+                                    <div class="col-lg-4">Importe: <input type="text" readonly class="form-control" name="subT" id="subT" value=""></div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="summit" class="btn btn-danger">Eliminar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form class="form" role="form" method="get" action="eliminar_mc">
+                <div class="modal fade" id="EliminarMC">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">¿Estas Seguro de Eliminar este Concepto?</h3>
+                            </div>
+                            <div class="table container modal-body">
+                                <div class="form-group">
+                                    <div class="col-lg-2">ID Material: <input type="text" class="form-control" name="idMC" id="idMC" readonly value=""></div>
+                                    <div class="col-lg-2">ID Proyecto: <input type="text" class="form-control" name="idProy" id="idProy" readonly value=""></div>
+                                    <div class="col-lg-4">Descripcion: <input type="text" readonly class="form-control" name="nombreDetCot" id="nombreDetCot" value=""></div>
+                                    <div class="col-lg-4">Importe: <input type="text" readonly class="form-control" name="subT" id="subT" value=""></div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="summit" class="btn btn-danger">Eliminar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form class="form" role="form" method="get" action="eliminar_mo">
+                <div class="modal fade" id="EliminarMO">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">¿Estas Seguro de Eliminar este Concepto?</h3>
+                            </div>
+                            <div class="table container modal-body">
+                                <div class="form-group">
+                                    <div class="col-lg-2">ID Material: <input type="text" class="form-control" name="idMO" id="idMO" readonly value=""></div>
+                                    <div class="col-lg-2">ID Proyecto: <input type="text" class="form-control" name="idProy" id="idProy" readonly value=""></div>
+                                    <div class="col-lg-5">Material: <input type="text" readonly class="form-control" name="nombreDetCot" id="nombreDetCot" value=""></div>
+                                    <div class="col-lg-3">Importe: <input type="text" readonly class="form-control" name="subT" id="subT" value=""></div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="summit" class="btn btn-danger">Eliminar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </body>
 </html>
