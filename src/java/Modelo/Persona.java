@@ -38,7 +38,7 @@ public class Persona {
         int status = 0;
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "INSERT INTO PERSONA(NOMBRE, APELLIDOP, APELLIDOM, CALLE, NUM, COL, CIUDAD, ESTADO, TELEFONO, NUM_SEGURO, CURP, RFC, FECHA_INGRESO) values(?,?,?,?,?,?,?,?,?,?,?,?,?);";
+        String query = "INSERT INTO PERSONA(NOMBRE, APELLIDOP, APELLIDOM, CALLE, NUM, COL, CIUDAD, ESTADO, TELEFONO, NUM_SEGURO, CURP, RFC, FECHA_INGRESO, STATUS) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
         try {
             ps = con.prepareStatement(query);
             ps.setObject(1, persona.getNombrePersona());
@@ -53,7 +53,8 @@ public class Persona {
             ps.setObject(10, persona.getNumSeguroPersona());
             ps.setObject(11, persona.getCurpPersona());
             ps.setObject(12, persona.getRfcPersona());
-            ps.setObject(13, persona.getEstatusPersona());
+            ps.setObject(13, persona.getFechaIngreso());
+            ps.setObject(14, persona.getEstatusPersona());
             status = ps.executeUpdate();
             System.out.println("Exito en el registro");
             System.out.println("Agregado: " + persona.getNombrePersona() + " " + persona.getApellidoPpersona() + " " + persona.getApellidoMpersona());
@@ -68,7 +69,7 @@ public class Persona {
         int status = 0;
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "UPDATE PERSONA set NOMBRE=?, APELLIDOP=?, APELLIDOM=?, CALLE=?, NUM=?, COL=?, CIUDAD=?, ESTADO=?, TELEFONO=?, NUM_SEGURO=?, CURP=?, RFC=?, FECHA_INGRESO=? where idPersona=?";
+        String query = "UPDATE PERSONA set NOMBRE=?, APELLIDOP=?, APELLIDOM=?, CALLE=?, NUM=?, COL=?, CIUDAD=?, ESTADO=?, TELEFONO=?, NUM_SEGURO=?, CURP=?, RFC=?, FECHA_INGRESO=? where id_Persona=?";
         try {
             ps = con.prepareStatement(query);
             ps.setObject(1, persona.getNombrePersona());
@@ -83,7 +84,7 @@ public class Persona {
             ps.setObject(10, persona.getNumSeguroPersona());
             ps.setObject(11, persona.getCurpPersona());
             ps.setObject(12, persona.getRfcPersona());
-            ps.setObject(13, persona.getEstatusPersona());
+            ps.setObject(13, persona.getFechaIngreso());
             ps.setObject(14, persona.getIdPersona());
             status = ps.executeUpdate();
             System.out.println("Exito en el registro");

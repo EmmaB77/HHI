@@ -103,7 +103,7 @@ public class Empleado {
             ps.setObject(6, empleado.getIdEmpleado());
             status = ps.executeUpdate();
             System.out.println("Exito en el registro");
-            System.out.println("Agregado: Nuevo Empleado");
+            System.out.println("Modificado Empleado: "+empleado.getIdEmpleado());
             con.close();
         } catch (SQLException e) {
             System.out.println(e);

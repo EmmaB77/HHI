@@ -178,7 +178,7 @@
                                 <td><h6>${cotizacion.fechaCot}</h6></td>
                                 <td class="col-lg-1"><h6>$ ${cotizacion.total} M.N.</h6></td>
                                 <td><h6>${cotizacion.estatusCot}</h6></td>
-                                <td class="col-lg-2">
+                                <td class="col-lg-2 btn-group">
                                     <a title="Agregar Concepto" data-toggle="modal" href="#" class="btn btn-sm btn-info" role="button" data-target="#Concepto" data-id="${cotizacion.idCot}"><i class="glyphicon glyphicon-plus"></i></a>
                                     <a title="Otros Detalles" data-toggle="modal" href="#" class="btn btn-sm btn-warning" role="button" data-target="#Otros" data-cot="${cotizacion.numCot}" data-orden="${cotizacion.ordComCot}" data-avance="${cotizacion.avanceCot}" data-facturas="${cotizacion.numFactCot}" data-usuario="${cotizacion.usuario.persona.nombrePersona}&nbsp;${cotizacion.usuario.persona.apellidoPpersona}&nbsp;${cotizacion.usuario.persona.apellidoMpersona}"><i class="glyphicon glyphicon-eye-open"></i></a>
                                     <a title="Asignar Orden de Compra" data-toggle="modal" href="#" class="btn btn-sm btn-default" role="button" data-target="#OrdenComp" data-cot="${cotizacion.numCot}" data-usuario="${cotizacion.usuario.persona.nombrePersona}&nbsp;${cotizacion.usuario.persona.apellidoPpersona}&nbsp;${cotizacion.usuario.persona.apellidoMpersona}"><i class="glyphicon glyphicon-star"></i></a>

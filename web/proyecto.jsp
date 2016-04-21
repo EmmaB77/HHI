@@ -191,7 +191,7 @@
                                 </div>
                                 <div class="row form-group">
                                     <div class="col-lg-5">Fecha Inicio<input type="date" class="form-control" id="fechai" name="fechai" required></div>
-                                    <div class="col-lg-5">Presupuesto<input type="number" class="form-control" id="presu" name="presu" required></div>
+                                    <div class="col-lg-5">Presupuesto<input type="number" class="form-control" id="presu" name="presu" required step="any"></div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -220,7 +220,7 @@
                                 </div>
                                 <div class="row form-group">
                                     <div class="col-lg-4">Descripción <input type="text" class="form-control" id="descripcion" name="descripcion" required></div>
-                                    <div class="col-lg-4">Subtotal <input type="number" class="form-control" id="subtotal" name="subtotal" required></div>
+                                    <div class="col-lg-4">Subtotal <input type="number" class="form-control" id="subtotal" name="subtotal" required step="any"></div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -248,7 +248,7 @@
                                 </div>
                                 <div class="row form-group">
                                     <div class="col-lg-4">Descripción <input type="text" class="form-control" id="descripcion" name="descripcion" required></div>
-                                    <div class="col-lg-4">Subtotal <input type="number" class="form-control" id="subtotal" name="subtotal" required></div>
+                                    <div class="col-lg-4">Subtotal <input type="number" class="form-control" id="subtotal" name="subtotal" required step="any"></div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -276,7 +276,7 @@
                                 </div>
                                 <div class="row form-group">
                                     <div class="col-lg-4">Descripción <input type="text" class="form-control" id="descripcion" name="descripcion" required></div>
-                                    <div class="col-lg-4">Subtotal <input type="number" class="form-control" id="subtotal" name="subtotal" required></div>
+                                    <div class="col-lg-4">Subtotal <input type="number" class="form-control" id="subtotal" name="subtotal" required step="any"></div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -299,7 +299,7 @@
                                 <div class="row form-group">
                                     <div class="col-lg-2">Id Proyecto <input type="text" class="form-control" id="idProyecto" name="idProyecto" readonly></div>
                                     <div class="col-lg-5">Descripción <input type="text" class="form-control" id="descripcion" name="descripcion" required></div>
-                                    <div class="col-lg-3">Subtotal <input type="number" class="form-control" id="subtotal" name="subtotal" required></div>
+                                    <div class="col-lg-3">Subtotal <input type="number" class="form-control" id="subtotal" name="subtotal" required step="any"></div>
                                 </div>
                             </div>
                             <div class="modal-footer">
