@@ -95,9 +95,7 @@
                         <li class="dropdown">
                             <a class="dropdown-toggle" href="#" data-toggle="dropdown">Personal</a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Ver Personal</a></li>
-                                <li><a href="#">Agregar</a></li>
-                                <li><a href="#">Actualizar</a></li>
+                                <li><a href="persona">Ver Personal</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">

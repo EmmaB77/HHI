@@ -4,10 +4,12 @@ public class EmpleadoBean {
     
     private int idEmpleado;
     private int idPersona;
+    private String puesto;
+    private float salarioxdia;
+    private float infonavit;
+    private String cuentaB;
+    private float transa;
     private PersonaBean persona;
-    private PuestoBean puesto;
-    private DepartamentoBean depto;
-    private EmpresaBean empresa;
 
     public int getIdEmpleado() {
         return idEmpleado;
@@ -25,30 +27,6 @@ public class EmpleadoBean {
         this.persona = persona;
     }
 
-    public PuestoBean getPuesto() {
-        return puesto;
-    }
-
-    public void setPuesto(PuestoBean puesto) {
-        this.puesto = puesto;
-    }
-
-    public DepartamentoBean getDepto() {
-        return depto;
-    }
-
-    public void setDepto(DepartamentoBean depto) {
-        this.depto = depto;
-    }
-
-    public EmpresaBean getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(EmpresaBean empresa) {
-        this.empresa = empresa;
-    }
-
     public int getIdPersona() {
         return idPersona;
     }
@@ -56,7 +34,45 @@ public class EmpleadoBean {
     public void setIdPersona(int idPersona) {
         this.idPersona = idPersona;
     }
-    
-    
-    
+
+    public float getSalarioxdia() {
+        return salarioxdia;
+    }
+
+    public void setSalarioxdia(float salarioxdia) {
+        this.salarioxdia = salarioxdia;
+    }
+
+    public float getInfonavit() {
+        return infonavit;
+    }
+
+    public void setInfonavit(float infonavit) {
+        this.infonavit = infonavit;
+    }
+
+    public String getCuentaB() {
+        return cuentaB;
+    }
+
+    public void setCuentaB(String cuentaB) {
+        this.cuentaB = cuentaB;
+    }
+
+    public float getTransa() {
+        return transa;
+    }
+
+    public void setTransa(float transa) {
+        this.transa = transa;
+    }
+
+    public String getPuesto() {
+        return puesto;
+    }
+
+    public void setPuesto(String puesto) {
+        this.puesto = puesto;
+    }
+
 }
