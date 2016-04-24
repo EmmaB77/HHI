@@ -241,7 +241,7 @@
             </div>
         </nav>
         <div class="container">
-            <h2>Nómina:</h2>
+            <h2>Personal:</h2>
             <div class="row">
                 <div class="col-lg-4">
                     <SELECT NAME="personal" onChange="mostrar(this)" class="form-control">
