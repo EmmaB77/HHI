@@ -76,6 +76,11 @@ public class ControladorCotizacion extends HttpServlet {
             Cotizacion.eliminarDetalle(idDet);
             response.sendRedirect("mod_cot?idCoti=" + idCot);
         }
+        if (userPath.equals("/eliminar_cot")) {
+            int idCot = Integer.parseInt(request.getParameter("idCoti"));
+            Cotizacion.eliminarCot(idCot);
+            response.sendRedirect("cotizacion");
+        }
     }
 
     @Override
@@ -160,11 +165,6 @@ public class ControladorCotizacion extends HttpServlet {
             String avance = request.getParameter("avance");
 
             Cotizacion.agregarFactura(numcotoc, factura, avance);
-            response.sendRedirect("cotizacion");
-        }
-        if (userPath.equals("/eliminar_cot")) {
-            int idCot = Integer.parseInt(request.getParameter("idCoti"));
-            Cotizacion.eliminarCot(idCot);
             response.sendRedirect("cotizacion");
         }
         if (userPath.equals("/modificar_cot")) {
