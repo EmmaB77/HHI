@@ -19,6 +19,11 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <script src="js/jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.myCarousel').carousel()
+            });
+        </script>
     </head>
     <body background="img/2.jpg">
         <nav class="navbar navbar-inverse navbar-static-top">
@@ -85,9 +90,29 @@
             </div>
         </nav>
         <div class="container">
-            <div class="jumbotron">
-                <h1>Bienvenido a HHI</h1> 
-                <h3>${persona.nombrePersona}&nbsp;${persona.apellidoPpersona}&nbsp;${persona.apellidoMpersona}</h3>
+            <div class="jumbotron" align="center">
+                <h2>Bienvenido a HHI GESTIÓN y CONTROL</h2> 
+                <h2>${persona.nombrePersona}&nbsp;${persona.apellidoPpersona}&nbsp;${persona.apellidoMpersona}</h2>
+            </div>
+            <div id="myCarousel" class="carousel slide">
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                    <li data-target="#myCarousel" data-slide-to="3"></li>
+                    <li data-target="#myCarousel" data-slide-to="4"></li>
+                </ol>
+                <!-- Carousel items -->
+                <div class="carousel-inner" align="center">
+                    <div class="active item"><img  src="img/img5.jpg" alt="Logo" /></div>
+                    <div class="item"><img  src="img/img4.jpg" alt="Trabajo" /></div>
+                    <div class="item"><img  src="img/img3.jpg" alt="Trabajo" /></div>
+                    <div class="item"><img  src="img/img2.jpg" alt="Trabajo" /></div>
+                    <div class="item"><img  src="img/img1.jpg" alt="Trabajo" /></div>
+                </div>
+                <!-- Carousel nav -->
+                <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
             </div>
             <footer class="navbar-inverse navbar-fixed-bottom">
                 <div class="container-fluid">
