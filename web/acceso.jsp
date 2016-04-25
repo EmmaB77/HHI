@@ -32,7 +32,7 @@
                 <label for="inputPassword" class="sr-only">Contrase&ntilde;a</label>
                 <input type="password" id="inputPassword"  name="password" class="form-control" placeholder="Contrase&ntilde;a" required>
                 <c:if test="${error==1}">
-                    <p class="alert-danger">Error en el usuario o contraseña</p>
+                    <p class="alert-danger">Usuario o Contrase&ntilde;a Incorrectos</p>
                 </c:if>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
             </form>
