@@ -193,8 +193,8 @@
                             <th><b>I.V.A</b></th>
                             <th><b>TOTAL</b></th>
                             <th><b>ACCIONES</b></th>
-                            
-                    </tr>
+
+                        </tr>
                     </thead>
                     <tbody>
                         <c:forEach var="detalle" items="${detallesd}" varStatus="iter">
@@ -219,7 +219,7 @@
                             <th><b>TOTAL PARCIAL</b></th>
                             <th><b>TOTAL I.V.A</b></th>
                             <th><b>TOTAL FINAL</b></th>   
-                    </tr>
+                        </tr>
                     </thead>
                     <tbody>
                         <c:forEach var="total" items="${totalesmd}" varStatus="iter">
@@ -249,8 +249,8 @@
                             <th><b>I.V.A</b></th>
                             <th><b>TOTAL</b></th>
                             <th><b>ACCIONES</b></th>
-                            
-                    </tr>
+
+                        </tr>
                     </thead>
                     <tbody>
                         <c:forEach var="detalle" items="${detallesi}" varStatus="iter">
@@ -275,7 +275,7 @@
                             <th><b>TOTAL PARCIAL</b></th>
                             <th><b>TOTAL I.V.A</b></th>
                             <th><b>TOTAL FINAL</b></th>   
-                    </tr>
+                        </tr>
                     </thead>
                     <tbody>
                         <c:forEach var="total" items="${totalesmi}" varStatus="iter">
@@ -305,8 +305,8 @@
                             <th><b>I.V.A</b></th>
                             <th><b>TOTAL</b></th>
                             <th><b>ACCIONES</b></th>
-                            
-                    </tr>
+
+                        </tr>
                     </thead>
                     <tbody>
                         <c:forEach var="detalle" items="${detallesc}" varStatus="iter">
@@ -331,7 +331,7 @@
                             <th><b>TOTAL PARCIAL</b></th>
                             <th><b>TOTAL I.V.A</b></th>
                             <th><b>TOTAL FINAL</b></th>   
-                    </tr>
+                        </tr>
                     </thead>
                     <tbody>
                         <c:forEach var="total" items="${totalesmc}" varStatus="iter">
@@ -355,7 +355,7 @@
                         <tr>
                             <th><b>DESCRIPCION</b></th>
                             <th><b>TOTAL</b></th>
-                    </tr>
+                        </tr>
                     </thead>
                     <tbody>
                         <c:forEach var="detalle" items="${detallesmo}" varStatus="iter">
@@ -375,7 +375,7 @@
                             <th><b></b></th>
                             <th><b>TOTAL</b></th>
                             <th><b></b></th>   
-                    </tr>
+                        </tr>
                     </thead>
                     <tbody>
                         <c:forEach var="total" items="${totalesmo}" varStatus="iter">
@@ -484,6 +484,16 @@
                     </div>
                 </div>
             </form>
+            <footer class="navbar-inverse navbar-fixed-bottom">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-3"><p class="text-primary">HHI INSTALACIONES INDUSTRIALES S.A. de C.V.</p></div>
+                        <div class="col-lg-3"><p class="text-primary">HHI Gestión y Control v1.0b Copyright &COPY;</p></div>
+                        <div class="col-lg-3"></div>
+                    </div>
+                </div>
+            </footer>
         </div>
     </body>
 </html>

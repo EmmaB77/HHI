@@ -89,6 +89,16 @@
                 <h1>Bienvenido a HHI</h1> 
                 <h3>${persona.nombrePersona}&nbsp;${persona.apellidoPpersona}&nbsp;${persona.apellidoMpersona}</h3>
             </div>
+            <footer class="navbar-inverse navbar-fixed-bottom">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-3"><p class="text-primary">HHI INSTALACIONES INDUSTRIALES S.A. de C.V.</p></div>
+                        <div class="col-lg-3"><p class="text-primary">HHI Gestión y Control v1.0b Copyright &COPY;</p></div>
+                        <div class="col-lg-3"></div>
+                    </div>
+                </div>
+            </footer>
         </div>
     </body>
 </html>

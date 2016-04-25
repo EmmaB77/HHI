@@ -212,11 +212,11 @@ public class Cotizacion {
         return status;
     }
     
-    public static int agregarFactura(String numcot, String nueva, String avance) {
+    public static int agregarFactura(String numcot, String nueva, String avance, String Status) {
         int status=0;
         Connection con = Conexion.getConnetion();
         PreparedStatement ps;
-        String query = "Update Cotizacion set num_fact='"+nueva+"', avance='"+avance+"' where num_cot='"+numcot+"';";
+        String query = "Update Cotizacion set num_fact='"+nueva+"', avance='"+avance+"', status='"+Status+"' where num_cot='"+numcot+"';";
         try {
             ps = con.prepareStatement(query);
             status = ps.executeUpdate();

@@ -171,9 +171,9 @@
                         <div class="col-xs-6"><b>(${cotizacion.canLetCot}/100 M.N.)</b></div>
                     </div>
                 </div><br>
-                    <div class="row" align="left">
-                        <div class="col-xs-6"><h6><b>PRECIO MAS EL 16% DE IVA</b></h6></div>
-                    </div>
+                <div class="row" align="left">
+                    <div class="col-xs-6"><h6><b>PRECIO MAS EL 16% DE IVA</b></h6></div>
+                </div>
                 <div class="table" align="left" style="background-color: #1C77D8">
                     <div class="row">
                         <div class="col-xs-6"><h6><b>TIEMPO DE ENTREGA: ${cotizacion.tiempoEntrega}</b></h6></div>
@@ -207,6 +207,16 @@
                     </tbody>
                 </table>
             </div>
+            <footer class="navbar-inverse navbar-fixed-bottom">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-3"><p class="text-primary">HHI INSTALACIONES INDUSTRIALES S.A. de C.V.</p></div>
+                        <div class="col-lg-3"><p class="text-primary">HHI Gestión y Control v1.0b Copyright &COPY;</p></div>
+                        <div class="col-lg-3"></div>
+                    </div>
+                </div>
+            </footer>
         </div>
     </body>
 </html>

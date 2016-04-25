@@ -163,8 +163,9 @@ public class ControladorCotizacion extends HttpServlet {
             String numcotoc = request.getParameter("numcotfa");
             String factura = request.getParameter("facturan");
             String avance = request.getParameter("avance");
+            String status = request.getParameter("estatus");
 
-            Cotizacion.agregarFactura(numcotoc, factura, avance);
+            Cotizacion.agregarFactura(numcotoc, factura, avance, status);
             response.sendRedirect("cotizacion");
         }
         if (userPath.equals("/modificar_cot")) {

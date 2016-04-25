@@ -339,11 +339,19 @@
                                 <h3 class="modal-title">Agregar Factura a Cotizacion</h3>
                             </div>
                             <div class="table container modal-body">
-                                <div class="form-group">
+                                <div class=" row form-group">
                                     <div class="col-lg-3">Cotizacion: <input type="text" class="form-control" name="numcotfa" id="numcotfa" readonly value=""></div>
                                     <div class="col-lg-3">Usuario: <input type="text" class="form-control" name="userfa" id="userfa" readonly value=""></div>
                                     <div class="col-lg-3">Nueva Factura: <input type="text" class="form-control" name="facturan" id="facturan"></div>
                                     <div class="col-lg-3">Avance:<input type="text" class="form-control" name="avance" id="avance"></div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-lg-4">Estatus: <select class="form-control" name="estatus" id="estatus">
+                                            <option value="Facturada"> Facturada</option>
+                                            <option value="Cotizado">Cotizado</option>
+                                            <option value="En Proceso">En Proceso</option>
+                                            <option value="Cancelada">Cancelada</option>
+                                        </select></div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -376,6 +384,16 @@
                     </div>
                 </div>
             </form>
+            <footer class="navbar-inverse navbar-fixed-bottom">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-3"><p class="text-primary">HHI INSTALACIONES INDUSTRIALES S.A. de C.V.</p></div>
+                        <div class="col-lg-3"><p class="text-primary">HHI Gestión y Control v1.0b Copyright &COPY;</p></div>
+                        <div class="col-lg-3"></div>
+                    </div>
+                </div>
+            </footer>
         </div>
     </body>
 </html>
