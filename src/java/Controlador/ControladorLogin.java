@@ -44,7 +44,7 @@ public class ControladorLogin extends HttpServlet {
                     response.sendRedirect("index.jsp");
             } else {
                 varSesion.setAttribute("error", 1);
-                response.sendRedirect("verDetalleCot.jsp");
+                response.sendRedirect("index.jsp");
             }
         }
     }
