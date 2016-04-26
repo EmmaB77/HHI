@@ -286,10 +286,10 @@
                                 <td>${persona.estatusPersona}</td>
                                 <td class="btn-group">
                                     <a title="Eliminar Persona: Irreversible" data-toggle="modal" href="#" class="btn btn-sm btn-danger" role="button" data-target="#EliminarP" data-id="${persona.idPersona}" data-nombre="${persona.nombrePersona}&nbsp;${persona.apellidoPpersona}&nbsp;${persona.apellidoMpersona}"><i class="glyphicon glyphicon-remove"></i></a>
-                                    <a title="Modificar Persona" data-toggle="modal" href="#" class="btn btn-sm btn-success" role="button" data-target="#ModificarP" data-id="${persona.idPersona}" data-nomb="${persona.nombrePersona}" data-app="${persona.apellidoPpersona}" data-apm="${persona.apellidoPpersona}"
+                                    <a title="Modificar Persona" data-toggle="modal" href="#" class="btn btn-sm btn-success" role="button" data-target="#ModificarP" data-id="${persona.idPersona}" data-nomb="${persona.nombrePersona}" data-app="${persona.apellidoPpersona}" data-apm="${persona.apellidoMpersona}"
                                        data-call="${persona.callePersona}" data-nc="${persona.numeroPersona}" data-col="${persona.coloniaPersona}" data-cd="${persona.ciudadPersona}" data-edo="${persona.estadoPersona}" data-tel="${persona.telefonoPersona}" data-ns="${persona.numSeguroPersona}" data-curp="${persona.curpPersona}"
                                        data-rfc="${persona.rfcPersona}" data-fec="${persona.fechaIngreso}"><i class="glyphicon glyphicon-edit"></i></a>
-                                    <a title="Ver Persona" data-toggle="modal" href="#" class="btn btn-sm btn-info" role="button" data-target="#VerP" data-nomb="${persona.nombrePersona}" data-app="${persona.apellidoPpersona}" data-apm="${persona.apellidoPpersona}"
+                                    <a title="Ver Persona" data-toggle="modal" href="#" class="btn btn-sm btn-info" role="button" data-target="#VerP" data-nomb="${persona.nombrePersona}" data-app="${persona.apellidoPpersona}" data-apm="${persona.apellidoMpersona}"
                                        data-call="${persona.callePersona}" data-nc="${persona.numeroPersona}" data-col="${persona.coloniaPersona}" data-cd="${persona.ciudadPersona}" data-edo="${persona.estadoPersona}" data-tel="${persona.telefonoPersona}" data-ns="${persona.numSeguroPersona}" data-curp="${persona.curpPersona}"
                                        data-rfc="${persona.rfcPersona}" data-fec="${persona.fechaIngreso}"><i class="glyphicon glyphicon-eye-open"></i></a>
                                     
@@ -403,24 +403,24 @@
                             <div class="table container modal-body">
                                 <div class="row form-group">
                                     <div class="col-lg-4">Nombre:<input type="text" class="form-control" id="nombre" name="nombre" required></div>
-                                    <div class="col-lg-4">Apellido Paterno: <input type="text" class="form-control" id="apellidop" name="apellidop"></div>
-                                    <div class="col-lg-4">Apellido Materno: <input type="text" class="form-control" id="apellidom" name="apellidom"></div>
+                                    <div class="col-lg-4">Apellido Paterno: <input type="text" class="form-control" id="apellidop" name="apellidop" required></div>
+                                    <div class="col-lg-4">Apellido Materno: <input type="text" class="form-control" id="apellidom" name="apellidom" required></div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col-lg-4">Calle: <input type="text" class="form-control" id="calle" name="calle"></div>
-                                    <div class="col-lg-2">Num: <input type="text" class="form-control" id="num" name="num"></div>
-                                    <div class="col-lg-3">Colonia: <input type="text" class="form-control" id="col" name="col"></div>
-                                    <div class="col-lg-3">Ciudad: <input type="text" class="form-control" id="cd" name="cd"></div>
+                                    <div class="col-lg-4">Calle: <input type="text" class="form-control" id="calle" name="calle" required></div>
+                                    <div class="col-lg-2">Num: <input type="text" class="form-control" id="num" name="num" required></div>
+                                    <div class="col-lg-3">Colonia: <input type="text" class="form-control" id="col" name="col" required></div>
+                                    <div class="col-lg-3">Ciudad: <input type="text" class="form-control" id="cd" name="cd" required></div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col-lg-4">Estado:<input type="text" class="form-control" id="edo" name="edo" required></div>
-                                    <div class="col-lg-4">Telefono: <input type="text" class="form-control" id="tel" name="tel"></div>
-                                    <div class="col-lg-4">Numero IMSS: <input type="text" class="form-control" id="imss" name="imss"></div>
+                                    <div class="col-lg-4">Telefono: <input type="text" class="form-control" id="tel" name="tel" required></div>
+                                    <div class="col-lg-4">Numero IMSS: <input type="text" class="form-control" id="imss" name="imss" required></div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col-lg-4">CURP:<input type="text" class="form-control" id="curp" name="curp" required></div>
-                                    <div class="col-lg-4">RFC: <input type="text" class="form-control" id="rfc" name="rfc"></div>
-                                    <div class="col-lg-4">Fecha de Ingreso: <input type="date" class="form-control" id="fechai" name="fechai"></div>
+                                    <div class="col-lg-4">RFC: <input type="text" class="form-control" id="rfc" name="rfc" required></div>
+                                    <div class="col-lg-4">Fecha de Ingreso: <input type="date" class="form-control" id="fechai" name="fechai" required></div>
                                 </div>
                             </div>
                             <div class="modal-footer">
